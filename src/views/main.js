@@ -2,7 +2,6 @@ import React from 'react';
 import './main.css';
 import planet from '../img/catStar.png';
 import rocket from '../img/rocket.png';
-import EventModal from '../components/EventModal';
 import { Link } from 'react-router-dom';
 
 
@@ -11,9 +10,6 @@ function getRandomArbitrary(min, max) {
 }
   
 function Main() {
-    const [eventModalShow, setEventModalShow] = React.useState(true);
-
-
     var style = ["style1", "style2", "style3", "style4"];
     var tam = ["tam1", "tam1", "tam1", "tam2", "tam3"];
     var opacity = ["opacity1", "opacity1", "opacity1", "opacity2", "opacity2", "opacity3"];
@@ -51,10 +47,6 @@ function Main() {
                     </Link>
                 </div>
             </div>
-            {/* <EventModal
-              show={eventModalShow}
-              onHide={setEventModalShow}
-            /> */}
         </div>
     );
 }

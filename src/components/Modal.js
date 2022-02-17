@@ -1,12 +1,13 @@
-import { Modal,Button } from "react-bootstrap";
+import { Modal} from "react-bootstrap";
 import {address, abi} from '../components/contract/contractInfo';
 import React, {useEffect} from 'react';
-import { ethers } from "ethers";
+import Caver from "caver-js";
 import './Modal.css';
 import loadingImg from '../img/loading-img.gif';
 import jquery from 'jquery';
 import $ from 'jquery';
 import styled from 'styled-components';
+import { klaytn, caver } from "./wallet/caver";
 
 const ModalCustom = styled(Modal)`
    
@@ -19,11 +20,8 @@ const ModalCustom = styled(Modal)`
 
 
 function componentToHex(c) {
-  //console.log("componentToHex");
-  //console.log(typeof(c));
-  //console.log("pppppppp");
   if(c!= undefined){
-    var hex = c.toString(16);
+    var hex = parseInt(c,10).toString(16);
     return hex.length === 1 ? "0" + hex : hex;
   }
 }
@@ -35,11 +33,17 @@ function ViewModal(props) {
  
   const viewCatData = async () => {
     const id = props.tokenid;
-    console.log('id:',id);
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const contract = new ethers.Contract(address, abi, provider);
-    const data = await contract.catDataOf(id);
-    return data;
+    if(klaytn == undefined){
+      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const contract = new _caver.klay.Contract(abi,address);
+      const data = await contract.methods.catDataOf(id).call();
+      return data;
+      
+    }else {
+      const contract = new caver.klay.Contract(abi, address);
+      const data = await contract.methods.catDataOf(id).call();
+      return data;
+    }
   }
 
   const [catData, setCatData] = React.useState([]);
@@ -57,13 +61,12 @@ function ViewModal(props) {
  
 
   useEffect(async ()=> {
-    //console.log(catData);
-    //console.log('R :', catData.catColor.R);
 
-    const tempColorValue = "#"+ componentToHex(catData.catColor.R) + componentToHex(catData.catColor.G) + componentToHex(catData.catColor.B);
-    //console.log('colorEffect:',tempColorValue);
-    setColorEffect(tempColorValue);
-    
+    if(catData.length != 0){
+      const tempColorValue = "#"+ componentToHex(catData.catColor.R) + componentToHex(catData.catColor.G) + componentToHex(catData.catColor.B);
+      //console.log('colorEffect:',tempColorValue);
+      setColorEffect(tempColorValue);
+    }
   },[catData])
 
   return (
@@ -117,10 +120,6 @@ function ViewModal(props) {
             _id && (
             _id = _id.split('/'),
             _id = _id[5],''
-            // <img style={{
-            //   width : 500,
-            //   height : 500
-            // }} src={"https://drive.google.com/uc?export=view&id="+ _id }/>
           )}
           
          {
@@ -133,24 +132,7 @@ function ViewModal(props) {
         </div>
 
       </Modal.Body>
-      {/* {
-        setTimeout(function(){
-        $('.btn-close').on('click',function(){
-          $('.modal-content').css("box-shadow", "");
-          setColorEffect("");;
-        })
-      },1000)
-      } */}
-
-      {/* {
-        //console.log(typeof(colorEffect))
-        //console.log('Effect value check',colorEffect)
-        setTimeout(function(){
-          console.log('colorEffect:',colorEffect);
-          $('.modal-content').css("box-shadow", "0px 0px 30px " + colorEffect)
-        },1000)
-        //$('.modal-content ').css("box-shadow", "0px 0px 30px " + colorEffect)
-      } */}
+     
     </ModalCustom>
   );
 }

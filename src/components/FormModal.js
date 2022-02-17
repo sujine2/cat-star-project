@@ -1,20 +1,15 @@
-import { Modal,Button, Form } from "react-bootstrap";
+import { Modal,Button} from "react-bootstrap";
 import React, {useEffect} from 'react';
 import './FormModal.css';
 import {address, abi} from '../components/contract/contractInfo';
 import { ethers } from "ethers";
 import RGBtoHex from "./RGBtoHex";
-import jquery from 'jquery';
 import $ from 'jquery';
 import { klaytn,caver } from '../components/wallet/caver';
-import { InstallKaikas } from '../components/wallet/InstallKaikas.js';
-import { ConnectKaikas } from '../components/wallet/ConnectKaikas.js';
+import Caver from "caver-js";
 //import { useWeb3React } from "@web3-react/core";
 
 function componentToHex(c) {
-  //console.log("componentToHex");
-  //console.log("pppppppp");
-  //console.log('type',typeof(c))
   if(c!= undefined){
     var hex = parseInt(c,10).toString(16);
     return hex.length === 1 ? "0" + hex : hex;
@@ -94,10 +89,18 @@ function FormModal(props) {
 
 
   const viewColor = async () => {
+    if(klaytn == undefined){
+      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const contract = new _caver.klay.Contract(abi,address);
+      const color = await contract.methods.getColor().call();
+      return color;
+    }
+    else {
+      const contract = new caver.klay.Contract(abi, address);
+      const color = await contract.methods.getColor().call();
+      return color;
+    }
     //const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const contract = new caver.klay.Contract(abi, address);
-    const color = await contract.methods.getColor().call();
-    return color;
   }
 
   setTimeout(function(){
@@ -150,7 +153,8 @@ function FormModal(props) {
           <button className="printColor" style={{
               backgroundColor: 'rgba('+ colors.R +','+ colors.G +',' + colors.B + ')',
               border: 0,
-              outline: 0
+              outline: 0,
+              width: 10
               }}></button> 
           <RGBtoHex className="hexColor" R={colors.R} G={colors.G} B={colors.B}></RGBtoHex>
           
@@ -185,23 +189,23 @@ function FormModal(props) {
             <div className="catInfoForm">
 
               <h4>Cat's name  </h4>
-              <input className="inputData" name="catName" type="text" style={{width: 400}} onChange={onChange}   value={catName}    required />
+              <input className="inputData" name="catName" type="text" style={{width: 400}} onChange={onChange}   value={catName}   required="required" />
               <br /><br />
               <h4>Your Name  </h4>
-              <input className="inputData" name="yourName" type="text" style={{width: 400}} onChange={onChange}   value={yourName}   required />
+              <input className="inputData" name="yourName" type="text" style={{width: 400}} onChange={onChange}   value={yourName}   required="required" />
               <br /><br />
               <h4>The day I met a cat  </h4>
-              <input className="inputData" name="dayMet" type="number" placeholder="ex)20210510" style={{width: 400}} onChange={onChange}   value={dayMet}    required />
+              <input className="inputData" name="dayMet" type="number" placeholder="ex)20210510" style={{width: 400}} onChange={onChange}   value={dayMet}    required="required"/>
               <br /><br />
               <h4>What my cat likes </h4>
-              <input className="inputData" name="favorite" type="text" style={{width: 400}} onChange={onChange}  value={favorite}   required />
+              <input className="inputData" name="favorite" type="text" style={{width: 400}} onChange={onChange}  value={favorite}   required="required" />
               <br /><br />
               <h4>Comment  </h4>
-              <input className="inputData" name="comment" type="text" style={{width: 400}} onChange={onChange}  value={comment}   required />
+              <input className="inputData" name="comment" type="text" style={{width: 400}} onChange={onChange}  value={comment}   required="required" />
               <br /><br />
               <h4>Image Link  </h4>
               <input className="inputData" name="imgURL" type="text" placeholder="google dirve **전체 공유 링크를** 넣어주세요!" style={{width: 400}}
-              onChange={onChange}  value={imgURL}  />
+              onChange={onChange}  value={imgURL} required="required"/>
               <br /><br />
             </div>
           </div>
@@ -210,21 +214,20 @@ function FormModal(props) {
         <Button onClick={async()=> {
           console.log('Dup',colorDup, $('.changeColorCheck').is(':checked'));
           if(colorDup === false && $('.changeColorCheck').is(':checked')){
-            alert('이미 사용된 컬러 입니다. 색상을 변경해 주세요.');
-          }else {
-            if(klaytn.selectedAddress == undefined ){
-              await klaytn.enable();
-            
-            } else if (klaytn === undefined) {
+            alert('이미 사용된 컬러 입니다. 색상을 변경해 주세요.'); 
+          }else if(catName === '' || yourName === '' || comment === '' || favorite === '' || dayMet === ''){
+            alert('입력란을 모두 채워주세요.');
+          } else {
+            if (klaytn === undefined) {
               alert('Non-Kaikas browser detected. You should consider trying Kaikas!');
+            }else {
+            //const key = caver.wallet.getKeyring(klaytn.selectedAddress);
+            // caver.klay.accounts.wallet.add(klaytn.selectedAddress);
+            // console.log(caver.klay.accounts.wallet);
+            if(klaytn.selectedAddress === undefined ){
+              await klaytn.enable();
             }
-
-            //console.log('address', klaytn.selectedAddress);
-            //const key = caver.wallet.keyring.generateSingleKey();
-            //const provider = new ethers.providers.Web3Provider(window.ethereum)
             const contract = new caver.klay.Contract(abi,address);
-            //const contractWithSigner = contract.sign(keyring);
-            //console.log(contractWithSigner.catData);
             if($('.changeColorCheck').is(':checked')){
               //fin = hexToRGB(colorValue)
               console.log('최종',tmp)
@@ -248,7 +251,7 @@ function FormModal(props) {
                 window.location.reload();
               });;
             }
-           
+          }
            
           }
         }}>Make a star</Button>
