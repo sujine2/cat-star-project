@@ -4,10 +4,9 @@ import React, {useEffect} from 'react';
 import Caver from "caver-js";
 import './Modal.css';
 import loadingImg from '../img/loading-img.gif';
-import jquery from 'jquery';
 import $ from 'jquery';
 import styled from 'styled-components';
-import { klaytn, caver } from "./wallet/caver";
+import { klaytn, caver } from "../wallet/caver";
 
 const ModalCustom = styled(Modal)`
    
@@ -64,7 +63,6 @@ function ViewModal(props) {
 
     if(catData.length != 0){
       const tempColorValue = "#"+ componentToHex(catData.catColor.R) + componentToHex(catData.catColor.G) + componentToHex(catData.catColor.B);
-      //console.log('colorEffect:',tempColorValue);
       setColorEffect(tempColorValue);
     }
   },[catData])

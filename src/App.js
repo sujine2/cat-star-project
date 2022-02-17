@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, react } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Main from './views/main';
 import StarsVeiw from './views/starView';
-import { klaytn} from './components/wallet/caver.js';
+import { klaytn} from './wallet/caver.js';
 
 // import { ConnectCypress } from './component/wallet/ConnectCypress.js';
 

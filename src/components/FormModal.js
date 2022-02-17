@@ -5,7 +5,7 @@ import {address, abi} from '../components/contract/contractInfo';
 import { ethers } from "ethers";
 import RGBtoHex from "./RGBtoHex";
 import $ from 'jquery';
-import { klaytn,caver } from '../components/wallet/caver';
+import { klaytn,caver } from '../wallet/caver';
 import Caver from "caver-js";
 
 
@@ -44,7 +44,6 @@ function FormModal(props) {
       setColors(result);
       const tempColorValue = "#"+ componentToHex(result.R) + componentToHex(result.G) + componentToHex(result.B);
       setColorValue(tempColorValue);
-      //$('.changeColor').val(tempColorValue);
       }
     }
     f();
@@ -74,12 +73,10 @@ function FormModal(props) {
   const findColor = async (_findColor) => {
     const abiCoder = ethers.utils.defaultAbiCoder;
     const colorIndex = ethers.utils.keccak256(abiCoder.encode(["uint","uint","uint"], [_findColor.R, _findColor.G, _findColor.B]));
-    //const provider = new ethers.providers.Web3Provider(window.ethereum)
     const contract = new caver.klay.Contract(abi, address);
     const colorOwner = await contract.methods.whoColorOf(colorIndex).call();
     //console.log(colorOwner);
     if(colorOwner == 0x0) {
-      //console.log('alsdj;flajf');
       setColorDup(true);
     }else {
       setColorDup(false);
@@ -132,49 +129,44 @@ function FormModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      {/* {
-        setTimeout(function(){
-          $('.modal-content').css("box-shadow", "")
-        },1000)
-      } */}
-      <Modal.Header closeButton>
-        <div className="modalTitle">
-            Your Cat Star's Infos
-        </div>
-        <div className="currentColor"> 
-          Current Color  :
+    <Modal.Header closeButton>
+      <div className="modalTitle">
+        Your Cat Star's Infos
+      </div>
+      <div className="currentColor"> 
+        Current Color  :
 
-          <button className="printColor" style={{
-              backgroundColor: 'rgba('+ colors.R +','+ colors.G +',' + colors.B + ')',
-              border: 0,
-              outline: 0,
-              width: 10
-              }}></button> 
-          <RGBtoHex className="hexColor" R={colors.R} G={colors.G} B={colors.B}></RGBtoHex>
+        <button className="printColor" style={{
+          backgroundColor: 'rgba('+ colors.R +','+ colors.G +',' + colors.B + ')',
+          border: 0,
+          outline: 0,
+          width: 10
+          }}></button> 
+        <RGBtoHex className="hexColor" R={colors.R} G={colors.G} B={colors.B}></RGBtoHex>
           
-          <div>
+        <div>
           <input type="checkbox" className="changeColorCheck" onClick={()=> controlColor()} /> 
           <label htmlFor="changeColorCheck" style={{
             fontSize: 15,
             marginLeft: 10,
             color: "gray"
           }}>컬러 바꾸기  1 Klay</label>
-          </div>
-
-          <div className="changeColorCon">
-            <input className="changeColor" type="color" defaultValue={colorValue}></input>
-            <span className="printColorValue" >{colorValue}</span>
-            <span style={{
-              marginLeft : 15, 
-              color: "red",
-              fontSize: 12
-            }} className="isColorDup"></span>
-            {
-            tmp = hexToRGB(colorValue),
-            tmp && (<></>)}
-          </div>
-          
         </div>
+
+        <div className="changeColorCon">
+          <input className="changeColor" type="color" defaultValue={colorValue}></input>
+          <span className="printColorValue" >{colorValue}</span>
+          <span style={{
+            marginLeft : 15, 
+            color: "red",
+            fontSize: 12
+          }} className="isColorDup"></span>
+          {
+          tmp = hexToRGB(colorValue),
+          tmp && (<></>)}
+        </div>
+          
+      </div>
         
       
       </Modal.Header>
@@ -215,40 +207,34 @@ function FormModal(props) {
             if (klaytn === undefined) {
               alert('Non-Kaikas browser detected. You should consider trying Kaikas!');
             }else {
-            //const key = caver.wallet.getKeyring(klaytn.selectedAddress);
-            // caver.klay.accounts.wallet.add(klaytn.selectedAddress);
-            // console.log(caver.klay.accounts.wallet);
-            if(klaytn.selectedAddress === undefined ){
-              await klaytn.enable();
-            }
-            const contract = new caver.klay.Contract(abi,address);
-            if($('.changeColorCheck').is(':checked')){
-
-              tmp && (
-              price = await contract.methods.getMintPrice().call(),
-              console.log('price',price),
-              contract.methods.mint(catName,yourName,comment,favorite,parseInt(dayMet),imgURL,tmp.R,tmp.G,tmp.B).send({
-                from: klaytn.selectedAddress,
-                gas: 1500000,
-                value : caver.utils.toPeb(price, 'KLAY'),
-              })).then(function(receipt){
-                console.log(receipt);
-                window.location.reload();
-              });
-            }else 
-            {
-              contract.methods.mint(catName,yourName,comment,favorite,parseInt(dayMet),imgURL,-1,-1,-1).send({
+              if(klaytn.selectedAddress === undefined ){
+                await klaytn.enable();
+              }
+              const contract = new caver.klay.Contract(abi,address);
+              if($('.changeColorCheck').is(':checked')){
+                tmp && (
+                price = await contract.methods.getMintPrice().call(),
+                console.log('price',price),
+                contract.methods.mint(catName,yourName,comment,favorite,parseInt(dayMet),imgURL,tmp.R,tmp.G,tmp.B).send({
+                  from: klaytn.selectedAddress,
+                  gas: 1500000,
+                  value : caver.utils.toPeb(price, 'KLAY'),
+                })).then(function(receipt){
+                  console.log(receipt);
+                  window.location.reload();
+                });
+              } else {
+                contract.methods.mint(catName,yourName,comment,favorite,parseInt(dayMet),imgURL,-1,-1,-1).send({
                 from: klaytn.selectedAddress,
                 gas: 1500000
               }).then(function(receipt){
                 console.log(receipt);
                 window.location.reload();
-              });;
+              });
             }
           }
            
-          }
-        }}>Make a star</Button>
+        } }}>Make a star</Button>
       </Modal.Footer>
     </Modal>
   );

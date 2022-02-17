@@ -8,12 +8,8 @@ import Search from '../img/search.png';
 import $ from 'jquery';
 import {ethers} from 'ethers';
 import {address, abi} from '../components/contract/contractInfo';
-import { klaytn,caver } from '../components/wallet/caver';
-import { InstallKaikas } from '../components/wallet/InstallKaikas';
-import { ConnectKaikas } from '../components/wallet/ConnectKaikas.js';
-import land from '../img/land.png';
+import { klaytn,caver } from '../wallet/caver';
 import Caver from "caver-js";
-import bgTree from '../img/bgTree .png';
 import searchLoading from '../img/catStar.png';
 
 
@@ -80,7 +76,6 @@ function StarView() {
     })
   }
   
-
   var style = ["style1", "style2", "style3", "style4"];
   var tam = ["tam1", "tam1", "tam1", "tam2", "tam3"];
   var opacity = ["opacity1", "opacity1", "opacity1", "opacity2", "opacity2", "opacity3"];
@@ -92,7 +87,6 @@ function StarView() {
 
 
   const getTokenNum = async () => {
-    //const caver = new Caver(provider);
     if(klaytn == undefined){
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       const contract = new _caver.klay.Contract(abi,address);
@@ -239,11 +233,8 @@ function StarView() {
         owner = await klaytn.enable();
         setAccount(klaytn.selectedAddress);
         if(klaytn.networkVersion != 1001){
-          alert('baobab 네트워크로 전환해 주세요.')
+          alert('baobab 네트워크로 전환해 주세요.');
         }
-        console.log(klaytn.networkVersion);
-      }else {
-        <InstallKaikas/>
       }
     }
     ff();
@@ -273,27 +264,25 @@ function StarView() {
           <div className="view-planet">
           <div className="view-constelacao">
             
-            {
-              //200
-              (tokenID <= 200) && (
-              Array(tokenID).fill(0).map((_, index) => {
-           
-                return (
-                  <span id={index} 
-                  className={test[index].styleClass} 
-                  onClick={(e) => {
-                    e.preventDefault();
-                      setModalShow({
-                        setShow: true,
-                        id: index
-                      });
+          {
+            //200
+            (tokenID <= 200) && (
+            Array(tokenID).fill(0).map((_, index) => {
+              return (
+                <span id={index} 
+                className={test[index].styleClass} 
+                onClick={(e) => {
+                  e.preventDefault();
+                    setModalShow({
+                      setShow: true,
+                      id: index
+                    });
                   }} 
-                  style={test[index].inlineStyle}></span>
-                )
-              }))
-            }
+                style={test[index].inlineStyle}></span>
+              )}
+            ))
+          }
           
-    
           {/* {
             //200
             Array(200).fill(0).map((_,index) => {
@@ -337,7 +326,7 @@ function StarView() {
             })
           }     */}
        
-          </div>
+        </div>
         <ViewModal
           show={setShow}
           onHide={() => setModalShow({
@@ -348,8 +337,8 @@ function StarView() {
         <Meteoro/>
     
         <div className='floresta'>
-          <img src={bgTree} alt="" />
-          {/*https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png */}
+          <img src="https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png" alt="" />
+          
         </div>
         {/* <div className="land">
           <img src={land} alt="" />

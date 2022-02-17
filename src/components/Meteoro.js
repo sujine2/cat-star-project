@@ -1,5 +1,5 @@
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import './Meteoro.css';
 
 
@@ -8,16 +8,15 @@ function getRandomArbitrary(min, max) {
 }
 
 function carregarMeteoro(){
-    var numeroAleatorio = 1000;
-    var style = ["style1", "style2", "style3", "style4"];
+  var numeroAleatorio = 1000;
+  var style = ["style1", "style2", "style3", "style4"];
 
-    setTimeout(function(){
-        meteoro();
-    }, numeroAleatorio);
+  setTimeout(function(){
+      meteoro();
+  }, numeroAleatorio);
 
   function meteoro(){
     setTimeout(meteoro, numeroAleatorio);
-    //numeroAleatorio = getRandomArbitrary(5000, 10000);
 
     var meteoro = "<div class='meteoro "+ style[getRandomArbitrary(0, 4)] +"'></div>";
 
