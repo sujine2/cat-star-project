@@ -7,7 +7,7 @@ import RGBtoHex from "./RGBtoHex";
 import $ from 'jquery';
 import { klaytn,caver } from '../components/wallet/caver';
 import Caver from "caver-js";
-//import { useWeb3React } from "@web3-react/core";
+
 
 function componentToHex(c) {
   if(c!= undefined){
@@ -40,10 +40,9 @@ function FormModal(props) {
       const result = await viewColor();
 
       if(result){
-      //console.log('result',result);
+
       setColors(result);
       const tempColorValue = "#"+ componentToHex(result.R) + componentToHex(result.G) + componentToHex(result.B);
-      console.log('colorValue:',tempColorValue);
       setColorValue(tempColorValue);
       //$('.changeColor').val(tempColorValue);
       }
@@ -100,17 +99,17 @@ function FormModal(props) {
       const color = await contract.methods.getColor().call();
       return color;
     }
-    //const provider = new ethers.providers.Web3Provider(window.ethereum)
+
   }
 
   setTimeout(function(){
-    //console.log("I am the third log after 3 seconds");
+
     $('.changeColor').change(async function (){
       //console.log($('.printColor').val());
       setColorValue($('.changeColor').val());
       const rgbColor = await hexToRGB($('.changeColor').val());
       await findColor(rgbColor);
-      //console.log('isColor',colorDup);
+
     })
 
   },500);
@@ -119,15 +118,13 @@ function FormModal(props) {
 
     if(colorDup == false){
       $('.isColorDup').text('이미 사용된 컬러 입니다.',{colorDup});
-      console.log('false check');
     }else {
       $('.isColorDup').text('');
-      console.log('true check');
     }
   },[colorDup]);
 
-  var tmp;
-
+  let tmp;
+  let price;
   return (
       <Modal
       {...props}
@@ -146,10 +143,7 @@ function FormModal(props) {
         </div>
         <div className="currentColor"> 
           Current Color  :
-          {
-           //$('.printColor').attr('value',colorValue)
-           //console.log(colorValue)
-          }
+
           <button className="printColor" style={{
               backgroundColor: 'rgba('+ colors.R +','+ colors.G +',' + colors.B + ')',
               border: 0,
@@ -229,14 +223,14 @@ function FormModal(props) {
             }
             const contract = new caver.klay.Contract(abi,address);
             if($('.changeColorCheck').is(':checked')){
-              //fin = hexToRGB(colorValue)
-              console.log('최종',tmp)
+
               tmp && (
-              
+              price = await contract.methods.getMintPrice().call(),
+              console.log('price',price),
               contract.methods.mint(catName,yourName,comment,favorite,parseInt(dayMet),imgURL,tmp.R,tmp.G,tmp.B).send({
                 from: klaytn.selectedAddress,
-                gas: 1500000
-                //value : caver.utils.toPeb('0.05', 'KLAY')
+                gas: 1500000,
+                value : caver.utils.toPeb(price, 'KLAY'),
               })).then(function(receipt){
                 console.log(receipt);
                 window.location.reload();
@@ -262,7 +256,6 @@ function FormModal(props) {
 
 
 function controlColor(){
-  console.log($('.changeColorCheck').is(':checked'));
   if($('.changeColorCheck').is(':checked')){
     $('.changeColorCon').show();
   }else {

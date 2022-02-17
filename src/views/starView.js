@@ -76,7 +76,6 @@ function StarView() {
 
   if(klaytn != undefined){
     klaytn.on('accountsChanged', function(accounts) {
-      console.log('change',accounts[0]);
       setAccount(accounts[0]);
     })
   }
@@ -121,8 +120,7 @@ function StarView() {
       if(viewStar == false){
         setViewStar(true)
         for(var i in myStarList){
-          //console.log('list',myStarList)
-          //console.log('i : ',list[i]);
+
           var data = await contract.methods.catDataOf(myStarList[i]).call();
           $('#'+myStarList[i]).addClass('style5');
           $('#'+myStarList[i]).css('width', '20px');
@@ -137,8 +135,7 @@ function StarView() {
       } else if(viewStar == true) {
         setViewStar(false);
         for(var i in myStarList){
-          //console.log('list',myStarList)
-          //console.log('i : ',list[i]);
+
           $('#'+myStarList[i]).css('width', '2px');
           $('#'+myStarList[i]).css('height', '2px');
           $('#'+myStarList[i]).css('background-color','white');
@@ -176,7 +173,7 @@ function StarView() {
       contract = new caver.klay.Contract(abi,address);
       colorOwner = await contract.methods.whoColorOf(colorIndex).call();
     }
-    console.log(colorOwner,typeof(parseInt(colorOwner,16).toString(16)));
+
     if(colorOwner == 0x0) {
       alert("It's not exist color code");
     }
@@ -184,14 +181,11 @@ function StarView() {
       var tokenList = await contract.methods.myStarOf(colorOwner).call();
       for(var i in tokenList){
         var data = await contract.methods.catDataOf(tokenList[i]).call();
-        //console.log(data);
-        console.log(_findColor, data.catColor);
         if (data!=='' && (parseInt(data.catColor.R) === _findColor.R) && (parseInt(data.catColor.G) === _findColor.G) && (parseInt(data.catColor.B) === _findColor.B)){
           $('#'+tokenList[i]).addClass('style5');
           $('#'+tokenList[i]).css('width', '20px');
           $('#'+tokenList[i]).css('height', '20px');
           $('#'+tokenList[i]).css('background-color', _searchInputs);
-          console.log('반목문 안 i',i);
           colorSearch = tokenList[i];
         }
       }
@@ -200,7 +194,7 @@ function StarView() {
   }
 
   const search = async() => {
-    console.log('-----',colorSearch);
+
 
     if(colorSearch!=''){
       $('#'+colorSearch).removeClass('style5');
@@ -211,10 +205,7 @@ function StarView() {
 
     $('.loading').css('display', 'block');
     var searchInputs = $('.search-bar').val();
-    console.log(searchInputs);
     const hexTorgb = hexToRGB(searchInputs);
-    console.log(hexTorgb);
-    //console.log(hexTorgb.R);
     if(hexTorgb != null){
       await findColor(hexTorgb,searchInputs);
     }
@@ -244,10 +235,13 @@ function StarView() {
 
   useEffect(() => {
     const ff =async () => {
-      console.log('??',klaytn.selectedAddress);
       if ( klaytn !=  undefined) {
         owner = await klaytn.enable();
         setAccount(klaytn.selectedAddress);
+        if(klaytn.networkVersion != 1001){
+          alert('baobab 네트워크로 전환해 주세요.')
+        }
+        console.log(klaytn.networkVersion);
       }else {
         <InstallKaikas/>
       }
@@ -283,7 +277,7 @@ function StarView() {
               //200
               (tokenID <= 200) && (
               Array(tokenID).fill(0).map((_, index) => {
-                console.log(typeof tokenID)
+           
                 return (
                   <span id={index} 
                   className={test[index].styleClass} 
