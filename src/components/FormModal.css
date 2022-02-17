@@ -65,7 +65,7 @@ h4 {
 
 .modal-content{
     box-shadow: "";
-    opacity: 80%;
+    opacity: 0.8;
     border-radius: 40px;
 }
 
