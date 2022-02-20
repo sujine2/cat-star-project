@@ -11,48 +11,37 @@ import { klaytn, caver } from "../wallet/caver";
 const ModalCustom = styled(Modal)`
    
 .modal-content{
-  box-shadow: 0px 0px 30px ${(props) => props.color && props.color};
+  box-shadow: 0px 0px 30px #${(props) => props.color && props.color};
 }
 `;
 
 
 
-
-function componentToHex(c) {
-  if(c!= undefined){
-    var hex = parseInt(c,10).toString(16);
-    return hex.length === 1 ? "0" + hex : hex;
-  }
-}
-
-
 function ViewModal(props) {
-  var _id = false;
-
  
   const viewCatData = async () => {
     const id = props.tokenid;
     if(klaytn == undefined){
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       const contract = new _caver.klay.Contract(abi,address);
-      const data = await contract.methods.catDataOf(id).call();
+      const data = await contract.methods.getCatData(id).call();
       return data;
       
     }else {
       const contract = new caver.klay.Contract(abi, address);
-      const data = await contract.methods.catDataOf(id).call();
+      const data = await contract.methods.getCatData(id).call();
       return data;
     }
   }
 
   const [catData, setCatData] = React.useState([]);
   const [colorEffect, setColorEffect] = React.useState();
+  let _id;
 
 
   useEffect(async () => {
       if (props.tokenid !== '') {
         const result = await viewCatData();
-        console.log('check',result);
         setCatData(result);
       }
   
@@ -62,7 +51,7 @@ function ViewModal(props) {
   useEffect(async ()=> {
 
     if(catData.length != 0){
-      const tempColorValue = "#"+ componentToHex(catData.catColor.R) + componentToHex(catData.catColor.G) + componentToHex(catData.catColor.B);
+      const tempColorValue = catData.catColor;
       setColorEffect(tempColorValue);
     }
   },[catData])
@@ -75,24 +64,20 @@ function ViewModal(props) {
       centered
       color={colorEffect}
     >
-      {
-        console.log(props.tokenid)
-      }
-
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" style={{
           fontSize: 33
         }}>
       
-            <div className='infoTitle'style={{ float: "left"}}>
-            {props.tokenid} 'th {catData.catName} 별
-            </div>
-            
-            <div className='infoColor' style={{ marginLeft: 600, loat: "left"}}>
-            {colorEffect}
-            </div>
+        <div className='infoTitle'style={{ float: "left"}}>
+        {props.tokenid} 'th {catData.catName} 별
+        </div>
+        
+        <div className='infoColor' style={{ marginLeft: 600, loat: "left"}}>
+          #{colorEffect}
+        </div>
           
-        </Modal.Title>
+      </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className='catInfo'>
@@ -112,7 +97,6 @@ function ViewModal(props) {
         <img className='showImg'style={{
             }} src={loadingImg}/>
 
-          
           {
             _id = catData.imgURL,
             _id && (
