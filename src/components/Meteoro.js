@@ -1,44 +1,32 @@
-
-import React from 'react';
-import './Meteoro.css';
-
+import React from "react";
+import "./Meteoro.css";
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function carregarMeteoro(){
+function carregarMeteoro() {
   var numeroAleatorio = 1000;
   var style = ["style1", "style2", "style3", "style4"];
 
+  function meteoro() {
+    var meteoro =
+      "<div class='meteoro " + style[getRandomArbitrary(0, 4)] + "'></div>";
 
-  function meteoro(){
     setTimeout(meteoro, numeroAleatorio);
 
-    var meteoro = "<div class='meteoro "+ style[getRandomArbitrary(0, 4)] +"'></div>";
+    document.getElementsByClassName("chuvaMeteoro")[0].innerHTML = meteoro;
 
-    document.getElementsByClassName('chuvaMeteoro')[0].innerHTML = meteoro;
-
-    setTimeout(function(){
-      document.getElementsByClassName('chuvaMeteoro')[0].innerHTML = "";
+    setTimeout(function () {
+      document.getElementsByClassName("chuvaMeteoro")[0].innerHTML = "";
     }, 400);
   }
 
-  setTimeout(function(){
+  setTimeout(function () {
     meteoro();
   }, numeroAleatorio);
 
-
-
-
-    return (
-      <div className="chuvaMeteoro">
-
-      </div>
-        
-    );
+  return <div className="chuvaMeteoro"></div>;
 }
-
-
 
 export default carregarMeteoro;

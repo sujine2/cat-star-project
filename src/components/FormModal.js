@@ -20,7 +20,6 @@ function FormModal(props) {
   const [colors, setColors] = React.useState([]);
   const [changeColor, setChangeColor] = React.useState();
   const [colorDup, setColorDup] = React.useState(true);
-  const [account, setAccount] = React.useState("");
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -33,7 +32,7 @@ function FormModal(props) {
   const findColor = async (_findColor) => {
     const contract = new caver.klay.Contract(abi, address);
     const colorOwner = await contract.methods.getWhoColor(_findColor).call();
-    if (colorOwner == 0x0) {
+    if (colorOwner === 0x0) {
       setColorDup(true);
     } else {
       setColorDup(false);
@@ -41,7 +40,7 @@ function FormModal(props) {
   };
 
   const getColor = async () => {
-    if (klaytn == undefined) {
+    if (klaytn === undefined) {
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       const contract = new _caver.klay.Contract(abi, address);
       const color = await contract.methods.currentColor().call();
@@ -62,12 +61,6 @@ function FormModal(props) {
     });
   }, 500);
 
-  if (klaytn != undefined) {
-    klaytn.on("accountsChanged", function (accounts) {
-      setAccount(accounts[0]);
-    });
-  }
-
   useEffect(() => {
     getColor().then((result) => {
       if (result) {
@@ -78,8 +71,8 @@ function FormModal(props) {
     });
   }, []);
 
-  useEffect(async () => {
-    if (colorDup == false) {
+  useEffect(() => {
+    if (colorDup === false) {
       $(".isColorDup").text("이미 사용된 컬러 입니다.", { colorDup });
     } else {
       $(".isColorDup").text("");

@@ -5,7 +5,7 @@ import Meteoro from "../components/Meteoro";
 import plus from "../img/plus.png";
 import FormModal from "../components/FormModal";
 import Search from "../img/search.png";
-import $, { data } from "jquery";
+import $ from "jquery";
 import { address, abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
 import Caver from "caver-js";
@@ -15,9 +15,9 @@ global.Buffer = global.Buffer || require("buffer").Buffer;
 let colorSearch = "";
 
 function setSearchBarShow() {
-  if ($(".search-container").css("display") == "block") {
+  if ($(".search-container").css("display") === "block") {
     $(".search-container").css("display", "none");
-    if (colorSearch != "") {
+    if (colorSearch !== "") {
       $("#" + colorSearch).css("width", "3px");
       $("#" + colorSearch).css("height", "3px");
       $("#" + colorSearch).css("background-color", "white");
@@ -77,7 +77,7 @@ function StarView() {
   let owner;
 
   const getTokenNum = async () => {
-    if (klaytn == undefined) {
+    if (klaytn === undefined) {
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       const contract = new _caver.klay.Contract(abi, address);
       const TokenID = await contract.methods.tokenID().call();
@@ -93,7 +93,7 @@ function StarView() {
     if (klaytn === undefined) {
       alert("Non-Kaikas browser detected. You should consider trying Kaikas!");
     } else {
-      if (klaytn.selectedAddress == undefined) {
+      if (klaytn.selectedAddress === undefined) {
         await klaytn.enable();
         setAccount(klaytn.selectedAddress);
       }
@@ -113,7 +113,7 @@ function StarView() {
 
           $(".myStar").text("View My Star");
         }
-      } else if (viewStar == true) {
+      } else if (viewStar === true) {
         setViewStar(false);
         for (let i in myStarList) {
           $("#" + myStarList[i]).css("width", "2px");
@@ -131,7 +131,7 @@ function StarView() {
   const findColor = async (_findColor) => {
     let colorOwner;
     let contract;
-    if (klaytn == undefined) {
+    if (klaytn === undefined) {
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       contract = new _caver.klay.Contract(abi, address);
     } else {
@@ -161,7 +161,7 @@ function StarView() {
     if (_index < 0 || _index >= tokenID) {
       alert("It's not exist cat star");
     } else {
-      if (klaytn == undefined) {
+      if (klaytn === undefined) {
         const _caver = new Caver("https://api.baobab.klaytn.net:8651");
         contract = new _caver.klay.Contract(abi, address);
       } else {
@@ -178,7 +178,7 @@ function StarView() {
   };
 
   const search = async () => {
-    if (colorSearch != "") {
+    if (colorSearch !== "") {
       $("#" + colorSearch).removeClass("style5");
       $("#" + colorSearch).css("width", "3px");
       $("#" + colorSearch).css("height", "3px");
@@ -186,7 +186,7 @@ function StarView() {
     }
     let searchInputs = $(".search-bar").val();
     $(".loading").css("display", "block");
-    if (searchInputs != "") {
+    if (searchInputs !== "") {
       if (searchInputs[0] === "#") {
         searchInputs = searchInputs.substr(1);
         await findColor(searchInputs);
@@ -198,7 +198,7 @@ function StarView() {
   };
 
   const fff = () => {
-    if (tokenID != -1) {
+    if (tokenID !== -1) {
       setTest(
         Array(200)
           .fill(0)
@@ -227,10 +227,10 @@ function StarView() {
 
   useEffect(() => {
     const ff = async () => {
-      if (klaytn != undefined) {
+      if (klaytn !== undefined) {
         owner = await klaytn.enable();
         setAccount(klaytn.selectedAddress);
-        if (klaytn.networkVersion != 1001) {
+        if (klaytn.networkVersion !== 1001) {
           alert("baobab 네트워크로 전환해 주세요.");
         }
       }
@@ -246,7 +246,7 @@ function StarView() {
     };
 
     f().then(() => {
-      if (tokenID != -1) {
+      if (tokenID !== -1) {
         fff();
         setIsLoading(true);
       }
