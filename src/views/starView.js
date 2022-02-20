@@ -139,7 +139,7 @@ function StarView() {
     }
 
     colorOwner = await contract.methods.getWhoColor(_findColor).call();
-    if (colorOwner === 0x0) {
+    if (colorOwner == 0x0) {
       alert("It's not exist color code");
     } else {
       let tokenList = await contract.methods.getMyStar(colorOwner).call();

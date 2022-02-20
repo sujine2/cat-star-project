@@ -32,7 +32,7 @@ function FormModal(props) {
   const findColor = async (_findColor) => {
     const contract = new caver.klay.Contract(abi, address);
     const colorOwner = await contract.methods.getWhoColor(_findColor).call();
-    if (colorOwner === 0x0) {
+    if (colorOwner == 0x0) {
       setColorDup(true);
     } else {
       setColorDup(false);
