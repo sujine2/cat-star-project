@@ -20,6 +20,7 @@ function FormModal(props) {
   const [colors, setColors] = React.useState([]);
   const [changeColor, setChangeColor] = React.useState();
   const [colorDup, setColorDup] = React.useState(true);
+  const [account, setAccount] = React.useState("");
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -78,6 +79,12 @@ function FormModal(props) {
       $(".isColorDup").text("");
     }
   }, [colorDup]);
+
+  if (klaytn !== undefined) {
+    klaytn.on("accountsChanged", function (accounts) {
+      setAccount(accounts[0]);
+    });
+  }
 
   let price;
   return (
@@ -259,7 +266,7 @@ function FormModal(props) {
                       true
                     )
                     .send({
-                      from: klaytn.selectedAddress,
+                      from: account,
                       gas: 1500000,
                       value: caver.utils.toPeb(price, "KLAY"),
                     })
@@ -267,7 +274,6 @@ function FormModal(props) {
                       window.location.reload();
                     });
                 } else {
-                  console.log(klaytn.selectedAddress);
                   contract.methods
                     .mint(
                       catName,
@@ -280,7 +286,7 @@ function FormModal(props) {
                       false
                     )
                     .send({
-                      from: klaytn.selectedAddress,
+                      from: account,
                       gas: 1500000,
                     })
                     .then(function (receipt) {
