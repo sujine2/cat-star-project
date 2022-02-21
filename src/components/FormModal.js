@@ -84,7 +84,7 @@ function FormModal(props) {
     if (klaytn !== undefined) {
       setAccount(klaytn.selectedAddress);
     }
-  }, [account]);
+  }, []);
 
   if (klaytn !== undefined) {
     klaytn.on("accountsChanged", function (accounts) {
