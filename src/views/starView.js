@@ -8,6 +8,7 @@ import Search from "../img/search.png";
 import $ from "jquery";
 import { address, abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
+import { land } from "../img/land.png";
 import Caver from "caver-js";
 import searchLoading from "../img/catStar.png";
 
@@ -41,6 +42,53 @@ function StarView() {
   const [tokenID, setTokenID] = React.useState(-1);
   const [isLoading, setIsLoading] = React.useState(false);
   const [test, setTest] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+  const [test2, setTest2] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+
+  const [test3, setTest3] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+
+  const [test4, setTest4] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+
+  const [test5, setTest5] = React.useState([
     {
       styleClass: "",
       inlineStyle: {
@@ -104,8 +152,8 @@ function StarView() {
         for (let i in myStarList) {
           let data = await contract.methods.getCatData(myStarList[i]).call();
           $("#" + myStarList[i]).addClass("style5");
-          $("#" + myStarList[i]).css("width", "20px");
-          $("#" + myStarList[i]).css("height", "20px");
+          $("#" + myStarList[i]).css("width", "17px");
+          $("#" + myStarList[i]).css("height", "17px");
           $("#" + myStarList[i]).css("background-color", "#" + data.catColor);
 
           $(".myStar").css("opacity", "100%");
@@ -147,8 +195,8 @@ function StarView() {
         let data = await contract.methods.getCatData(tokenList[i]).call();
         if (data !== "" && _findColor === data.catColor) {
           $("#" + tokenList[i]).addClass("style5");
-          $("#" + tokenList[i]).css("width", "20px");
-          $("#" + tokenList[i]).css("height", "20px");
+          $("#" + tokenList[i]).css("width", "17px");
+          $("#" + tokenList[i]).css("height", "17px");
           $("#" + tokenList[i]).css("background-color", "#" + _findColor);
           colorSearch = tokenList[i];
         }
@@ -170,8 +218,8 @@ function StarView() {
 
       const data = await contract.methods.getCatData(_index).call();
       $("#" + _index).addClass("style5");
-      $("#" + _index).css("width", "20px");
-      $("#" + _index).css("height", "20px");
+      $("#" + _index).css("width", "17px");
+      $("#" + _index).css("height", "17px");
       $("#" + _index).css("background-color", "#" + data.catColor);
       colorSearch = _index;
     }
@@ -180,8 +228,8 @@ function StarView() {
   const search = async () => {
     if (colorSearch !== "") {
       $("#" + colorSearch).removeClass("style5");
-      $("#" + colorSearch).css("width", "3px");
-      $("#" + colorSearch).css("height", "3px");
+      $("#" + colorSearch).css("width", "2px");
+      $("#" + colorSearch).css("height", "2px");
       $("#" + colorSearch).css("background-color", "white");
     }
     let searchInputs = $(".search-bar").val();
@@ -217,6 +265,102 @@ function StarView() {
                 animationDelay: getRandomArbitrary(0, 9) + "s",
                 left: getRandomArbitrary(0, widthWindow),
                 top: getRandomArbitrary(0, heightWindow),
+                opacity: [getRandomArbitrary(0, 6)],
+              },
+            };
+          })
+      );
+
+      setTest2(
+        Array(200)
+          .fill(0)
+          .map(() => {
+            return {
+              styleClass:
+                "view-estrela " +
+                style[getRandomArbitrary(0, 4)] +
+                " " +
+                opacity[getRandomArbitrary(0, 6)] +
+                " " +
+                tam[getRandomArbitrary(0, 5)] +
+                " ",
+
+              inlineStyle: {
+                animationDelay: getRandomArbitrary(0, 9) + "s",
+                left: getRandomArbitrary(0, widthWindow),
+                top: getRandomArbitrary(0, heightWindow),
+                opacity: [getRandomArbitrary(0, 6)],
+              },
+            };
+          })
+      );
+
+      setTest3(
+        Array(250)
+          .fill(0)
+          .map(() => {
+            return {
+              styleClass:
+                "view-estrela " +
+                style[getRandomArbitrary(0, 4)] +
+                " " +
+                opacity[getRandomArbitrary(0, 6)] +
+                " " +
+                tam[getRandomArbitrary(0, 5)] +
+                " ",
+
+              inlineStyle: {
+                animationDelay: getRandomArbitrary(0, 9) + "s",
+                left: getRandomArbitrary(0, widthWindow),
+                top: getRandomArbitrary(300, 400),
+                opacity: [getRandomArbitrary(0, 6)],
+              },
+            };
+          })
+      );
+
+      setTest4(
+        Array(200)
+          .fill(0)
+          .map(() => {
+            return {
+              styleClass:
+                "view-estrela " +
+                style[getRandomArbitrary(0, 4)] +
+                " " +
+                opacity[getRandomArbitrary(0, 6)] +
+                " " +
+                tam[getRandomArbitrary(0, 5)] +
+                " ",
+
+              inlineStyle: {
+                animationDelay: getRandomArbitrary(0, 9) + "s",
+                left: getRandomArbitrary(0, widthWindow),
+                top: getRandomArbitrary(400, 470),
+                opacity: [getRandomArbitrary(0, 6)],
+              },
+            };
+          })
+      );
+
+      setTest5(
+        Array(200)
+          .fill(0)
+          .map(() => {
+            return {
+              styleClass:
+                "view-estrela " +
+                style[getRandomArbitrary(0, 4)] +
+                " " +
+                opacity[getRandomArbitrary(0, 6)] +
+                " " +
+                tam[getRandomArbitrary(0, 5)] +
+                " ",
+
+              inlineStyle: {
+                animationDelay: getRandomArbitrary(0, 9) + "s",
+                left: getRandomArbitrary(0, widthWindow),
+                top: getRandomArbitrary(220, 300),
                 opacity: [getRandomArbitrary(0, 6)],
               },
             };
@@ -282,6 +426,94 @@ function StarView() {
                     );
                   })
             }
+
+            {
+              //200
+              Array(200)
+                .fill(0)
+                .map((_, index) => {
+                  return (
+                    <span
+                      id={index}
+                      className={test2[index].styleClass}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setModalShow({
+                          setShow: true,
+                          id: index,
+                        });
+                      }}
+                      style={test2[index].inlineStyle}
+                    ></span>
+                  );
+                })
+            }
+
+            {
+              //200
+              Array(250)
+                .fill(0)
+                .map((_, index) => {
+                  return (
+                    <span
+                      id={index}
+                      className={test3[index].styleClass}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setModalShow({
+                          setShow: true,
+                          id: index,
+                        });
+                      }}
+                      style={test3[index].inlineStyle}
+                    ></span>
+                  );
+                })
+            }
+
+            {
+              //200
+              Array(50)
+                .fill(0)
+                .map((_, index) => {
+                  return (
+                    <span
+                      id={index}
+                      className={test4[index].styleClass}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setModalShow({
+                          setShow: true,
+                          id: index,
+                        });
+                      }}
+                      style={test4[index].inlineStyle}
+                    ></span>
+                  );
+                })
+            }
+
+            {
+              //200
+              Array(50)
+                .fill(0)
+                .map((_, index) => {
+                  return (
+                    <span
+                      id={index}
+                      className={test5[index].styleClass}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setModalShow({
+                          setShow: true,
+                          id: index,
+                        });
+                      }}
+                      style={test5[index].inlineStyle}
+                    ></span>
+                  );
+                })
+            }
           </div>
           <ViewModal
             show={setShow}
@@ -342,7 +574,10 @@ function StarView() {
           <div className="myStarCon">
             {account !== "" && (
               <>
-                <div className="myStar" onClick={() => viewMyStar(account)}>
+                <div
+                  className="myStar"
+                  onClick={() => viewMyStar(klaytn.selectedAddress)}
+                >
                   View My Star-Off
                 </div>
               </>
