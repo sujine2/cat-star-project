@@ -80,6 +80,12 @@ function FormModal(props) {
     }
   }, [colorDup]);
 
+  useEffect(() => {
+    if (klaytn !== undefined) {
+      setAccount(klaytn.selectedAddress);
+    }
+  }, [account]);
+
   if (klaytn !== undefined) {
     klaytn.on("accountsChanged", function (accounts) {
       setAccount(accounts[0]);
