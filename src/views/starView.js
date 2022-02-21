@@ -294,6 +294,7 @@ function StarView() {
             }
             tokenid={id}
           />
+
           <Meteoro />
 
           <div className="floresta">

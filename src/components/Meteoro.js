@@ -11,7 +11,7 @@ function carregarMeteoro() {
 
   function meteoro() {
     var meteoro =
-      "<div class='meteoro " + style[getRandomArbitrary(0, 4)] + "'></div>";
+      "<div className='meteoro " + style[getRandomArbitrary(0, 4)] + "'></div>";
 
     setTimeout(meteoro, numeroAleatorio);
 
