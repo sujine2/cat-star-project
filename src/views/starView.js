@@ -201,7 +201,7 @@ function StarView() {
   const fff = () => {
     if (tokenID !== -1) {
       setTest(
-        Array(200)
+        Array(tokenID)
           .fill(0)
           .map(() => {
             return {
@@ -282,94 +282,6 @@ function StarView() {
                       ></span>
                     );
                   })
-            }
-
-            {
-              //200
-              Array(200)
-                .fill(0)
-                .map((_, index) => {
-                  return (
-                    <span
-                      id={index}
-                      className={test2[index].styleClass}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setModalShow({
-                          setShow: true,
-                          id: index,
-                        });
-                      }}
-                      style={test2[index].inlineStyle}
-                    ></span>
-                  );
-                })
-            }
-
-            {
-              //200
-              Array(250)
-                .fill(0)
-                .map((_, index) => {
-                  return (
-                    <span
-                      id={index}
-                      className={test3[index].styleClass}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setModalShow({
-                          setShow: true,
-                          id: index,
-                        });
-                      }}
-                      style={test3[index].inlineStyle}
-                    ></span>
-                  );
-                })
-            }
-
-            {
-              //200
-              Array(50)
-                .fill(0)
-                .map((_, index) => {
-                  return (
-                    <span
-                      id={index}
-                      className={test4[index].styleClass}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setModalShow({
-                          setShow: true,
-                          id: index,
-                        });
-                      }}
-                      style={test4[index].inlineStyle}
-                    ></span>
-                  );
-                })
-            }
-
-            {
-              //200
-              Array(50)
-                .fill(0)
-                .map((_, index) => {
-                  return (
-                    <span
-                      id={index}
-                      className={test5[index].styleClass}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setModalShow({
-                          setShow: true,
-                          id: index,
-                        });
-                      }}
-                      style={test5[index].inlineStyle}
-                    ></span>
-                  );
-                })
             }
           </div>
           <ViewModal
