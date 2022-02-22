@@ -80,18 +80,14 @@ function FormModal(props) {
     }
   }, [colorDup]);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (klaytn !== undefined) {
       setAccount(klaytn.selectedAddress);
+      klaytn.on("accountsChanged", function (accounts) {
+        setAccount(accounts[0]);
+      });
     }
   }, []);
-
-  if (klaytn !== undefined) {
-    klaytn.on("accountsChanged", function (accounts) {
-      setAccount(accounts[0]);
-    });
-  }
-
   let price;
   return (
     <Modal
@@ -101,139 +97,154 @@ function FormModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <div className="modalTitle">Your Cat Star's Infos</div>
-        <div className="currentColor">
-          Current Color :
-          <button
-            className="printColor"
-            style={{
-              backgroundColor: "#" + colors,
-              border: 0,
-              outline: 0,
-              width: 10,
-              cursor: "default",
-              marginRight: 50,
-            }}
-          >
-            <div className="printColorValue" style={{ marginLeft: 40 }}>
-              #{colors}
-            </div>
-          </button>
-          <div>
-            <input
-              type="checkbox"
-              className="changeColorCheck"
-              onClick={() => controlColor()}
-            />
-            <label
-              htmlFor="changeColorCheck"
-              style={{
-                fontSize: 15,
-                marginLeft: 10,
-                color: "gray",
-              }}
-            >
-              컬러 바꾸기 1 Klay
-            </label>
-          </div>
-          <div className="changeColorCon">
-            <input
-              className="changeColor"
-              type="color"
-              defaultValue={"#" + changeColor}
-            ></input>
-            <span className="printColorValue">#{changeColor}</span>
-            <span
-              style={{
-                marginLeft: 15,
-                color: "red",
-                fontSize: 12,
-              }}
-              className="isColorDup"
-            ></span>
-          </div>
-        </div>
+        <div className="modalTitle">고양이 별 정보</div>
       </Modal.Header>
       <Modal.Body>
         <div className="formModalBody">
           <div className="catInfoForm">
-            <h4>Cat's name </h4>
-            <input
-              className="inputData"
-              name="catName"
-              type="text"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={catName}
-              required="required"
-            />
             <br />
+            <div style={{ float: "left", width: 140, fontSize: 50 }}>
+              <h4>별 이름 </h4>
+              <h4>별 주인 </h4>
+              <h4>만난 날 </h4>
+              <h4>좋아하는 것 </h4>
+              <h4>메모 </h4>
+              <h4>이미지 링크 </h4>
+            </div>
+            <div style={{ float: "left", width: 450 }}>
+              <input
+                className="inputData"
+                name="catName"
+                type="text"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={catName}
+                required="required"
+              />{" "}
+              <br />
+              <input
+                className="inputData"
+                name="yourName"
+                type="text"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={yourName}
+                required="required"
+              />
+              <br />
+              <input
+                className="inputData"
+                name="dayMet"
+                type="number"
+                placeholder="ex)20210510"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={dayMet}
+                required="required"
+              />
+              <br />
+              <input
+                className="inputData"
+                name="favorite"
+                type="text"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={favorite}
+                required="required"
+              />
+              <br />
+              <input
+                className="inputData"
+                name="comment"
+                type="text"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={comment}
+                required="required"
+              />
+              <br />
+              <input
+                className="inputData"
+                name="imgURL"
+                type="text"
+                placeholder="구글 드라이브 **전체 공유 링크를** 넣어주세요!"
+                style={{ width: 400 }}
+                onChange={onChange}
+                value={imgURL}
+                required="required"
+              />
+            </div>
             <br />
-            <h4>Your Name </h4>
-            <input
-              className="inputData"
-              name="yourName"
-              type="text"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={yourName}
-              required="required"
-            />
-            <br />
-            <br />
-            <h4>The day I met a cat </h4>
-            <input
-              className="inputData"
-              name="dayMet"
-              type="number"
-              placeholder="ex)20210510"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={dayMet}
-              required="required"
-            />
-            <br />
-            <br />
-            <h4>What my cat likes </h4>
-            <input
-              className="inputData"
-              name="favorite"
-              type="text"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={favorite}
-              required="required"
-            />
-            <br />
-            <br />
-            <h4>Comment </h4>
-            <input
-              className="inputData"
-              name="comment"
-              type="text"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={comment}
-              required="required"
-            />
-            <br />
-            <br />
-            <h4>Image Link </h4>
-            <input
-              className="inputData"
-              name="imgURL"
-              type="text"
-              placeholder="google dirve **전체 공유 링크를** 넣어주세요!"
-              style={{ width: 400 }}
-              onChange={onChange}
-              value={imgURL}
-              required="required"
-            />
-            <br />
-            <br />
+            <div className="currentColor" style={{ width: 600 }}>
+              <div
+                style={{
+                  float: "left",
+                  width: 105,
+                  marginLeft: 20,
+                  marginRight: 20,
+                }}
+              >
+                현재 별 색상 :
+              </div>
+              <button
+                className="printColor"
+                style={{
+                  backgroundColor: "#" + colors,
+                  border: 0,
+                  outline: 0,
+                  width: 10,
+                  cursor: "default",
+                  marginRight: 30,
+                  float: "left",
+                }}
+              ></button>
+              <div
+                className="printColorValue"
+                style={{ float: "left", marginRight: 170 }}
+              >
+                #{colors}
+              </div>
+
+              <div style={{ float: "left", width: 150 }}>
+                <input
+                  type="checkbox"
+                  className="changeColorCheck"
+                  onClick={() => controlColor()}
+                />
+                <label
+                  htmlFor="changeColorCheck"
+                  style={{
+                    fontSize: 15,
+                    marginLeft: 10,
+                    color: "gray",
+                  }}
+                >
+                  컬러 바꾸기 1 Klay
+                </label>
+                <div className="changeColorCon">
+                  <input
+                    className="changeColor"
+                    type="color"
+                    defaultValue={"#" + changeColor}
+                  ></input>
+                  <span className="printColorValue">#{changeColor}</span>
+                  <br />
+                  <span
+                    style={{
+                      marginLeft: 15,
+                      color: "red",
+                      fontSize: 12,
+                    }}
+                    className="isColorDup"
+                  ></span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Modal.Body>
+      <br />
+
       <Modal.Footer>
         <Button
           onClick={async () => {
@@ -244,7 +255,8 @@ function FormModal(props) {
               yourName === "" ||
               comment === "" ||
               favorite === "" ||
-              dayMet === ""
+              dayMet === "" ||
+              imgURL === ""
             ) {
               alert("입력란을 모두 채워주세요.");
             } else {
@@ -253,11 +265,10 @@ function FormModal(props) {
                   "Non-Kaikas browser detected. You should consider trying Kaikas!"
                 );
               } else {
-                if (klaytn.selectedAddress === undefined) {
+                if ((await klaytn._kaikas.isUnlocked()) === false) {
                   await klaytn.enable();
                 }
                 const contract = new caver.klay.Contract(abi, address);
-
                 if ($(".changeColorCheck").is(":checked")) {
                   price = await contract.methods.getMintPrice().call();
                   contract.methods
@@ -303,7 +314,7 @@ function FormModal(props) {
             }
           }}
         >
-          Make a star
+          별 만들기
         </Button>
       </Modal.Footer>
     </Modal>

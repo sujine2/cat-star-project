@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Caver from "caver-js";
 import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
-import $ from "jquery";
+import $, { data } from "jquery";
 import styled from "styled-components";
 import { klaytn, caver } from "../wallet/caver";
 
@@ -63,45 +63,54 @@ function ViewModal(props) {
             fontSize: 33,
           }}
         >
-          <div className="infoTitle" style={{ float: "left" }}>
-            {props.tokenid} 'th {catData.catName} 별
+          <div className="infoTitle">
+            {props.tokenid} 번째 {catData.catName} 별
           </div>
 
-          <div className="infoColor" style={{ marginLeft: 600, loat: "left" }}>
+          <div className="infoColor">
+            <button
+              className="printColor"
+              style={{
+                backgroundColor: "#" + catData.catColor,
+                border: 0,
+                outline: 0,
+                width: 10,
+                cursor: "default",
+                marginRight: 15,
+                float: "left",
+              }}
+            ></button>
             #{colorEffect}
           </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <img className="showImg" style={{}} src={loadingImg} />
+
+        {
+          ((_id = catData.imgURL),
+          _id && ((_id = _id.split("/")), (_id = _id[5]), ""))
+        }
+
+        {
+          ($(".showImg").attr(
+            "src",
+            "https://drive.google.com/uc?export=view&id=" + _id
+          ),
+          $(".showImg").css("marginLeft", ""),
+          $(".showImg").css("marginTop", ""),
+          (_id = false))
+        }
+
         <div className="catInfo">
-          <br />
-          <h4> 별 소유자 : {catData.yourName}</h4>
-          <br />
-          <h4> 만난 날 : {catData.metDay}</h4>
-          <br />
-          <h4> 좋아하는 것 : {catData.favorite}</h4>
-          <br />
-          <br />
-          <div className="dataComment">{catData.comment}</div>
-          <br />
+          <div style={{ float: "left", marginLeft: 20, marginRight: 50 }}>
+            소유자 : {catData.yourName}
+          </div>
+          <div style={{ float: "left" }}>좋아하는 것 : {catData.favorite}</div>
         </div>
-        <div className="dataImg">
-          <img className="showImg" style={{}} src={loadingImg} />
-
-          {
-            ((_id = catData.imgURL),
-            _id && ((_id = _id.split("/")), (_id = _id[5]), ""))
-          }
-
-          {
-            ($(".showImg").attr(
-              "src",
-              "https://drive.google.com/uc?export=view&id=" + _id
-            ),
-            $(".showImg").css("marginLeft", ""),
-            $(".showImg").css("marginTop", ""),
-            (_id = false))
-          }
+        <div className="dataComment">{catData.comment}</div>
+        <div className="day" style={{ float: "right", marginRight: 5 }}>
+          {catData.metDay}
         </div>
       </Modal.Body>
     </ModalCustom>

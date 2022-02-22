@@ -8,7 +8,7 @@ import Search from "../img/search.png";
 import $ from "jquery";
 import { address, abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
-import { land } from "../img/land.png";
+import land from "../img/land.png";
 import Caver from "caver-js";
 import searchLoading from "../img/catStar.png";
 
@@ -112,7 +112,7 @@ function StarView() {
           $(".myStar").css("opacity", "100%");
           $(".myStar").css("text-shadow", "0px 0px 8px white");
 
-          $(".myStar").text("View My Star");
+          $(".myStar").text("내 별 보기");
         }
       } else if (viewStar === true) {
         setViewStar(false);
@@ -123,7 +123,7 @@ function StarView() {
           $("#" + myStarList[i]).removeClass("style5");
           $(".myStar").css("opacity", "60%");
           $(".myStar").css("text-shadow", "");
-          $(".myStar").text("View My Star-Off");
+          $(".myStar").text("내 별 보기 - off");
         }
       }
     }
@@ -294,14 +294,17 @@ function StarView() {
             }
             tokenid={id}
           />
+          <div className="chuvaMeteoro"></div>
 
-          <Meteoro />
-
-          <div className="floresta">
+          {/* <div className="floresta">
             <img
               src="https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png"
               alt=""
             />
+          </div> */}
+
+          <div className="land">
+            <img src={land} alt="" />
           </div>
 
           <div className="loading">
@@ -348,18 +351,14 @@ function StarView() {
                   className="myStar"
                   onClick={() => viewMyStar(klaytn.selectedAddress)}
                 >
-                  View My Star-Off
+                  내 별 보기 - off
                 </div>
               </>
             )}
           </div>
 
           <form className="search-container">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="What is your color?"
-            />
+            <input type="text" className="search-bar" />
             <a onClick={search}>
               <img className="search-icon" src={Search} />
             </a>

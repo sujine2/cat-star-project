@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap');
+
 * {
     box-sizing: content-box;
 }
@@ -117,7 +118,7 @@ html, body {
   color: white;
   font-family: 'Luxurious Roman', cursive;
   font-size: 35px;
-  margin: 50px 200px 50px 200px;
+  margin: 30px 200px 30px 200px;
   padding-right: 100px;
   padding-left: 100px;
   margin-top: 7%;
@@ -127,13 +128,16 @@ html, body {
 }
 
 .welcome{
-  font-family: 'Courgette', cursive;
+  font-family: 'Gamja Flower', cursive;
   opacity: 0.9;
   margin-top: 25px;
+  font-weight: 700;
 }
 
 .moveCon {
+  font-family: 'Gamja Flower', cursive;
   position: absolute;
+  margin-left: 100px;
 }
 
 .move {
@@ -159,9 +163,11 @@ html, body {
   opacity: 0.9; 
 }
 
+
 .des{
+  font-family: 'Gaegu', cursive;
   text-align: center;
-  font-size: 25px;
+  font-size: 27px;
   opacity: 0.8;
 }
 @keyframes fadein {

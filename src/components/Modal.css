@@ -1,40 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Poppins:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hahmlet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap');
 
 .catInfo {
     font-family: 'Gabriela', serif;
-    font-family: 'Hahmlet', serif;
+    font-family: 'Gamja Flower', cursive;
     font-size: 20px;
-    float: left;
-    width: 40%;
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-bottom: 3%;
+    text-align: center;
 }
 
 
-
-.dataImg{
-    float: left;
-    width: 50%;
-    
+#contained-modal-title-vcenter{
+    width: 100%;
 }
 
+.day{
+    font-family: 'Gamja Flower', cursive;
+    font-size: 18px;
+}
 .infoTitle{
-    font-family: 'Hahmlet', serif;
-    
+    font-family: 'Gamja Flower', cursive;
     margin-left: 20px;
+    float: left;
+    width: 60%;
 }
 
 .infoColor{
-    font-family: 'Luxurious Roman', cursive;
+    font-family: 'Gamja Flower', cursive;
+    float: left;
+    font-size: 20px;
+    width: 30%;
 }
 
 .showImg {
-    max-width: 100%;
     width: auto;
-    height: auto;
-    border-radius: 40px;
+    height: 400px;
+    display: block; 
+    margin: 0px auto;
+    border-radius: 10px;
+    margin-bottom: 3%;
 }
 
 .btn-close{
@@ -43,10 +49,14 @@
 
 
 .dataComment {
-    text-align: center;
-    margin-left: 3%;
-    margin-right: 12%;
-    border-style: dashed;
-    border-radius: 40px;
-    padding: 10px;
+    font-family: 'Gamja Flower', cursive;
+    padding: 2%;
+    border-style: solid;
+    border-color: #e2e2e2;
+    border-radius: 10px;
+    height: auto;
+    margin: 3%;
+    font-size: 24px;
+    float: left;
+    width: 91%;
 }
