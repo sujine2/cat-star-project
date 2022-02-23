@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
-#root {
-  
+.container {
+  width: 100%;
+  max-width: none !important;
 }

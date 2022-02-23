@@ -8,6 +8,17 @@ import { klaytn, caver } from "../wallet/caver";
 import Caver from "caver-js";
 
 const ModalCustomFrom = styled(Modal)`
+  .modal-content {
+    box-shadow: "";
+    border-radius: 20px;
+    width: auto;
+    opacity: 0.96;
+    padding: 10px;
+  }
+  .modal-body {
+    margin: 0 auto;
+    width: auto;
+  }
   @media (min-width: 652px) {
     .modal-dialog-centered {
       min-height: calc(100% - 0.5rem);
@@ -47,7 +58,9 @@ function FormModal(props) {
 
   const findColor = async (_findColor) => {
     const contract = new caver.klay.Contract(abi, address);
-    const colorOwner = await contract.methods.getWhoColor(_findColor).call();
+    const colorOwner = await contract.methods
+      .getWhoColor(parseInt(_findColor, 16))
+      .call();
     if (colorOwner == 0x0) {
       setColorDup(true);
     } else {
@@ -73,7 +86,6 @@ function FormModal(props) {
     $(".changeColor").change(async function () {
       change = $(".changeColor").val().substr(1);
       setChangeColor(change);
-      change = parseInt(change).toString(16);
       await findColor(change);
     });
   }, 500);

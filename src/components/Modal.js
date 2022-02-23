@@ -10,16 +10,28 @@ import { klaytn, caver } from "../wallet/caver";
 
 const ModalCustom = styled(Modal)`
   .modal-content {
+    padding: 0;
+    width: 510px;
+    height: 700px;
     box-shadow: 0px 0px 30px #${(props) => props.color && props.color};
   }
-  @media (min-width: 500px) {
+
+  .modal-body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    max-width: 510px;
+    padding: 0;
+  }
+
+  @media (min-width: 510px) {
     .modal-dialog-centered {
       min-height: calc(100% - 0.5rem);
     }
   }
-  @media (min-width: 500px) {
+  @media (min-width: 510px) {
     .modal-dialog {
-      max-width: 500px;
+      max-width: 510px;
       margin: 0 auto;
     }
   }
@@ -112,15 +124,30 @@ function ViewModal(props) {
           (_id = false))
         }
 
-        <div className="catInfo">
-          <div style={{ float: "left", marginLeft: 20, marginRight: 50 }}>
-            소유자 : {catData.yourName}
+        <div style={{ marginRight: 20, marginLeft: 13 }}>
+          <div className="catInfo">
+            <div
+              style={{
+                float: "left",
+                marginLeft: 20,
+                marginRight: 50,
+              }}
+            >
+              소유자 : {catData.yourName}
+            </div>
+            <div style={{ float: "left" }}>
+              좋아하는 것 : {catData.favorite}
+            </div>
           </div>
-          <div style={{ float: "left" }}>좋아하는 것 : {catData.favorite}</div>
-        </div>
-        <div className="dataComment">{catData.comment}</div>
-        <div className="day" style={{ float: "right", marginRight: 5 }}>
-          {catData.metDay}
+          <div className="dataComment" style={{ padding: 10 }}>
+            {catData.comment}
+          </div>
+          <div
+            className="day"
+            style={{ float: "right", marginRight: 10, padding: 10 }}
+          >
+            {catData.metDay}
+          </div>
         </div>
       </Modal.Body>
     </ModalCustom>
