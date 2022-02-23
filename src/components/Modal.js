@@ -12,6 +12,17 @@ const ModalCustom = styled(Modal)`
   .modal-content {
     box-shadow: 0px 0px 30px #${(props) => props.color && props.color};
   }
+  @media (min-width: 500px) {
+    .modal-dialog-centered {
+      min-height: calc(100% - 0.5rem);
+    }
+  }
+  @media (min-width: 500px) {
+    .modal-dialog {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
 `;
 
 function ViewModal(props) {
@@ -43,7 +54,7 @@ function ViewModal(props) {
 
   useEffect(() => {
     if (catData.length !== 0) {
-      const tempColorValue = catData.catColor;
+      const tempColorValue = parseInt(catData.catColor).toString(16);
       setColorEffect(tempColorValue);
     }
   }, [catData]);
@@ -51,7 +62,6 @@ function ViewModal(props) {
   return (
     <ModalCustom
       {...props}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       color={colorEffect}
@@ -71,7 +81,7 @@ function ViewModal(props) {
             <button
               className="printColor"
               style={{
-                backgroundColor: "#" + catData.catColor,
+                backgroundColor: "#" + parseInt(catData.catColor).toString(16),
                 border: 0,
                 outline: 0,
                 width: 10,

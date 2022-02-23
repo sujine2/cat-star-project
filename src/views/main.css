@@ -136,21 +136,21 @@ html, body {
 
 .moveCon {
   font-family: 'Gamja Flower', cursive;
-  position: absolute;
-  margin-left: 100px;
+  width:300px;
+  margin:auto;
 }
 
 .move {
   text-decoration: none;
-  display: inline-block;
   color: white; 
   cursor: pointer;
   text-shadow : 3px 4px 20px white;
-  margin: 0 auto;
-  padding-left: 230px;
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
   opacity: 0.6;
+  width:100%;
+  margin:auto;
+  display:block;
 }
 
 .move:hover {

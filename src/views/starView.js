@@ -107,7 +107,10 @@ function StarView() {
           $("#" + myStarList[i]).addClass("style5");
           $("#" + myStarList[i]).css("width", "17px");
           $("#" + myStarList[i]).css("height", "17px");
-          $("#" + myStarList[i]).css("background-color", "#" + data.catColor);
+          $("#" + myStarList[i]).css(
+            "background-color",
+            "#" + parseInt(data.catColor).toString(16)
+          );
 
           $(".myStar").css("opacity", "100%");
           $(".myStar").css("text-shadow", "0px 0px 8px white");
@@ -139,14 +142,19 @@ function StarView() {
       contract = new caver.klay.Contract(abi, address);
     }
 
-    colorOwner = await contract.methods.getWhoColor(_findColor).call();
+    colorOwner = await contract.methods
+      .getWhoColor(parseInt(_findColor, 16))
+      .call();
     if (colorOwner == 0x0) {
       alert("It's not exist color code");
     } else {
       let tokenList = await contract.methods.getMyStar(colorOwner).call();
       for (let i in tokenList) {
         let data = await contract.methods.getCatData(tokenList[i]).call();
-        if (data !== "" && _findColor === data.catColor) {
+        if (
+          data !== "" &&
+          _findColor === parseInt(data.catColor).toString(16)
+        ) {
           $("#" + tokenList[i]).addClass("style5");
           $("#" + tokenList[i]).css("width", "17px");
           $("#" + tokenList[i]).css("height", "17px");
@@ -168,12 +176,14 @@ function StarView() {
       } else {
         contract = new caver.klay.Contract(abi, address);
       }
-
       const data = await contract.methods.getCatData(_index).call();
       $("#" + _index).addClass("style5");
       $("#" + _index).css("width", "17px");
       $("#" + _index).css("height", "17px");
-      $("#" + _index).css("background-color", "#" + data.catColor);
+      $("#" + _index).css(
+        "background-color",
+        "#" + parseInt(data.catColor).toString(16)
+      );
       colorSearch = _index;
     }
   };

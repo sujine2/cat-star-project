@@ -1,4 +1,4 @@
-export const address = "0xa8BD67692C823df194F24910DAB296CD47ff4b52";
+export const address = "0xD1a76a4ABe8cb8EAAA6E3D371839757DAe0aFd09";
 export const abi = [
   {
     inputs: [],
@@ -144,12 +144,12 @@ export const abi = [
   {
     constant: true,
     inputs: [],
-    name: "currentColor",
+    name: "color",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint24",
         name: "",
-        type: "string",
+        type: "uint24",
       },
     ],
     payable: false,
@@ -443,19 +443,14 @@ export const abi = [
         type: "string",
       },
       {
-        internalType: "string",
-        name: "userSetColor",
-        type: "string",
+        internalType: "uint24",
+        name: "userColor",
+        type: "uint24",
       },
       {
         internalType: "uint32",
         name: "metDay",
         type: "uint32",
-      },
-      {
-        internalType: "bool",
-        name: "isUserSet",
-        type: "bool",
       },
     ],
     name: "mint",
@@ -557,9 +552,9 @@ export const abi = [
             type: "string",
           },
           {
-            internalType: "string",
+            internalType: "uint24",
             name: "catColor",
-            type: "string",
+            type: "uint24",
           },
           {
             internalType: "uint32",
@@ -606,9 +601,9 @@ export const abi = [
     constant: true,
     inputs: [
       {
-        internalType: "string",
+        internalType: "uint24",
         name: "_color",
-        type: "string",
+        type: "uint24",
       },
     ],
     name: "getWhoColor",

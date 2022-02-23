@@ -1,10 +1,25 @@
 import { Modal, Button } from "react-bootstrap";
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import "./FormModal.css";
 import { address, abi } from "../components/contract/contractInfo";
 import $ from "jquery";
 import { klaytn, caver } from "../wallet/caver";
 import Caver from "caver-js";
+
+const ModalCustomFrom = styled(Modal)`
+  @media (min-width: 652px) {
+    .modal-dialog-centered {
+      min-height: calc(100% - 0.5rem);
+    }
+  }
+  @media (min-width: 652px) {
+    .modal-dialog {
+      max-width: 652px;
+      margin: 0 auto;
+    }
+  }
+`;
 
 function FormModal(props) {
   const [inputs, setInputs] = React.useState({
@@ -44,12 +59,12 @@ function FormModal(props) {
     if (klaytn === undefined) {
       const _caver = new Caver("https://api.baobab.klaytn.net:8651");
       const contract = new _caver.klay.Contract(abi, address);
-      const color = await contract.methods.currentColor().call();
-      return color;
+      let color = await contract.methods.color().call();
+      return parseInt(color).toString(16);
     } else {
       const contract = new caver.klay.Contract(abi, address);
-      const color = await contract.methods.currentColor().call();
-      return color;
+      let color = await contract.methods.color().call();
+      return parseInt(color).toString(16);
     }
   };
 
@@ -58,6 +73,7 @@ function FormModal(props) {
     $(".changeColor").change(async function () {
       change = $(".changeColor").val().substr(1);
       setChangeColor(change);
+      change = parseInt(change).toString(16);
       await findColor(change);
     });
   }, 500);
@@ -89,14 +105,14 @@ function FormModal(props) {
     }
   }, []);
   let price;
+  let changeTmp;
   return (
-    <Modal
+    <ModalCustomFrom
       {...props}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header className="asdklf" closeButton>
         <div className="modalTitle">고양이 별 정보</div>
       </Modal.Header>
       <Modal.Body>
@@ -111,7 +127,7 @@ function FormModal(props) {
               <h4>메모 </h4>
               <h4>이미지 링크 </h4>
             </div>
-            <div style={{ float: "left", width: 450 }}>
+            <div style={{ float: "left", width: "auto" }}>
               <input
                 className="inputData"
                 name="catName"
@@ -271,6 +287,7 @@ function FormModal(props) {
                 const contract = new caver.klay.Contract(abi, address);
                 if ($(".changeColorCheck").is(":checked")) {
                   price = await contract.methods.getMintPrice().call();
+                  changeTmp = parseInt(changeColor, 16);
                   contract.methods
                     .mint(
                       catName,
@@ -278,9 +295,8 @@ function FormModal(props) {
                       comment,
                       favorite,
                       imgURL,
-                      changeColor,
-                      parseInt(dayMet),
-                      true
+                      changeTmp,
+                      parseInt(dayMet)
                     )
                     .send({
                       from: account,
@@ -298,9 +314,8 @@ function FormModal(props) {
                       comment,
                       favorite,
                       imgURL,
-                      "",
-                      parseInt(dayMet),
-                      false
+                      0,
+                      parseInt(dayMet)
                     )
                     .send({
                       from: account,
@@ -317,7 +332,7 @@ function FormModal(props) {
           별 만들기
         </Button>
       </Modal.Footer>
-    </Modal>
+    </ModalCustomFrom>
   );
 }
 

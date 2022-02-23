@@ -84,7 +84,6 @@ h4 {
     width: auto;
     opacity: 0.96;
     padding: 10px;
-    min-width: 500px;
 }
 
 .btn.btn-primary{
@@ -108,15 +107,26 @@ h4 {
 }
 
 
-.modal-dialog .modal-lg .modal-dialog-centered{
+.modal-body{
+    margin:0 auto;
     width: auto;
 }
+
 
 .catInfoForm h4{
     margin-left: 20px;
 }
 
-.modal-dialog {
-    position:absolute; 
-    left:28%;
+@media (min-width: 652px){
+    .modal-dialog-centered {
+        min-height: calc(100% - 3.5rem);
+    }
 }
+@media (min-width: 652px){
+    .modal-dialog {
+        max-width: 652px;
+        margin: 0 auto;
+    }
+}
+  
+  

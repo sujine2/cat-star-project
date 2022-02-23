@@ -24,14 +24,16 @@
     font-family: 'Gamja Flower', cursive;
     margin-left: 20px;
     float: left;
-    width: 60%;
+    width: auto;
 }
 
 .infoColor{
     font-family: 'Gamja Flower', cursive;
-    float: left;
+    float: right;
     font-size: 20px;
-    width: 30%;
+    width: auto;
+    margin-right: 4%;
+    margin-top: 2%;
 }
 
 .showImg {
@@ -41,10 +43,11 @@
     margin: 0px auto;
     border-radius: 10px;
     margin-bottom: 3%;
+    max-width: 500px;
 }
 
 .btn-close{
-    margin-left: 10;
+    padding: 10px;
 }
 
 
@@ -58,5 +61,7 @@
     margin: 3%;
     font-size: 24px;
     float: left;
-    width: 91%;
+    width: 90%;
 }
+
+
