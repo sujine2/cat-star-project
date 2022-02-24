@@ -10,6 +10,7 @@ import { klaytn, caver } from "../wallet/caver";
 
 const ModalCustom = styled(Modal)`
   .modal-content {
+    border-radius: 20px;
     padding: 0;
     width: 510px;
     height: 700px;
@@ -19,7 +20,6 @@ const ModalCustom = styled(Modal)`
   .modal-body {
     overflow-x: hidden;
     overflow-y: hidden;
-
     max-width: 510px;
     padding: 0;
   }

@@ -78,13 +78,7 @@ h4 {
 }
 
 
-.modal-content{
-    box-shadow: "";
-    border-radius: 20px;
-    width: auto;
-    opacity: 0.96;
-    padding: 10px;
-}
+
 
 .btn.btn-primary{
     font-family: 'Gaegu', cursive;
