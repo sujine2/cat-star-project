@@ -41,7 +41,9 @@ function ViewModal(props) {
   const viewCatData = async () => {
     const id = props.tokenid;
     if (klaytn === undefined) {
-      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const _caver = new Caver(
+        "https://public-node-api.klaytnapi.com/v1/cypress"
+      );
       const contract = new _caver.klay.Contract(abi, address);
       const data = await contract.methods.getCatData(id).call();
       return data;

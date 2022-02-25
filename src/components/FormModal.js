@@ -70,7 +70,9 @@ function FormModal(props) {
 
   const getColor = async () => {
     if (klaytn === undefined) {
-      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const _caver = new Caver(
+        "https://public-node-api.klaytnapi.com/v1/cypress"
+      );
       const contract = new _caver.klay.Contract(abi, address);
       let color = await contract.methods.color().call();
       return parseInt(color).toString(16);
@@ -308,7 +310,8 @@ function FormModal(props) {
                       favorite,
                       imgURL,
                       changeTmp,
-                      parseInt(dayMet)
+                      parseInt(dayMet),
+                      true
                     )
                     .send({
                       from: account,
@@ -327,7 +330,8 @@ function FormModal(props) {
                       favorite,
                       imgURL,
                       0,
-                      parseInt(dayMet)
+                      parseInt(dayMet),
+                      false
                     )
                     .send({
                       from: account,

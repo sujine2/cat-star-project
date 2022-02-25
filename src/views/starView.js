@@ -79,7 +79,9 @@ function StarView() {
 
   const getTokenNum = async () => {
     if (klaytn === undefined) {
-      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const _caver = new Caver(
+        "https://public-node-api.klaytnapi.com/v1/cypress"
+      );
       const contract = new _caver.klay.Contract(abi, address);
       const TokenID = await contract.methods.tokenID().call();
       return TokenID;
@@ -136,7 +138,9 @@ function StarView() {
     let colorOwner;
     let contract;
     if (klaytn === undefined) {
-      const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+      const _caver = new Caver(
+        "https://public-node-api.klaytnapi.com/v1/cypress"
+      );
       contract = new _caver.klay.Contract(abi, address);
     } else {
       contract = new caver.klay.Contract(abi, address);
@@ -171,7 +175,9 @@ function StarView() {
       alert("It's not exist cat star");
     } else {
       if (klaytn === undefined) {
-        const _caver = new Caver("https://api.baobab.klaytn.net:8651");
+        const _caver = new Caver(
+          "https://public-node-api.klaytnapi.com/v1/cypress"
+        );
         contract = new _caver.klay.Contract(abi, address);
       } else {
         contract = new caver.klay.Contract(abi, address);
@@ -241,8 +247,8 @@ function StarView() {
       if (klaytn !== undefined) {
         owner = await klaytn.enable();
         setAccount(klaytn.selectedAddress);
-        if (klaytn.networkVersion !== 1001) {
-          alert("baobab 네트워크로 전환해 주세요.");
+        if (klaytn.networkVersion !== 8217) {
+          alert("mainnet 네트워크로 전환해 주세요.");
         }
       }
     };
