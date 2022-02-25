@@ -1,4 +1,4 @@
-export const address = "0xD1a76a4ABe8cb8EAAA6E3D371839757DAe0aFd09";
+export const address = "0x6B6E62943cF3F26a5ec26549E78e537c59de1C41";
 export const abi = [
   {
     inputs: [],
@@ -451,6 +451,11 @@ export const abi = [
         internalType: "uint32",
         name: "metDay",
         type: "uint32",
+      },
+      {
+        internalType: "bool",
+        name: "isUserSet",
+        type: "bool",
       },
     ],
     name: "mint",

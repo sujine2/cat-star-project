@@ -8,7 +8,7 @@ import Search from "../img/search.png";
 import $ from "jquery";
 import { address, abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
-import land from "../img/land.png";
+import land from "../img/land2.png";
 import Caver from "caver-js";
 import searchLoading from "../img/catStar.png";
 
