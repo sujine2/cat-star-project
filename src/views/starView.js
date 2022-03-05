@@ -53,6 +53,62 @@ function StarView() {
     },
   ]);
 
+  const [test1, setTest1] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+  const [test2, setTest2] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+  const [test3, setTest3] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+  const [test4, setTest4] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+  const [test5, setTest5] = React.useState([
+    {
+      styleClass: "",
+      inlineStyle: {
+        animationDelay: "0s",
+        left: 0,
+        top: 0,
+        opacity: 0,
+      },
+    },
+  ]);
+
   if (klaytn !== undefined) {
     klaytn.on("accountsChanged", function (accounts) {
       if (viewStar === true) {
@@ -217,7 +273,7 @@ function StarView() {
   const fff = () => {
     if (tokenID !== -1) {
       setTest(
-        Array(tokenID)
+        Array(300)
           .fill(0)
           .map(() => {
             return {
@@ -240,6 +296,75 @@ function StarView() {
           })
       );
     }
+    setTest1(
+      Array(300)
+        .fill(0)
+        .map(() => {
+          return {
+            styleClass:
+              "view-estrela " +
+              style[getRandomArbitrary(0, 4)] +
+              " " +
+              opacity[getRandomArbitrary(0, 6)] +
+              " " +
+              tam[getRandomArbitrary(0, 5)] +
+              " ",
+
+            inlineStyle: {
+              animationDelay: getRandomArbitrary(0, 9) + "s",
+              left: getRandomArbitrary(0, widthWindow),
+              top: getRandomArbitrary(300, 400),
+              opacity: [getRandomArbitrary(0, 6)],
+            },
+          };
+        })
+    );
+    setTest2(
+      Array(100)
+        .fill(0)
+        .map(() => {
+          return {
+            styleClass:
+              "view-estrela " +
+              style[getRandomArbitrary(0, 4)] +
+              " " +
+              opacity[getRandomArbitrary(0, 6)] +
+              " " +
+              tam[getRandomArbitrary(0, 5)] +
+              " ",
+
+            inlineStyle: {
+              animationDelay: getRandomArbitrary(0, 9) + "s",
+              left: getRandomArbitrary(0, widthWindow),
+              top: getRandomArbitrary(250, 300),
+              opacity: [getRandomArbitrary(0, 6)],
+            },
+          };
+        })
+    );
+    setTest3(
+      Array(100)
+        .fill(0)
+        .map(() => {
+          return {
+            styleClass:
+              "view-estrela " +
+              style[getRandomArbitrary(0, 4)] +
+              " " +
+              opacity[getRandomArbitrary(0, 6)] +
+              " " +
+              tam[getRandomArbitrary(0, 5)] +
+              " ",
+
+            inlineStyle: {
+              animationDelay: getRandomArbitrary(0, 9) + "s",
+              left: getRandomArbitrary(0, widthWindow),
+              top: getRandomArbitrary(300, 450),
+              opacity: [getRandomArbitrary(0, 6)],
+            },
+          };
+        })
+    );
   };
 
   useEffect(() => {
@@ -279,7 +404,7 @@ function StarView() {
           <div className="view-constelacao">
             {
               //200
-              tokenID <= 200 &&
+              tokenID > 0 &&
                 Array(tokenID)
                   .fill(0)
                   .map((_, index) => {
@@ -312,16 +437,16 @@ function StarView() {
           />
           <div className="chuvaMeteoro"></div>
 
-          {/* <div className="floresta">
+          <div className="floresta">
             <img
               src="https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png"
               alt=""
             />
-          </div> */}
-
-          <div className="land">
-            <img src={land} alt="" />
           </div>
+
+          {/* <div className="land">
+            <img src={land} alt="" />
+          </div> */}
 
           <div className="loading">
             <img className="loadingImg" src={searchLoading} />
