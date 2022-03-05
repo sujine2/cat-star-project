@@ -52,7 +52,7 @@ function Main() {
         <div className="imgCon">
           <img src={planet}></img>
           <br />
-          <p className="welcome">201205</p>
+          <p className="welcome">220301</p>
         </div>
 
         <div className="des">
