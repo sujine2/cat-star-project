@@ -1,4 +1,4 @@
-export const address = "0x6B6E62943cF3F26a5ec26549E78e537c59de1C41";
+export const address = "0x8B5C1cc17fbc248a80666460E29a8924c1155d4a";
 export const abi = [
   {
     inputs: [],
@@ -497,21 +497,6 @@ export const abi = [
         internalType: "address",
         name: "",
         type: "address",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "getContractBalance",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     payable: false,

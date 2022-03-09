@@ -69,18 +69,9 @@ function FormModal(props) {
   };
 
   const getColor = async () => {
-    if (klaytn === undefined) {
-      const _caver = new Caver(
-        "https://public-node-api.klaytnapi.com/v1/cypress"
-      );
-      const contract = new _caver.klay.Contract(abi, address);
-      let color = await contract.methods.color().call();
-      return parseInt(color).toString(16);
-    } else {
-      const contract = new caver.klay.Contract(abi, address);
-      let color = await contract.methods.color().call();
-      return parseInt(color).toString(16);
-    }
+    const contract = new caver.klay.Contract(abi, address);
+    let color = await contract.methods.color().call();
+    return parseInt(color).toString(16);
   };
 
   setTimeout(function () {
@@ -117,6 +108,7 @@ function FormModal(props) {
         setAccount(accounts[0]);
       });
     }
+    console.log(account);
   }, []);
   let price;
   let changeTmp;
@@ -128,6 +120,21 @@ function FormModal(props) {
     >
       <Modal.Header className="asdklf" closeButton>
         <div className="modalTitle">고양이 별 정보</div>
+        <div style={{ width: 100, float: "right", marginLeft: 70 }}>
+          <button
+            className="walletConnect"
+            onClick={async () => {
+              if (klaytn === undefined) {
+                alert("카이카스 지갑을 설치해 주세요!");
+              } else {
+                const accounts = await klaytn.enable();
+                setAccount(accounts[0]);
+              }
+            }}
+          >
+            지갑 연결하기
+          </button>
+        </div>
       </Modal.Header>
       <Modal.Body>
         <div className="formModalBody">
@@ -216,6 +223,7 @@ function FormModal(props) {
               >
                 현재 별 색상 :
               </div>
+
               <button
                 className="printColor"
                 style={{
@@ -291,55 +299,60 @@ function FormModal(props) {
               alert("입력란을 모두 채워주세요.");
             } else {
               if (klaytn === undefined) {
-                alert(
-                  "Non-Kaikas browser detected. You should consider trying Kaikas!"
-                );
+                alert("카이카스 지갑을 설치해 주세요!");
               } else {
-                if ((await klaytn._kaikas.isUnlocked()) === false) {
-                  await klaytn.enable();
-                }
-                const contract = new caver.klay.Contract(abi, address);
-                if ($(".changeColorCheck").is(":checked")) {
-                  price = await contract.methods.getMintPrice().call();
-                  changeTmp = parseInt(changeColor, 16);
-                  contract.methods
-                    .mint(
-                      catName,
-                      yourName,
-                      comment,
-                      favorite,
-                      imgURL,
-                      changeTmp,
-                      parseInt(dayMet),
-                      true
-                    )
-                    .send({
-                      from: account,
-                      gas: 1500000,
-                      value: caver.utils.toPeb(price, "KLAY"),
-                    })
-                    .then(function (receipt) {
-                      window.location.reload();
-                    });
+                if (
+                  (await klaytn._kaikas.isUnlocked()) === false ||
+                  klaytn.selectedAddress === undefined
+                ) {
+                  alert("지갑을 연결해주세요!");
                 } else {
-                  contract.methods
-                    .mint(
-                      catName,
-                      yourName,
-                      comment,
-                      favorite,
-                      imgURL,
-                      0,
-                      parseInt(dayMet),
-                      false
-                    )
-                    .send({
-                      from: account,
-                      gas: 1500000,
-                    })
-                    .then(function (receipt) {
-                      window.location.reload();
-                    });
+                  //setAccount(klaytn.selectedAddress);
+                  const _caver = new Caver(window.klaytn);
+                  const contract = new _caver.klay.Contract(abi, address);
+
+                  if ($(".changeColorCheck").is(":checked")) {
+                    price = await contract.methods.getMintPrice().call();
+                    changeTmp = parseInt(changeColor, 16);
+                    await contract.methods
+                      .mint(
+                        catName,
+                        yourName,
+                        comment,
+                        favorite,
+                        imgURL,
+                        changeTmp,
+                        parseInt(dayMet),
+                        true
+                      )
+                      .send({
+                        from: account,
+                        gas: 1500000,
+                        value: caver.utils.toPeb(price, "KLAY"),
+                      })
+                      .then(function (receipt) {
+                        window.location.reload();
+                      });
+                  } else {
+                    await contract.methods
+                      .mint(
+                        catName,
+                        yourName,
+                        comment,
+                        favorite,
+                        imgURL,
+                        0,
+                        parseInt(dayMet),
+                        false
+                      )
+                      .send({
+                        from: account,
+                        gas: 1500000,
+                      })
+                      .then(function (receipt) {
+                        window.location.reload();
+                      });
+                  }
                 }
               }
             }

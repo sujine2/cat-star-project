@@ -1,7 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { address, abi } from "../components/contract/contractInfo";
 import React, { useEffect } from "react";
-import Caver from "caver-js";
 import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
 import $, { data } from "jquery";
@@ -40,18 +39,10 @@ const ModalCustom = styled(Modal)`
 function ViewModal(props) {
   const viewCatData = async () => {
     const id = props.tokenid;
-    if (klaytn === undefined) {
-      const _caver = new Caver(
-        "https://public-node-api.klaytnapi.com/v1/cypress"
-      );
-      const contract = new _caver.klay.Contract(abi, address);
-      const data = await contract.methods.getCatData(id).call();
-      return data;
-    } else {
-      const contract = new caver.klay.Contract(abi, address);
-      const data = await contract.methods.getCatData(id).call();
-      return data;
-    }
+
+    const contract = new caver.klay.Contract(abi, address);
+    const data = await contract.methods.getCatData(id).call();
+    return data;
   };
 
   const [catData, setCatData] = React.useState([]);
@@ -109,7 +100,9 @@ function ViewModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <img className="showImg" style={{}} src={loadingImg} />
+        <img className="showImg" src={loadingImg} />
+
+        {}
 
         {
           ((_id = catData.imgURL),

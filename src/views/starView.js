@@ -9,7 +9,6 @@ import $ from "jquery";
 import { address, abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
 import land from "../img/land2.png";
-import Caver from "caver-js";
 import searchLoading from "../img/catStar.png";
 
 global.Buffer = global.Buffer || require("buffer").Buffer;
@@ -19,8 +18,8 @@ function setSearchBarShow() {
   if ($(".search-container").css("display") === "block") {
     $(".search-container").css("display", "none");
     if (colorSearch !== "") {
-      $("#" + colorSearch).css("width", "3px");
-      $("#" + colorSearch).css("height", "3px");
+      $("#" + colorSearch).css("width", "2px");
+      $("#" + colorSearch).css("height", "2px");
       $("#" + colorSearch).css("background-color", "white");
       colorSearch = "";
     }
@@ -134,58 +133,45 @@ function StarView() {
   let owner;
 
   const getTokenNum = async () => {
-    if (klaytn === undefined) {
-      const _caver = new Caver(
-        "https://public-node-api.klaytnapi.com/v1/cypress"
-      );
-      const contract = new _caver.klay.Contract(abi, address);
-      const TokenID = await contract.methods.tokenID().call();
-      return TokenID;
-    } else {
-      const contract = new caver.klay.Contract(abi, address);
-      const TokenID = await contract.methods.tokenID().call();
-      return TokenID;
-    }
+    const contract = new caver.klay.Contract(abi, address);
+    const TokenID = await contract.methods.tokenID().call();
+    return TokenID;
   };
 
   const viewMyStar = async (_owner) => {
     if (klaytn === undefined) {
       alert("Non-Kaikas browser detected. You should consider trying Kaikas!");
-    } else {
-      if (klaytn.selectedAddress === undefined) {
-        await klaytn.enable();
-        setAccount(klaytn.selectedAddress);
+    }
+
+    const contract = new caver.klay.Contract(abi, address);
+    const myStarList = await contract.methods.getMyStar(_owner).call();
+    if (viewStar === false) {
+      setViewStar(true);
+      for (let i in myStarList) {
+        let data = await contract.methods.getCatData(myStarList[i]).call();
+        $("#" + myStarList[i]).addClass("style5");
+        $("#" + myStarList[i]).css("width", "17px");
+        $("#" + myStarList[i]).css("height", "17px");
+        $("#" + myStarList[i]).css(
+          "background-color",
+          "#" + parseInt(data.catColor).toString(16)
+        );
+
+        $(".myStar").css("opacity", "100%");
+        $(".myStar").css("text-shadow", "0px 0px 8px white");
+
+        $(".myStar").text("내 별 보기");
       }
-      const contract = new caver.klay.Contract(abi, address);
-      const myStarList = await contract.methods.getMyStar(_owner).call();
-      if (viewStar === false) {
-        setViewStar(true);
-        for (let i in myStarList) {
-          let data = await contract.methods.getCatData(myStarList[i]).call();
-          $("#" + myStarList[i]).addClass("style5");
-          $("#" + myStarList[i]).css("width", "17px");
-          $("#" + myStarList[i]).css("height", "17px");
-          $("#" + myStarList[i]).css(
-            "background-color",
-            "#" + parseInt(data.catColor).toString(16)
-          );
-
-          $(".myStar").css("opacity", "100%");
-          $(".myStar").css("text-shadow", "0px 0px 8px white");
-
-          $(".myStar").text("내 별 보기");
-        }
-      } else if (viewStar === true) {
-        setViewStar(false);
-        for (let i in myStarList) {
-          $("#" + myStarList[i]).css("width", "2px");
-          $("#" + myStarList[i]).css("height", "2px");
-          $("#" + myStarList[i]).css("background-color", "white");
-          $("#" + myStarList[i]).removeClass("style5");
-          $(".myStar").css("opacity", "60%");
-          $(".myStar").css("text-shadow", "");
-          $(".myStar").text("내 별 보기 - off");
-        }
+    } else if (viewStar === true) {
+      setViewStar(false);
+      for (let i in myStarList) {
+        $("#" + myStarList[i]).css("width", "2px");
+        $("#" + myStarList[i]).css("height", "2px");
+        $("#" + myStarList[i]).css("background-color", "white");
+        $("#" + myStarList[i]).removeClass("style5");
+        $(".myStar").css("opacity", "60%");
+        $(".myStar").css("text-shadow", "");
+        $(".myStar").text("내 별 보기 - off");
       }
     }
   };
@@ -193,14 +179,8 @@ function StarView() {
   const findColor = async (_findColor) => {
     let colorOwner;
     let contract;
-    if (klaytn === undefined) {
-      const _caver = new Caver(
-        "https://public-node-api.klaytnapi.com/v1/cypress"
-      );
-      contract = new _caver.klay.Contract(abi, address);
-    } else {
-      contract = new caver.klay.Contract(abi, address);
-    }
+
+    contract = new caver.klay.Contract(abi, address);
 
     colorOwner = await contract.methods
       .getWhoColor(parseInt(_findColor, 16))
@@ -230,14 +210,8 @@ function StarView() {
     if (_index < 0 || _index >= tokenID) {
       alert("It's not exist cat star");
     } else {
-      if (klaytn === undefined) {
-        const _caver = new Caver(
-          "https://public-node-api.klaytnapi.com/v1/cypress"
-        );
-        contract = new _caver.klay.Contract(abi, address);
-      } else {
-        contract = new caver.klay.Contract(abi, address);
-      }
+      contract = new caver.klay.Contract(abi, address);
+
       const data = await contract.methods.getCatData(_index).call();
       $("#" + _index).addClass("style5");
       $("#" + _index).css("width", "17px");
@@ -370,11 +344,7 @@ function StarView() {
   useEffect(() => {
     const ff = async () => {
       if (klaytn !== undefined) {
-        owner = await klaytn.enable();
         setAccount(klaytn.selectedAddress);
-        if (klaytn.networkVersion !== 8217) {
-          alert("mainnet 네트워크로 전환해 주세요.");
-        }
       }
     };
     ff();
@@ -435,7 +405,7 @@ function StarView() {
             }
             tokenid={id}
           />
-          <div className="chuvaMeteoro"></div>
+          <div className="chuvaMeteoro">{/* <Meteoro /> */}</div>
 
           <div className="floresta">
             <img
@@ -459,14 +429,8 @@ function StarView() {
               id="plusbtn"
               onClick={async () => {
                 if (klaytn === undefined) {
-                  alert(
-                    "Non-Kaikas browser detected. You should consider trying Kaikas!"
-                  );
-                } else if (klaytn.selectedAddress == undefined) {
-                  await klaytn.enable();
-                  setAccount(klaytn.selectedAddress);
+                  alert("카이카스 지갑을 설치해주세요!");
                 }
-
                 setFormModalShow(true);
               }}
             />
@@ -486,7 +450,7 @@ function StarView() {
           </div>
 
           <div className="myStarCon">
-            {account !== "" && (
+            {account !== undefined && account !== "" && (
               <>
                 <div
                   className="myStar"
