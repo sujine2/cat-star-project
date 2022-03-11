@@ -119,7 +119,6 @@ function FormModal(props) {
         setAccount(accounts[0]);
       });
     }
-    console.log(account);
   }, []);
 
   let price;
@@ -369,7 +368,7 @@ function FormModal(props) {
           className="klipBtn"
           onClick={async () => {
             const klipAddress = cookies.get("user");
-            console.log("유저 주소!!", klipAddress);
+
             if (colorDup === false && $(".changeColorCheck").is(":checked")) {
               alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
             } else if (klipAddress == undefined) {
@@ -420,7 +419,7 @@ function FormModal(props) {
                     console.log(res.err);
                   } else if (res.request_key) {
                     await setBuyKey(res.request_key);
-                    console.log("daadsadsa", getResult(res.request_key));
+
                     QRCode.toDataURL(
                       "https://klipwallet.com/?target=/a2a?request_key=" +
                         res.request_key,

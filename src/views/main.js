@@ -64,10 +64,9 @@ function Main() {
                   // 에러 처리
                 } else if (res.request_key) {
                   // request_key 보관
-                  console.log("??", res.request_key);
+
                   await setKey(res.request_key);
 
-                  console.log("ssdssdsd", key);
                   QRCode.toDataURL(
                     "https://klipwallet.com/?target=/a2a?request_key=" +
                       res.request_key,
