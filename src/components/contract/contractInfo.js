@@ -1,5 +1,5 @@
 export const address = "0x8B5C1cc17fbc248a80666460E29a8924c1155d4a";
-export const abi = [
+export const _abi = [
   {
     inputs: [],
     payable: false,
@@ -624,3 +624,54 @@ export const abi = [
     type: "function",
   },
 ];
+
+export const _mintabi = {
+  constant: false,
+  inputs: [
+    {
+      internalType: "string",
+      name: "catName",
+      type: "string",
+    },
+    {
+      internalType: "string",
+      name: "yourName",
+      type: "string",
+    },
+    {
+      internalType: "string",
+      name: "comment",
+      type: "string",
+    },
+    {
+      internalType: "string",
+      name: "favorite",
+      type: "string",
+    },
+    {
+      internalType: "string",
+      name: "imgURL",
+      type: "string",
+    },
+    {
+      internalType: "uint24",
+      name: "userColor",
+      type: "uint24",
+    },
+    {
+      internalType: "uint32",
+      name: "metDay",
+      type: "uint32",
+    },
+    {
+      internalType: "bool",
+      name: "isUserSet",
+      type: "bool",
+    },
+  ],
+  name: "mint",
+  outputs: [],
+  payable: true,
+  stateMutability: "payable",
+  type: "function",
+};

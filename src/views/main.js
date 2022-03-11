@@ -6,12 +6,19 @@ import rocket from "../img/rocket.png";
 import tele from "../img/tele.png";
 import { Link } from "react-router-dom";
 import { klaytn, caver } from "../wallet/caver";
+import { prepare } from "klip-sdk";
+import QRModal from "../components/QRModal";
+import QRCode from "qrcode";
+import klip from "../img/Klip.png";
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function Main() {
+  const [QRurl, setQRurl] = React.useState("");
+  const [key, setKey] = React.useState("");
+  const [QRModalShow, setQRModalShow] = React.useState(false);
   var style = ["style1", "style2", "style3", "style4"];
   var tam = ["tam1", "tam1", "tam1", "tam2", "tam3"];
   var opacity = [
@@ -41,8 +48,50 @@ function Main() {
                 }
               }}
             >
-              지갑 연결하기
+              Kaikas로 로그인
             </button>
+            <button
+              className="mainKlipConnect"
+              onClick={async () => {
+                const bappName = "cat-planet";
+                const res = await prepare.auth({
+                  bappName,
+                });
+                if (res.err) {
+                  alert(
+                    "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
+                  );
+                  // 에러 처리
+                } else if (res.request_key) {
+                  // request_key 보관
+                  console.log("??", res.request_key);
+                  await setKey(res.request_key);
+
+                  console.log("ssdssdsd", key);
+                  QRCode.toDataURL(
+                    "https://klipwallet.com/?target=/a2a?request_key=" +
+                      res.request_key,
+                    function (err, url) {
+                      setQRurl(url);
+                      setQRModalShow(true);
+                    }
+                  );
+                }
+              }}
+            >
+              <img
+                style={{ width: 30, height: 30, marginRight: 5 }}
+                src={klip}
+              ></img>
+              Klip으로 로그인
+            </button>
+            <QRModal
+              show={QRModalShow}
+              onHide={() => setQRModalShow(false)}
+              url={QRurl}
+              qrkey={key}
+            />
+
             <div className="barGuide">
               <a
                 target="_blank"

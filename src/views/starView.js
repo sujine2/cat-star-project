@@ -6,7 +6,7 @@ import plus from "../img/plus.png";
 import FormModal from "../components/FormModal";
 import Search from "../img/search.png";
 import $ from "jquery";
-import { address, abi } from "../components/contract/contractInfo";
+import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
 import land from "../img/land2.png";
 import searchLoading from "../img/catStar.png";
@@ -133,7 +133,7 @@ function StarView() {
   let owner;
 
   const getTokenNum = async () => {
-    const contract = new caver.klay.Contract(abi, address);
+    const contract = new caver.klay.Contract(_abi, address);
     const TokenID = await contract.methods.tokenID().call();
     return TokenID;
   };
@@ -143,7 +143,7 @@ function StarView() {
       alert("Non-Kaikas browser detected. You should consider trying Kaikas!");
     }
 
-    const contract = new caver.klay.Contract(abi, address);
+    const contract = new caver.klay.Contract(_abi, address);
     const myStarList = await contract.methods.getMyStar(_owner).call();
     if (viewStar === false) {
       setViewStar(true);
@@ -180,7 +180,7 @@ function StarView() {
     let colorOwner;
     let contract;
 
-    contract = new caver.klay.Contract(abi, address);
+    contract = new caver.klay.Contract(_abi, address);
 
     colorOwner = await contract.methods
       .getWhoColor(parseInt(_findColor, 16))
@@ -210,7 +210,7 @@ function StarView() {
     if (_index < 0 || _index >= tokenID) {
       alert("It's not exist cat star");
     } else {
-      contract = new caver.klay.Contract(abi, address);
+      contract = new caver.klay.Contract(_abi, address);
 
       const data = await contract.methods.getCatData(_index).call();
       $("#" + _index).addClass("style5");
@@ -428,9 +428,6 @@ function StarView() {
               src={plus}
               id="plusbtn"
               onClick={async () => {
-                if (klaytn === undefined) {
-                  alert("카이카스 지갑을 설치해주세요!");
-                }
                 setFormModalShow(true);
               }}
             />

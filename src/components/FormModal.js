@@ -2,10 +2,14 @@ import { Modal, Button } from "react-bootstrap";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./FormModal.css";
-import { address, abi } from "../components/contract/contractInfo";
+import { address, _abi, _mintabi } from "../components/contract/contractInfo";
 import $ from "jquery";
 import { klaytn, caver } from "../wallet/caver";
 import Caver from "caver-js";
+import { prepare, getResult } from "klip-sdk";
+import QRbuyModal from "./QRbuyModal";
+import QRCode from "qrcode";
+import { Cookies } from "react-cookie";
 
 const ModalCustomFrom = styled(Modal)`
   .modal-content {
@@ -33,6 +37,7 @@ const ModalCustomFrom = styled(Modal)`
 `;
 
 function FormModal(props) {
+  const cookies = new Cookies();
   const [inputs, setInputs] = React.useState({
     catName: "",
     yourName: "",
@@ -42,11 +47,17 @@ function FormModal(props) {
     imgURL: "",
   });
 
+  const [QRModalShow, setQRModalShow] = React.useState(false);
+  const [QRbuyModalShow, setQRbuyModalShow] = React.useState(false);
   const { catName, yourName, dayMet, favorite, comment, imgURL } = inputs;
   const [colors, setColors] = React.useState([]);
   const [changeColor, setChangeColor] = React.useState();
   const [colorDup, setColorDup] = React.useState(true);
   const [account, setAccount] = React.useState("");
+  const [QRurl, setQRurl] = React.useState("");
+  const [key, setKey] = React.useState("");
+  const [buyKey, setBuyKey] = React.useState("");
+  const [userKlipAddress, setUserKlipAddress] = React.useState("");
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -57,7 +68,7 @@ function FormModal(props) {
   };
 
   const findColor = async (_findColor) => {
-    const contract = new caver.klay.Contract(abi, address);
+    const contract = new caver.klay.Contract(_abi, address);
     const colorOwner = await contract.methods
       .getWhoColor(parseInt(_findColor, 16))
       .call();
@@ -69,7 +80,7 @@ function FormModal(props) {
   };
 
   const getColor = async () => {
-    const contract = new caver.klay.Contract(abi, address);
+    const contract = new caver.klay.Contract(_abi, address);
     let color = await contract.methods.color().call();
     return parseInt(color).toString(16);
   };
@@ -110,6 +121,7 @@ function FormModal(props) {
     }
     console.log(account);
   }, []);
+
   let price;
   let changeTmp;
   return (
@@ -120,21 +132,6 @@ function FormModal(props) {
     >
       <Modal.Header className="asdklf" closeButton>
         <div className="modalTitle">고양이 별 정보</div>
-        <div style={{ width: 100, float: "right", marginLeft: 70 }}>
-          <button
-            className="walletConnect"
-            onClick={async () => {
-              if (klaytn === undefined) {
-                alert("카이카스 지갑을 설치해 주세요!");
-              } else {
-                const accounts = await klaytn.enable();
-                setAccount(accounts[0]);
-              }
-            }}
-          >
-            지갑 연결하기
-          </button>
-        </div>
       </Modal.Header>
       <Modal.Body>
         <div className="formModalBody">
@@ -284,7 +281,15 @@ function FormModal(props) {
       <br />
 
       <Modal.Footer>
+        <QRbuyModal
+          show={QRbuyModalShow}
+          onHide={() => setQRbuyModalShow(false)}
+          url={QRurl}
+          qrkey={buyKey}
+        />
+
         <Button
+          className="kaikasBtn"
           onClick={async () => {
             if (colorDup === false && $(".changeColorCheck").is(":checked")) {
               alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
@@ -309,7 +314,7 @@ function FormModal(props) {
                 } else {
                   //setAccount(klaytn.selectedAddress);
                   const _caver = new Caver(window.klaytn);
-                  const contract = new _caver.klay.Contract(abi, address);
+                  const contract = new _caver.klay.Contract(_abi, address);
 
                   if ($(".changeColorCheck").is(":checked")) {
                     price = await contract.methods.getMintPrice().call();
@@ -358,7 +363,120 @@ function FormModal(props) {
             }
           }}
         >
-          별 만들기
+          Kaikas로 별 만들기
+        </Button>
+        <Button
+          className="klipBtn"
+          onClick={async () => {
+            const klipAddress = cookies.get("user");
+            console.log("유저 주소!!", klipAddress);
+            if (colorDup === false && $(".changeColorCheck").is(":checked")) {
+              alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
+            } else if (klipAddress == undefined) {
+              alert("Klip 지갑을 연결해주세요!");
+            } else {
+              if (
+                catName === "" ||
+                yourName === "" ||
+                comment === "" ||
+                favorite === "" ||
+                dayMet === "" ||
+                imgURL === ""
+              ) {
+                alert("입력란을 모두 채워주세요.");
+              } else {
+                const contract = new caver.klay.Contract(_abi, address);
+                if ($(".changeColorCheck").is(":checked")) {
+                  price = await contract.methods.getMintPrice().call();
+                  changeTmp = parseInt(changeColor, 16);
+                  const bappName = "cat-planet";
+                  const from = klipAddress;
+                  const to = address;
+                  const value = caver.utils.toPeb(price, "KLAY");
+                  const abi = JSON.stringify(_mintabi);
+                  const array = [
+                    catName,
+                    yourName,
+                    comment,
+                    favorite,
+                    imgURL,
+                    changeTmp,
+                    parseInt(dayMet),
+                    true,
+                  ];
+
+                  const params = JSON.stringify(array);
+
+                  const res = await prepare.executeContract({
+                    bappName,
+                    from,
+                    to,
+                    value,
+                    abi,
+                    params,
+                  });
+
+                  if (res.err) {
+                    console.log(res.err);
+                  } else if (res.request_key) {
+                    await setBuyKey(res.request_key);
+                    console.log("daadsadsa", getResult(res.request_key));
+                    QRCode.toDataURL(
+                      "https://klipwallet.com/?target=/a2a?request_key=" +
+                        res.request_key,
+                      function (err, url) {
+                        setQRurl(url);
+                        setQRbuyModalShow(true);
+                      }
+                    );
+                  }
+                } else {
+                  const bappName = "cat-planet";
+                  const from = klipAddress;
+                  const to = address;
+                  const value = "0";
+                  const abi = JSON.stringify(_mintabi);
+                  const array = [
+                    catName,
+                    yourName,
+                    comment,
+                    favorite,
+                    imgURL,
+                    0,
+                    parseInt(dayMet),
+                    false,
+                  ];
+
+                  const params = JSON.stringify(array);
+
+                  const res = await prepare.executeContract({
+                    bappName,
+                    from,
+                    to,
+                    value,
+                    abi,
+                    params,
+                  });
+
+                  if (res.err) {
+                    console.log(res.err);
+                  } else if (res.request_key) {
+                    await setBuyKey(res.request_key);
+                    QRCode.toDataURL(
+                      "https://klipwallet.com/?target=/a2a?request_key=" +
+                        res.request_key,
+                      function (err, url) {
+                        setQRurl(url);
+                        setQRbuyModalShow(true);
+                      }
+                    );
+                  }
+                }
+              }
+            }
+          }}
+        >
+          Klip 으로 별 만들기
         </Button>
       </Modal.Footer>
     </ModalCustomFrom>

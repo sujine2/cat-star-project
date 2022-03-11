@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import { address, abi } from "../components/contract/contractInfo";
+import { address, _abi } from "../components/contract/contractInfo";
 import React, { useEffect } from "react";
 import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
@@ -40,7 +40,7 @@ function ViewModal(props) {
   const viewCatData = async () => {
     const id = props.tokenid;
 
-    const contract = new caver.klay.Contract(abi, address);
+    const contract = new caver.klay.Contract(_abi, address);
     const data = await contract.methods.getCatData(id).call();
     return data;
   };

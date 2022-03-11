@@ -100,25 +100,6 @@ h4 {
     border-color: 2px #ffae42;
 }
 
-.walletConnect{
-    font-family: 'Gaegu', cursive;
-    background: #ffae42;
-    border : 0;
-    border-radius: 40px;
-    width: 100%;
-    color: #FFFFFF;
-}
-
-.walletConnect:hover {
-    background: #ffae42;
-    box-shadow: 0 0 15px #ffae42;
-    border : 0;
-}
-
-.walletConnect:focus{
-    background: #ffae42;
-    border-color: 2px #ffae42;
-}
 
 
 
@@ -128,4 +109,18 @@ h4 {
 
 
   
-  
+.btn.btn-primary.klipBtn{
+    background-color: #216FEA;
+}
+
+.btn.btn-primary.klipBtn:hover{
+    background: #216FEA;
+    box-shadow: 0 0 15px #216FEA;
+    border : 0;
+}
+
+
+.btn.btn-primary.klipBtn:focus{
+    background: #216FEA;
+    border-color: 2px #216FEA;
+}
