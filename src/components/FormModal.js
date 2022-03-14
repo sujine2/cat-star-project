@@ -292,18 +292,18 @@ function FormModal(props) {
           onClick={async () => {
             if (colorDup === false && $(".changeColorCheck").is(":checked")) {
               alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
-            } else if (
-              catName === "" ||
-              yourName === "" ||
-              comment === "" ||
-              favorite === "" ||
-              dayMet === "" ||
-              imgURL === ""
-            ) {
-              alert("입력란을 모두 채워주세요.");
+            } else if (klaytn === undefined) {
+              alert("카이카스 지갑을 설치해 주세요!");
             } else {
-              if (klaytn === undefined) {
-                alert("카이카스 지갑을 설치해 주세요!");
+              if (
+                catName === "" ||
+                yourName === "" ||
+                comment === "" ||
+                favorite === "" ||
+                dayMet === "" ||
+                imgURL === ""
+              ) {
+                alert("입력란을 모두 채워주세요.");
               } else {
                 if (
                   (await klaytn._kaikas.isUnlocked()) === false ||
