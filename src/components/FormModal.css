@@ -82,22 +82,26 @@ h4 {
 
 .btn.btn-primary{
     font-family: 'Gaegu', cursive;
-    background: #ffae42;
+    background: #ffffff;
     border : 0;
     border-radius: 10px;
     width: 100%;
+    border: 1px solid #ffae42;
+    color: #ffae42;
 }
 
 .btn.btn-primary:hover{
     background: #ffae42;
     box-shadow: 0 0 15px #ffae42;
     border : 0;
+    color: #ffffff;
 }
 
 
 .btn.btn-primary:focus{
     background: #ffae42;
     border-color: 2px #ffae42;
+    color: #ffffff;
 }
 
 
@@ -110,17 +114,21 @@ h4 {
 
   
 .btn.btn-primary.klipBtn{
-    background-color: #216FEA;
+    background-color: #ffffff;
+    color : #216FEA;
+    border : 1px solid #216FEA;
 }
 
 .btn.btn-primary.klipBtn:hover{
     background: #216FEA;
     box-shadow: 0 0 15px #216FEA;
     border : 0;
+    color: #ffffff;
 }
 
 
 .btn.btn-primary.klipBtn:focus{
     background: #216FEA;
     border-color: 2px #216FEA;
+    color: #ffffff;
 }
