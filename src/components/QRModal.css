@@ -1,0 +1,23 @@
+.btn.btn-primary.QRmodal{
+    font-family: 'Gaegu', cursive;
+    background: #ffae42;
+    border : 0;
+    border-radius: 10px;
+    width: 100%;
+    border: 0;
+    color: #ffffff
+}
+
+.btn.btn-primary:hover{
+    background: #ffae42;
+    box-shadow: 0 0 15px #ffae42;
+    border : 0;
+    color: #ffffff;
+}
+
+
+.btn.btn-primary:focus{
+    background: #ffae42;
+    border-color: 2px #ffae42;
+    color: #ffffff;
+}

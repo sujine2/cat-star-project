@@ -1,6 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { getResult } from "klip-sdk";
 import { Cookies } from "react-cookie";
+import "./QRModal.css";
 
 function QRModal(props) {
   const cookies = new Cookies();
@@ -24,11 +25,11 @@ function QRModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button
+          className="QRmodal"
           onClick={async () => {
             if (props.qrkey != "") {
-              console.log("adsadssdadsaads", props.qrkey);
               const data = await getResult(props.qrkey);
-              console.log("Result", data);
+
               if (data.status == "completed") {
                 alert("Klip 지갑이 연결 되었습니다.");
 
@@ -38,7 +39,6 @@ function QRModal(props) {
                   expires: new Date(),
                   maxAge: 1500,
                 });
-                console.log("쿠키", cookies.get("user"));
               } else {
                 alert("Klip 지갑이 연결되지 않았습니다.");
               }
