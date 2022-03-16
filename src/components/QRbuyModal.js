@@ -28,6 +28,7 @@ function QRbuyModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button
+          className="QRmodal"
           onClick={async () => {
             const data = await getResult(props.qrkey);
             console.log(props.qrkey);
