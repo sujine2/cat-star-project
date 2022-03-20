@@ -216,13 +216,12 @@ html, body {
 
 .mainWalletConnect{
   float: right;
-  
   background: #ffae42;
   border : 0;
   border-radius: 5px;
   width:13%;
   height: 29px;
-  margin-top: 13px;
+  margin-top: 17px;
   margin-right: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -299,7 +298,7 @@ html, body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-right: 20px;
-  margin-top: 13px;
+  margin-top: 17px;
 }
 .mainKlipConnect:hover {
   background: #216FEA;

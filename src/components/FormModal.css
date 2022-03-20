@@ -79,18 +79,21 @@ h4 {
 
 
 
-
-.btn.btn-primary{
+.kaikasBtn{
+    width: 48%;
+    float: left;
+}
+.kaikasBtn > .btn.btn-primary {
     font-family: 'Gaegu', cursive;
-    background: #ffffff;
+    background: #ffae42;
     border : 0;
+    width: 90%;
     border-radius: 10px;
-    width: 100%;
     border: 1px solid #ffae42;
-    color: #ffae42;
+    color: #ffffff;
 }
 
-.btn.btn-primary:hover{
+.kaikasBtn > .btn.btn-primary:hover{
     background: #ffae42;
     box-shadow: 0 0 15px #ffae42;
     border : 0;
@@ -98,7 +101,7 @@ h4 {
 }
 
 
-.btn.btn-primary:focus{
+.kaikasBtn >.btn.btn-primary:focus{
     background: #ffae42;
     border-color: 2px #ffae42;
     color: #ffffff;
@@ -112,14 +115,20 @@ h4 {
 }
 
 
-  
-.btn.btn-primary.klipBtn{
-    background-color: #ffffff;
-    color : #216FEA;
+.klipBtn{
+    width: 48%;
+    float: left;
+}
+.klipBtn > .btn.btn-primary{
+    font-family: 'Gaegu', cursive;
+    background-color: #216FEA;
+    color: #ffffff;
+    width: 90%;
+    border-radius: 10px;
     border : 1px solid #216FEA;
 }
 
-.btn.btn-primary.klipBtn:hover{
+.klipBtn > .btn.btn-primary:hover{
     background: #216FEA;
     box-shadow: 0 0 15px #216FEA;
     border : 0;
@@ -127,7 +136,7 @@ h4 {
 }
 
 
-.btn.btn-primary.klipBtn:focus{
+.klipBtn > .btn.btn-primary:focus{
     background: #216FEA;
     border-color: 2px #216FEA;
     color: #ffffff;

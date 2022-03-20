@@ -1,0 +1,45 @@
+.string1{
+    filter: drop-shadow(0px 0px 1px white);
+    position: absolute;
+    width: 34%;
+    left: 0px;
+    top: 80px
+}
+
+
+.string2{
+    filter: drop-shadow(0px 0px 1px white);
+    float: right;
+    position: absolute;
+    width: 34%;
+    right: 0px;
+    top: 80px
+}
+
+
+
+.starColor1 path{
+    filter: drop-shadow(0px 0px 20px white);
+
+}
+
+.starColor1{
+    position: absolute;
+    left: 200px;
+    top: 150px;
+    fill: white;
+}
+
+
+
+.starColor2 path{
+    filter: drop-shadow(0px 0px 20px white);
+}
+
+.starColor2{
+    float: right;
+    position: relative;
+    right: 200px;
+    top: 150px;
+    fill: white;
+}

@@ -3,9 +3,10 @@ import { address, _abi } from "../components/contract/contractInfo";
 import React, { useEffect } from "react";
 import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
-import $, { data } from "jquery";
+import $ from "jquery";
 import styled from "styled-components";
 import { klaytn, caver } from "../wallet/caver";
+import line from "../img/line.png";
 
 const ModalCustom = styled(Modal)`
   .modal-content {

@@ -1,5 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 import { getResult } from "klip-sdk";
+import $ from "jquery";
 
 let klipAddress = "";
 
@@ -31,13 +32,9 @@ function QRbuyModal(props) {
           className="QRmodal"
           onClick={async () => {
             const data = await getResult(props.qrkey);
-            console.log(props.qrkey);
-            console.log("Result", data);
-            console.log("Result", data.status);
             if (data.status == "completed") {
               alert("별 발행이 완료되었습니다.");
-
-              console.log("유저 어들세ㅓㅏㅁ;ㄹ", klipAddress);
+              $(".btn-close").trigger("click");
               window.location.reload();
             } else {
               alert("거래가 처리되지 않았습니다.");

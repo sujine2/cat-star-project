@@ -286,197 +286,198 @@ function FormModal(props) {
           url={QRurl}
           qrkey={buyKey}
         />
-
-        <Button
-          className="kaikasBtn"
-          onClick={async () => {
-            if (colorDup === false && $(".changeColorCheck").is(":checked")) {
-              alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
-            } else if (klaytn === undefined) {
-              alert("카이카스 지갑을 설치해 주세요!");
-            } else {
-              if (
-                catName === "" ||
-                yourName === "" ||
-                comment === "" ||
-                favorite === "" ||
-                dayMet === "" ||
-                imgURL === ""
-              ) {
-                alert("입력란을 모두 채워주세요.");
+        <div className="kaikasBtn">
+          <Button
+            onClick={async () => {
+              if (colorDup === false && $(".changeColorCheck").is(":checked")) {
+                alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
+              } else if (klaytn === undefined) {
+                alert("카이카스 지갑을 설치해 주세요!");
               } else {
                 if (
                   (await klaytn._kaikas.isUnlocked()) === false ||
                   klaytn.selectedAddress === undefined
                 ) {
-                  alert("지갑을 연결해주세요!");
+                  alert("kaikas 로 로그인 해주세요!");
                 } else {
-                  //setAccount(klaytn.selectedAddress);
-                  const _caver = new Caver(window.klaytn);
-                  const contract = new _caver.klay.Contract(_abi, address);
+                  if (
+                    catName === "" ||
+                    yourName === "" ||
+                    comment === "" ||
+                    favorite === "" ||
+                    dayMet === "" ||
+                    imgURL === ""
+                  ) {
+                    alert("입력란을 모두 채워주세요.");
+                  } else {
+                    //setAccount(klaytn.selectedAddress);
+                    const _caver = new Caver(window.klaytn);
+                    const contract = new _caver.klay.Contract(_abi, address);
 
+                    if ($(".changeColorCheck").is(":checked")) {
+                      price = await contract.methods.getMintPrice().call();
+                      changeTmp = parseInt(changeColor, 16);
+                      await contract.methods
+                        .mint(
+                          catName,
+                          yourName,
+                          comment,
+                          favorite,
+                          imgURL,
+                          changeTmp,
+                          parseInt(dayMet),
+                          true
+                        )
+                        .send({
+                          from: account,
+                          gas: 1500000,
+                          value: caver.utils.toPeb(price, "KLAY"),
+                        })
+                        .then(function (receipt) {
+                          window.location.reload();
+                        });
+                    } else {
+                      await contract.methods
+                        .mint(
+                          catName,
+                          yourName,
+                          comment,
+                          favorite,
+                          imgURL,
+                          0,
+                          parseInt(dayMet),
+                          false
+                        )
+                        .send({
+                          from: account,
+                          gas: 1500000,
+                        })
+                        .then(function (receipt) {
+                          window.location.reload();
+                        });
+                    }
+                  }
+                }
+              }
+            }}
+          >
+            Kaikas로 별 만들기
+          </Button>
+        </div>
+
+        <div className="klipBtn">
+          <Button
+            onClick={async () => {
+              const klipAddress = cookies.get("user");
+              if (colorDup === false && $(".changeColorCheck").is(":checked")) {
+                alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
+              } else if (klipAddress == undefined) {
+                alert("Klip 으로 로그인 해주세요!");
+              } else {
+                if (
+                  catName === "" ||
+                  yourName === "" ||
+                  comment === "" ||
+                  favorite === "" ||
+                  dayMet === "" ||
+                  imgURL === ""
+                ) {
+                  alert("입력란을 모두 채워주세요.");
+                } else {
+                  const contract = new caver.klay.Contract(_abi, address);
                   if ($(".changeColorCheck").is(":checked")) {
                     price = await contract.methods.getMintPrice().call();
                     changeTmp = parseInt(changeColor, 16);
-                    await contract.methods
-                      .mint(
-                        catName,
-                        yourName,
-                        comment,
-                        favorite,
-                        imgURL,
-                        changeTmp,
-                        parseInt(dayMet),
-                        true
-                      )
-                      .send({
-                        from: account,
-                        gas: 1500000,
-                        value: caver.utils.toPeb(price, "KLAY"),
-                      })
-                      .then(function (receipt) {
-                        window.location.reload();
-                      });
+                    const bappName = "cat-planet";
+                    const from = klipAddress;
+                    const to = address;
+                    const value = caver.utils.toPeb(price, "KLAY");
+                    const abi = JSON.stringify(_mintabi);
+                    const array = [
+                      catName,
+                      yourName,
+                      comment,
+                      favorite,
+                      imgURL,
+                      changeTmp,
+                      parseInt(dayMet),
+                      true,
+                    ];
+
+                    const params = JSON.stringify(array);
+
+                    const res = await prepare.executeContract({
+                      bappName,
+                      from,
+                      to,
+                      value,
+                      abi,
+                      params,
+                    });
+
+                    if (res.err) {
+                      console.log(res.err);
+                    } else if (res.request_key) {
+                      await setBuyKey(res.request_key);
+
+                      QRCode.toDataURL(
+                        "https://klipwallet.com/?target=/a2a?request_key=" +
+                          res.request_key,
+                        function (err, url) {
+                          setQRurl(url);
+                          setQRbuyModalShow(true);
+                        }
+                      );
+                    }
                   } else {
-                    await contract.methods
-                      .mint(
-                        catName,
-                        yourName,
-                        comment,
-                        favorite,
-                        imgURL,
-                        0,
-                        parseInt(dayMet),
-                        false
-                      )
-                      .send({
-                        from: account,
-                        gas: 1500000,
-                      })
-                      .then(function (receipt) {
-                        window.location.reload();
-                      });
+                    const bappName = "cat-planet";
+                    const from = klipAddress;
+                    const to = address;
+                    const value = "0";
+                    const abi = JSON.stringify(_mintabi);
+                    const array = [
+                      catName,
+                      yourName,
+                      comment,
+                      favorite,
+                      imgURL,
+                      0,
+                      parseInt(dayMet),
+                      false,
+                    ];
+
+                    const params = JSON.stringify(array);
+
+                    const res = await prepare.executeContract({
+                      bappName,
+                      from,
+                      to,
+                      value,
+                      abi,
+                      params,
+                    });
+
+                    if (res.err) {
+                      console.log(res.err);
+                    } else if (res.request_key) {
+                      await setBuyKey(res.request_key);
+                      QRCode.toDataURL(
+                        "https://klipwallet.com/?target=/a2a?request_key=" +
+                          res.request_key,
+                        function (err, url) {
+                          setQRurl(url);
+                          setQRbuyModalShow(true);
+                        }
+                      );
+                    }
                   }
                 }
               }
-            }
-          }}
-        >
-          Kaikas로 별 만들기
-        </Button>
-        <Button
-          className="klipBtn"
-          onClick={async () => {
-            const klipAddress = cookies.get("user");
-
-            if (colorDup === false && $(".changeColorCheck").is(":checked")) {
-              alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
-            } else if (klipAddress == undefined) {
-              alert("Klip 지갑을 연결해주세요!");
-            } else {
-              if (
-                catName === "" ||
-                yourName === "" ||
-                comment === "" ||
-                favorite === "" ||
-                dayMet === "" ||
-                imgURL === ""
-              ) {
-                alert("입력란을 모두 채워주세요.");
-              } else {
-                const contract = new caver.klay.Contract(_abi, address);
-                if ($(".changeColorCheck").is(":checked")) {
-                  price = await contract.methods.getMintPrice().call();
-                  changeTmp = parseInt(changeColor, 16);
-                  const bappName = "cat-planet";
-                  const from = klipAddress;
-                  const to = address;
-                  const value = caver.utils.toPeb(price, "KLAY");
-                  const abi = JSON.stringify(_mintabi);
-                  const array = [
-                    catName,
-                    yourName,
-                    comment,
-                    favorite,
-                    imgURL,
-                    changeTmp,
-                    parseInt(dayMet),
-                    true,
-                  ];
-
-                  const params = JSON.stringify(array);
-
-                  const res = await prepare.executeContract({
-                    bappName,
-                    from,
-                    to,
-                    value,
-                    abi,
-                    params,
-                  });
-
-                  if (res.err) {
-                    console.log(res.err);
-                  } else if (res.request_key) {
-                    await setBuyKey(res.request_key);
-
-                    QRCode.toDataURL(
-                      "https://klipwallet.com/?target=/a2a?request_key=" +
-                        res.request_key,
-                      function (err, url) {
-                        setQRurl(url);
-                        setQRbuyModalShow(true);
-                      }
-                    );
-                  }
-                } else {
-                  const bappName = "cat-planet";
-                  const from = klipAddress;
-                  const to = address;
-                  const value = "0";
-                  const abi = JSON.stringify(_mintabi);
-                  const array = [
-                    catName,
-                    yourName,
-                    comment,
-                    favorite,
-                    imgURL,
-                    0,
-                    parseInt(dayMet),
-                    false,
-                  ];
-
-                  const params = JSON.stringify(array);
-
-                  const res = await prepare.executeContract({
-                    bappName,
-                    from,
-                    to,
-                    value,
-                    abi,
-                    params,
-                  });
-
-                  if (res.err) {
-                    console.log(res.err);
-                  } else if (res.request_key) {
-                    await setBuyKey(res.request_key);
-                    QRCode.toDataURL(
-                      "https://klipwallet.com/?target=/a2a?request_key=" +
-                        res.request_key,
-                      function (err, url) {
-                        setQRurl(url);
-                        setQRbuyModalShow(true);
-                      }
-                    );
-                  }
-                }
-              }
-            }
-          }}
-        >
-          Klip 으로 별 만들기
-        </Button>
+            }}
+          >
+            Klip 으로 별 만들기
+          </Button>
+        </div>
       </Modal.Footer>
     </ModalCustomFrom>
   );

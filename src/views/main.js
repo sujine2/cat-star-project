@@ -10,12 +10,14 @@ import { prepare } from "klip-sdk";
 import QRModal from "../components/QRModal";
 import QRCode from "qrcode";
 import klip from "../img/Klip.png";
+import { Cookies } from "react-cookie";
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function Main() {
+  const cookies = new Cookies();
   const [QRurl, setQRurl] = React.useState("");
   const [key, setKey] = React.useState("");
   const [QRModalShow, setQRModalShow] = React.useState(false);
@@ -31,6 +33,7 @@ function Main() {
   ];
   var widthWindow = window.innerWidth;
   var heightWindow = window.innerHeight;
+  var set;
   return (
     <div className="planet">
       <div className="bar">
@@ -38,52 +41,70 @@ function Main() {
           <div className="barTitle">Cat-planet</div>
 
           <div className="barRight">
-            <button
-              className="mainWalletConnect"
-              onClick={async () => {
-                if (klaytn === undefined) {
-                  alert("카이카스 지갑을 설치해 주세요!");
-                } else {
-                  await klaytn.enable();
-                }
-              }}
-            >
-              Kaikas로 로그인
-            </button>
-            <button
-              className="mainKlipConnect"
-              onClick={async () => {
-                const bappName = "cat-planet";
-                const res = await prepare.auth({
-                  bappName,
-                });
-                if (res.err) {
-                  alert(
-                    "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
-                  );
-                  // 에러 처리
-                } else if (res.request_key) {
-                  // request_key 보관
+            {klaytn.selectedAddress}
+            {klaytn.selectedAddress === undefined ? (
+              <button
+                className="mainWalletConnect"
+                onClick={async () => {
+                  if (klaytn === undefined) {
+                    alert("카이카스 지갑을 설치해 주세요!");
+                  } else {
+                    await klaytn.enable();
+                    window.location.reload();
+                  }
+                }}
+              >
+                Kaikas로 로그인
+              </button>
+            ) : (
+              <button className="mainWalletConnect">Kaikas 연결됨</button>
+            )}
 
-                  await setKey(res.request_key);
+            {cookies.get("user") === undefined ? (
+              <button
+                className="mainKlipConnect"
+                onClick={async () => {
+                  const bappName = "cat-planet";
+                  const res = await prepare.auth({
+                    bappName,
+                  });
+                  if (res.err) {
+                    alert(
+                      "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
+                    );
+                    // 에러 처리
+                  } else if (res.request_key) {
+                    // request_key 보관
 
-                  QRCode.toDataURL(
-                    "https://klipwallet.com/?target=/a2a?request_key=" +
-                      res.request_key,
-                    function (err, url) {
-                      setQRurl(url);
-                      setQRModalShow(true);
-                    }
-                  );
-                }
-              }}
-            >
-              <img
-                style={{ width: 30, height: 30, marginRight: 5 }}
-                src={klip}
-              ></img>
-              Klip으로 로그인
-            </button>
+                    await setKey(res.request_key);
+
+                    QRCode.toDataURL(
+                      "https://klipwallet.com/?target=/a2a?request_key=" +
+                        res.request_key,
+                      function (err, url) {
+                        setQRurl(url);
+                        setQRModalShow(true);
+                      }
+                    );
+                  }
+                }}
+              >
+                <img
+                  style={{ width: 30, height: 30, marginRight: 5 }}
+                  src={klip}
+                ></img>
+                Klip으로 로그인
+              </button>
+            ) : (
+              <button className="mainKlipConnect">
+                <img
+                  style={{ width: 30, height: 30, marginRight: 5 }}
+                  src={klip}
+                ></img>
+                Klip 연결됨
+              </button>
+            )}
+
             <QRModal
               show={QRModalShow}
               onHide={() => setQRModalShow(false)}
@@ -147,8 +168,8 @@ function Main() {
 
         <div className="des">
           어린왕자는 8번째 별인 고양이 별에 도착했습니다.
-          <br />이 별에는 아무도 살지 않았고, 고양이들만 밤하늘에서 반짝이고
-          있었습니다.
+          <br />이 별에는 고양이들이 살았고, 밤이되면 고양이들은 별이 되어
+          누군가를 위해 반짝였습니다.
           <br />이 곳에서 고양이들은 사라지지도, 아프지도 않았고 하늘에서 밝게
           빛날 뿐이었습니다.
         </div>

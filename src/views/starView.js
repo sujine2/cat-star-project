@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./starView.css";
 import ViewModal from "../components/Modal";
-import Meteoro from "../components/Meteoro";
 import plus from "../img/plus.png";
 import FormModal from "../components/FormModal";
 import Search from "../img/search.png";
@@ -10,6 +9,8 @@ import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
 import land from "../img/land2.png";
 import searchLoading from "../img/catStar.png";
+import Decoration from "../components/Decoration";
+import { Cookies } from "react-cookie";
 
 global.Buffer = global.Buffer || require("buffer").Buffer;
 let colorSearch = "";
@@ -33,6 +34,8 @@ function getRandomArbitrary(min, max) {
 }
 
 function StarView() {
+  const cookies = new Cookies();
+  const [viewStarAccount, setViewStarAccount] = React.useState("");
   const [modalShow, setModalShow] = React.useState({ setShow: false, id: "" });
   const { setShow, id } = modalShow;
   const [account, setAccount] = React.useState("");
@@ -186,7 +189,7 @@ function StarView() {
       .getWhoColor(parseInt(_findColor, 16))
       .call();
     if (colorOwner == 0x0) {
-      alert("It's not exist color code");
+      alert("존재하지 않는 컬러 코드입니다.");
     } else {
       let tokenList = await contract.methods.getMyStar(colorOwner).call();
       for (let i in tokenList) {
@@ -208,7 +211,7 @@ function StarView() {
   const findIndex = async (_index) => {
     let contract;
     if (_index < 0 || _index >= tokenID) {
-      alert("It's not exist cat star");
+      alert("존재하지 않는 별입니다!");
     } else {
       contract = new caver.klay.Contract(_abi, address);
 
@@ -405,6 +408,7 @@ function StarView() {
             }
             tokenid={id}
           />
+          <Decoration showDeco={setShow} id={id} />
           <div className="chuvaMeteoro">{/* <Meteoro /> */}</div>
 
           <div className="floresta">
@@ -447,16 +451,81 @@ function StarView() {
           </div>
 
           <div className="myStarCon">
-            {account !== undefined && account !== "" && (
-              <>
-                <div
-                  className="myStar"
-                  onClick={() => viewMyStar(klaytn.selectedAddress)}
-                >
-                  내 별 보기 - off
-                </div>
-              </>
-            )}
+            {account !== undefined &&
+              account !== "" &&
+              cookies.get("user") === undefined && (
+                <>
+                  <div
+                    className="myStar"
+                    onClick={() => {
+                      viewMyStar(klaytn.selectedAddress);
+                    }}
+                  >
+                    내 별 보기 - off
+                  </div>
+                </>
+              )}
+            {cookies.get("user") !== undefined &&
+              (account === undefined || account == "") && (
+                <>
+                  <div
+                    className="myStar"
+                    onClick={() => {
+                      if (cookies.get("user") !== undefined) {
+                        viewMyStar(cookies.get("user"));
+                      } else {
+                        alert("Kilp 로그인 만료");
+                      }
+                    }}
+                  >
+                    내 별 보기 - off
+                  </div>
+                </>
+              )}
+
+            {cookies.get("user") !== undefined &&
+              account !== undefined &&
+              account !== "" && (
+                <>
+                  <div
+                    className="myStar"
+                    onClick={() => {
+                      viewStar === true && viewMyStar(viewStarAccount);
+                    }}
+                  >
+                    내 별 보기 - off
+                  </div>
+
+                  {viewStar === false && (
+                    <div className="myStarMenuCon">
+                      <div className="myStarMenu">
+                        <div
+                          className="menu"
+                          onClick={async () => {
+                            if (cookies.get("user") !== undefined) {
+                              setViewStarAccount(cookies.get("user"));
+                              viewMyStar(cookies.get("user"));
+                            } else {
+                              alert("Kilp 로그인 만료");
+                            }
+                          }}
+                        >
+                          Klip 지갑
+                        </div>
+                        <div
+                          className="menu"
+                          onClick={() => {
+                            setViewStarAccount(klaytn.selectedAddress);
+                            viewMyStar(klaytn.selectedAddress);
+                          }}
+                        >
+                          Kaikas 지갑
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
           </div>
 
           <form className="search-container">

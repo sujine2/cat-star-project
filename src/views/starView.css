@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Poppins:wght@300&family=Noto+Sans+KR&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap');
 
 
@@ -244,20 +244,18 @@
 
 .myStar {
   font-family: 'Gamja Flower', cursive;
-  position: absolute;
-  margin-left: 69%;
   color : white;
   font-size: 28px;
-  width: 30%;
   float: right;
-  bottom: 20px;
+  position: fixed;
+  bottom:0;
+  right: 0;
   cursor: pointer;
   opacity: 0.6;
+  width: 13%;
 }
 
-.myStarCon{
-  margin-left: 270px;
-}
+
 
 .loadingImg {
   width: 70px;
@@ -278,3 +276,51 @@
 .loading{
   display: none;
 }
+
+
+
+.myStarMenu{
+  bottom: 60px;
+  right: 60px;
+  font-size: 18px;
+  width: 10%;
+  float: right;
+  cursor: pointer;
+  color: black;
+  position: fixed;
+  display: none;
+}
+
+
+
+.myStarMenuCon{
+  float: right;
+  position: fixed;
+  bottom:0;
+  right: 0;
+  width: 13%;
+  height: 8%;
+  cursor: pointer;
+}
+
+.myStarMenuCon:hover > .myStarMenu {
+  display: block;
+}
+
+.myStarMenu:hover {
+  display: block;
+}
+
+.menu{
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 13px;
+  background-color : white;
+ 
+}
+
+
+.menu:hover {
+  box-shadow: 0px 0px 20px #ffae42;
+  border: 1px solid #ffae42;
+}
+

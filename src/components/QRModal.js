@@ -1,6 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { getResult } from "klip-sdk";
 import { Cookies } from "react-cookie";
+import $ from "jquery";
 import "./QRModal.css";
 
 function QRModal(props) {
@@ -19,6 +20,7 @@ function QRModal(props) {
       </Modal.Header>
       <Modal.Body>
         <p>스마트폰 카메라로 아래의 QR코드를 찍어주세요.</p>
+        <p>로그인 유지시간은 25분입니다.</p>
         <div style={{ textAlign: "center" }}>
           <img src={props.url}></img>
         </div>
@@ -31,14 +33,15 @@ function QRModal(props) {
               const data = await getResult(props.qrkey);
 
               if (data.status == "completed") {
-                alert("Klip 지갑이 연결 되었습니다.");
-
                 cookies.set("user", data.result.klaytn_address, {
                   path: "/",
                   secure: true,
                   expires: new Date(),
                   maxAge: 1500,
                 });
+
+                alert("Klip 지갑이 연결 되었습니다.");
+                $(".btn-close").trigger("click");
               } else {
                 alert("Klip 지갑이 연결되지 않았습니다.");
               }
