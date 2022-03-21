@@ -5,8 +5,8 @@ import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
 import $ from "jquery";
 import styled from "styled-components";
+import FormModal from "../components/FormModal";
 import { klaytn, caver } from "../wallet/caver";
-import line from "../img/line.png";
 
 const ModalCustom = styled(Modal)`
   .modal-content {
@@ -45,7 +45,6 @@ function ViewModal(props) {
     const data = await contract.methods.getCatData(id).call();
     return data;
   };
-
   const [catData, setCatData] = React.useState([]);
   const [colorEffect, setColorEffect] = React.useState();
   let _id;
@@ -60,7 +59,10 @@ function ViewModal(props) {
 
   useEffect(() => {
     if (catData.length !== 0) {
-      const tempColorValue = parseInt(catData.catColor).toString(16);
+      let tempColorValue = parseInt(catData.catColor).toString(16);
+      while (tempColorValue.length !== 6) {
+        tempColorValue = "0" + tempColorValue;
+      }
       setColorEffect(tempColorValue);
     }
   }, [catData]);
@@ -87,7 +89,7 @@ function ViewModal(props) {
             <button
               className="printColor"
               style={{
-                backgroundColor: "#" + parseInt(catData.catColor).toString(16),
+                backgroundColor: "#" + colorEffect,
                 border: 0,
                 outline: 0,
                 width: 10,
@@ -102,8 +104,6 @@ function ViewModal(props) {
       </Modal.Header>
       <Modal.Body>
         <img className="showImg" src={loadingImg} />
-
-        {}
 
         {
           ((_id = catData.imgURL),

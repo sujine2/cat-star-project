@@ -15,7 +15,11 @@ function Decoration(props) {
 
     const contract = new caver.klay.Contract(_abi, address);
     const data = await contract.methods.getCatData(id).call();
-    setidColor(parseInt(data.catColor).toString(16));
+    let tempColorValue = parseInt(data.catColor).toString(16);
+    while (tempColorValue.length !== 6) {
+      tempColorValue = "0" + tempColorValue;
+    }
+    setidColor(tempColorValue);
   }
 
   useEffect(() => {

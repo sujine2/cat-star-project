@@ -10,6 +10,8 @@ import { prepare, getResult } from "klip-sdk";
 import QRbuyModal from "./QRbuyModal";
 import QRCode from "qrcode";
 import { Cookies } from "react-cookie";
+import QRModal from "../components/QRModal";
+import ViewModal from "../components/Modal";
 
 const ModalCustomFrom = styled(Modal)`
   .modal-content {
@@ -47,7 +49,8 @@ function FormModal(props) {
     imgURL: "",
   });
 
-  const [QRModalShow, setQRModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState({ setShow: false, id: "" });
+  const { setShow, id } = modalShow;
   const [QRbuyModalShow, setQRbuyModalShow] = React.useState(false);
   const { catName, yourName, dayMet, favorite, comment, imgURL } = inputs;
   const [colors, setColors] = React.useState([]);
@@ -57,7 +60,10 @@ function FormModal(props) {
   const [QRurl, setQRurl] = React.useState("");
   const [key, setKey] = React.useState("");
   const [buyKey, setBuyKey] = React.useState("");
-  const [userKlipAddress, setUserKlipAddress] = React.useState("");
+
+  const [QRurlForm, setQRurlForm] = React.useState("");
+  const [keyForm, setKeyForm] = React.useState("");
+  const [QRModalShowForm, setQRModalShowForm] = React.useState(false);
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -123,13 +129,18 @@ function FormModal(props) {
 
   let price;
   let changeTmp;
+  let shouldView;
+
   return (
     <ModalCustomFrom
       {...props}
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      style={{
+        display: !modalShow.setShow ? "flex" : "none",
+      }}
     >
-      <Modal.Header className="asdklf" closeButton>
+      <Modal.Header id="closeForm" closeButton>
         <div className="modalTitle">고양이 별 정보</div>
       </Modal.Header>
       <Modal.Body>
@@ -137,8 +148,8 @@ function FormModal(props) {
           <div className="catInfoForm">
             <br />
             <div style={{ float: "left", width: 140, fontSize: 50 }}>
-              <h4>별 이름 </h4>
-              <h4>별 주인 </h4>
+              <h4>고양이 이름 </h4>
+              <h4>주인 이름 </h4>
               <h4>만난 날 </h4>
               <h4>좋아하는 것 </h4>
               <h4>메모 </h4>
@@ -286,6 +297,23 @@ function FormModal(props) {
           url={QRurl}
           qrkey={buyKey}
         />
+        <QRModal
+          show={QRModalShowForm}
+          onHide={() => setQRModalShowForm(false)}
+          url={QRurlForm}
+          qrkey={keyForm}
+        />
+        <ViewModal
+          show={setShow}
+          onHide={() =>
+            setModalShow({
+              setShow: false,
+              id: "",
+            })
+          }
+          tokenid={id}
+        />
+
         <div className="kaikasBtn">
           <Button
             onClick={async () => {
@@ -299,6 +327,7 @@ function FormModal(props) {
                   klaytn.selectedAddress === undefined
                 ) {
                   alert("kaikas 로 로그인 해주세요!");
+                  await klaytn.enable();
                 } else {
                   if (
                     catName === "" ||
@@ -334,6 +363,7 @@ function FormModal(props) {
                           value: caver.utils.toPeb(price, "KLAY"),
                         })
                         .then(function (receipt) {
+                          window.sessionStorage.setItem("id_&", props.id);
                           window.location.reload();
                         });
                     } else {
@@ -353,6 +383,7 @@ function FormModal(props) {
                           gas: 1500000,
                         })
                         .then(function (receipt) {
+                          window.sessionStorage.setItem("id_&", props.id);
                           window.location.reload();
                         });
                     }
@@ -364,7 +395,6 @@ function FormModal(props) {
             Kaikas로 별 만들기
           </Button>
         </div>
-
         <div className="klipBtn">
           <Button
             onClick={async () => {
@@ -373,6 +403,30 @@ function FormModal(props) {
                 alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
               } else if (klipAddress == undefined) {
                 alert("Klip 으로 로그인 해주세요!");
+
+                const bappName = "cat-planet";
+                const res = await prepare.auth({
+                  bappName,
+                });
+                if (res.err) {
+                  alert(
+                    "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
+                  );
+                  // 에러 처리
+                } else if (res.request_key) {
+                  // request_key 보관
+
+                  await setKeyForm(res.request_key);
+
+                  QRCode.toDataURL(
+                    "https://klipwallet.com/?target=/a2a?request_key=" +
+                      res.request_key,
+                    function (err, url) {
+                      setQRurlForm(url);
+                      setQRModalShowForm(true);
+                    }
+                  );
+                }
               } else {
                 if (
                   catName === "" ||
@@ -424,6 +478,7 @@ function FormModal(props) {
                         "https://klipwallet.com/?target=/a2a?request_key=" +
                           res.request_key,
                         function (err, url) {
+                          window.sessionStorage.setItem("id_&", props.id);
                           setQRurl(url);
                           setQRbuyModalShow(true);
                         }
@@ -465,6 +520,7 @@ function FormModal(props) {
                         "https://klipwallet.com/?target=/a2a?request_key=" +
                           res.request_key,
                         function (err, url) {
+                          window.sessionStorage.setItem("id_&", props.id);
                           setQRurl(url);
                           setQRbuyModalShow(true);
                         }

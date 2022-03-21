@@ -114,8 +114,8 @@ html, body {
   font-family: 'Luxurious Roman', cursive;
   font-size: 35px;
   margin: 30px 200px 30px 200px;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding-right: 70px;
+  padding-left: 70px;
   margin-top: 7%;
   animation: fadein 3s;
   -moz-animation: fadein 3s; /* Firefox */
@@ -228,7 +228,7 @@ html, body {
   background: #ffae42;
   border : 0;
   border-radius: 5px;
-  width:13%;
+  width: 15%;
   height: 4vh;
   margin-top: calc(5vh / 2.5);
   margin-right: 30px;

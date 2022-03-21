@@ -148,13 +148,15 @@ function StarView() {
       setViewStar(true);
       for (let i in myStarList) {
         let data = await contract.methods.getCatData(myStarList[i]).call();
+        let tempColorValue = parseInt(data.catColor).toString(16);
+        while (tempColorValue.length !== 6) {
+          tempColorValue = "0" + tempColorValue;
+        }
+
         $("#" + myStarList[i]).addClass("style5");
         $("#" + myStarList[i]).css("width", "17px");
         $("#" + myStarList[i]).css("height", "17px");
-        $("#" + myStarList[i]).css(
-          "background-color",
-          "#" + parseInt(data.catColor).toString(16)
-        );
+        $("#" + myStarList[i]).css("background-color", "#" + tempColorValue);
 
         $(".myStar").css("opacity", "100%");
         $(".myStar").css("text-shadow", "0px 0px 8px white");
@@ -194,6 +196,9 @@ function StarView() {
           data !== "" &&
           _findColor === parseInt(data.catColor).toString(16)
         ) {
+          while (_findColor.length !== 6) {
+            _findColor = "0" + _findColor;
+          }
           $("#" + tokenList[i]).addClass("style5");
           $("#" + tokenList[i]).css("width", "17px");
           $("#" + tokenList[i]).css("height", "17px");
@@ -212,13 +217,14 @@ function StarView() {
       contract = new caver.klay.Contract(_abi, address);
 
       const data = await contract.methods.getCatData(_index).call();
+      let tempColorValue = parseInt(data.catColor).toString(16);
+      while (tempColorValue.length !== 6) {
+        tempColorValue = "0" + tempColorValue;
+      }
       $("#" + _index).addClass("style5");
       $("#" + _index).css("width", "17px");
       $("#" + _index).css("height", "17px");
-      $("#" + _index).css(
-        "background-color",
-        "#" + parseInt(data.catColor).toString(16)
-      );
+      $("#" + _index).css("background-color", "#" + tempColorValue);
       colorSearch = _index;
     }
   };
@@ -231,6 +237,7 @@ function StarView() {
       $("#" + colorSearch).css("background-color", "white");
     }
     let searchInputs = $(".search-bar").val();
+
     $(".loading").css("display", "block");
     if (searchInputs !== "") {
       if (searchInputs[0] === "#") {
@@ -364,6 +371,16 @@ function StarView() {
     });
   }, [tokenID]);
 
+  useEffect(() => {
+    console.log("sss", window.sessionStorage.getItem("id_&"));
+    if (window.sessionStorage.getItem("id_&") !== null) {
+      setModalShow({
+        setShow: true,
+        id: window.sessionStorage.getItem("id_&"),
+      });
+      window.sessionStorage.removeItem("id_&");
+    }
+  }, []);
   return (
     <>
       {!isLoading ? (
@@ -405,6 +422,7 @@ function StarView() {
             tokenid={id}
           />
           <Decoration showDeco={setShow} id={id} />
+
           <div className="chuvaMeteoro">{/* <Meteoro /> */}</div>
 
           <div className="floresta">
@@ -434,6 +452,8 @@ function StarView() {
             <FormModal
               show={formModalShow}
               onHide={() => setFormModalShow(false)}
+              id={tokenID}
+              onClose={() => setFormModalShow(true)}
             />
 
             <img
@@ -535,7 +555,11 @@ function StarView() {
           </div>
 
           <form className="search-container">
-            <input type="text" className="search-bar" />
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="#색상코드, 별 번호 검색"
+            />
             <a onClick={search}>
               <img className="search-icon" src={Search} />
             </a>

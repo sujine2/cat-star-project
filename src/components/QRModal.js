@@ -41,7 +41,9 @@ function QRModal(props) {
                 });
 
                 alert("Klip 지갑이 연결 되었습니다.");
-                $(".btn-close").trigger("click");
+                $(".btn-close").attr("class", "QR-close");
+
+                $(".QR-close").trigger("click");
               } else {
                 alert("Klip 지갑이 연결되지 않았습니다.");
               }
