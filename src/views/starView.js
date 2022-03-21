@@ -454,7 +454,10 @@ function StarView() {
                   <div
                     className="myStar"
                     onClick={() => {
-                      if (klaytn.selectedAddress !== undefined) {
+                      if (
+                        klaytn.selectedAddress !== undefined &&
+                        klaytn !== undefined
+                      ) {
                         viewMyStar(klaytn.selectedAddress);
                       }
                     }}
@@ -513,8 +516,13 @@ function StarView() {
                         <div
                           className="menu"
                           onClick={() => {
-                            setViewStarAccount(klaytn.selectedAddress);
-                            viewMyStar(klaytn.selectedAddress);
+                            if (
+                              klaytn.selectedAddress !== undefined &&
+                              klaytn !== undefined
+                            ) {
+                              setViewStarAccount(klaytn.selectedAddress);
+                              viewMyStar(klaytn.selectedAddress);
+                            }
                           }}
                         >
                           Kaikas 지갑
