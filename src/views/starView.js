@@ -142,10 +142,6 @@ function StarView() {
   };
 
   const viewMyStar = async (_owner) => {
-    if (klaytn === undefined) {
-      alert("Non-Kaikas browser detected. You should consider trying Kaikas!");
-    }
-
     const contract = new caver.klay.Contract(_abi, address);
     const myStarList = await contract.methods.getMyStar(_owner).call();
     if (viewStar === false) {
