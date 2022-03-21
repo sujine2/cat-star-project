@@ -11,6 +11,7 @@ import QRModal from "../components/QRModal";
 import QRCode from "qrcode";
 import klip from "../img/Klip.png";
 import { Cookies } from "react-cookie";
+import logo from "../img/logo.png";
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -38,7 +39,9 @@ function Main() {
     <div className="planet">
       <div className="bar">
         <div className="barContent">
-          <div className="barTitle">Cat-planet</div>
+          <div className="barTitle">
+            <img src={logo}></img>
+          </div>
 
           <div className="barRight">
             {(klaytn === undefined || klaytn.selectedAddress === undefined) && (
