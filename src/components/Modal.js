@@ -14,7 +14,7 @@ const ModalCustom = styled(Modal)`
     padding: 0;
     width: 510px;
     height: 700px;
-    box-shadow: 0px 0px 30px #${(props) => props.color && props.color};
+    box-shadow: 0px 0px 20px #${(props) => props.color && props.color};
   }
 
   .modal-body {

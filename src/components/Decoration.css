@@ -3,7 +3,7 @@
     position: absolute;
     width: calc(50vw - 255px);
     left: 0px;
-    top: calc(50vh - 350px);
+    top: calc(50vh - 330px);
 }
 
 
@@ -13,7 +13,7 @@
     position: absolute;
     width: calc(50vw - 255px);
     right: 0px;
-    top: calc(50vh - 350px);
+    top: calc(50vh - 330px);
 }
 
 
@@ -26,7 +26,7 @@
 .starColor1{
     position: absolute;
     left: calc((50vw - 355px) / 2 );
-    top: calc(50vh - 260px);
+    top: calc(50vh - 230px);
     fill: white; 
 }
 
@@ -40,6 +40,6 @@
     left: calc((50vw + 255px) + (50vw - 355px)/2);
     position: relative;
     right: 200px;
-    top: calc(50vh - 260px);
+    top: calc(50vh - 230px);
     fill: white;
 }
