@@ -41,8 +41,7 @@ function Main() {
           <div className="barTitle">Cat-planet</div>
 
           <div className="barRight">
-            {klaytn.selectedAddress}
-            {klaytn.selectedAddress === undefined ? (
+            {(klaytn === undefined || klaytn.selectedAddress === undefined) && (
               <button
                 className="mainWalletConnect"
                 onClick={async () => {
@@ -56,7 +55,8 @@ function Main() {
               >
                 Kaikas로 로그인
               </button>
-            ) : (
+            )}
+            {klaytn !== undefined && klaytn.selectedAddress !== undefined && (
               <button className="mainWalletConnect">Kaikas 연결됨</button>
             )}
 
