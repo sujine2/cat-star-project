@@ -458,7 +458,9 @@ function StarView() {
                   <div
                     className="myStar"
                     onClick={() => {
-                      viewMyStar(klaytn.selectedAddress);
+                      if (klaytn.selectedAddress !== undefined) {
+                        viewMyStar(klaytn.selectedAddress);
+                      }
                     }}
                   >
                     내 별 보기 - off
