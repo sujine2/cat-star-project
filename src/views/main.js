@@ -163,12 +163,12 @@ function Main() {
         <div className="imgCon">
           <img src={planet}></img>
           <br />
-          <p className="welcome">220301</p>
+          <p className="welcome">220321</p>
         </div>
 
         <div className="des">
           어린왕자는 8번째 별인 고양이 별에 도착했습니다.
-          <br />이 별에는 고양이들이 살았고, 밤이되면 고양이들은 별이 되어
+          <br />이 별에는 고양이들이 살았고, 밤이 되면 고양이들은 별이 되어
           누군가를 위해 반짝였습니다.
           <br />이 곳에서 고양이들은 사라지지도, 아프지도 않았고 하늘에서 밝게
           빛날 뿐이었습니다.
