@@ -34,6 +34,7 @@ function RequestLogin(props) {
               alert("카이카스 지갑을 설치해 주세요!");
             } else {
               await klaytn.enable();
+              window.location.reload();
             }
           }}
         >
