@@ -449,7 +449,6 @@ function StarView() {
               src={plus}
               id="plusbtn"
               onClick={async () => {
-                setFormModalShow(true);
                 if (
                   klaytn !== undefined &&
                   klaytn.selectedAddress === undefined &&
@@ -461,6 +460,8 @@ function StarView() {
                   cookies.get("user") === undefined
                 ) {
                   setLoginModalShow(true);
+                } else {
+                  setFormModalShow(true);
                 }
               }}
             />
