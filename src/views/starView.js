@@ -375,7 +375,6 @@ function StarView() {
   }, [tokenID]);
 
   useEffect(() => {
-    console.log("sss", window.sessionStorage.getItem("id_&"));
     if (window.sessionStorage.getItem("id_&") !== null) {
       setModalShow({
         setShow: true,
@@ -452,8 +451,13 @@ function StarView() {
               onClick={async () => {
                 setFormModalShow(true);
                 if (
-                  (klaytn === undefined ||
-                    klaytn.selectedAddress === undefined) &&
+                  klaytn !== undefined &&
+                  klaytn.selectedAddress === undefined &&
+                  cookies.get("user") === undefined
+                ) {
+                  setLoginModalShow(true);
+                } else if (
+                  klaytn === undefined &&
                   cookies.get("user") === undefined
                 ) {
                   setLoginModalShow(true);

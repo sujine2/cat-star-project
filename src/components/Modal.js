@@ -66,7 +66,6 @@ function ViewModal(props) {
       setColorEffect(tempColorValue);
     }
     let tmp = catData.catName;
-    console.log(String(tmp).length);
 
     if (String(tmp).length > 11) {
       $(".infoTitle").css("font-size", "20px");
