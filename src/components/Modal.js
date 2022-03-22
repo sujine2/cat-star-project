@@ -65,6 +65,12 @@ function ViewModal(props) {
       }
       setColorEffect(tempColorValue);
     }
+    let tmp = catData.catName;
+    console.log(String(tmp).length);
+
+    if (String(tmp).length > 11) {
+      $(".infoTitle").css("font-size", "20px");
+    }
   }, [catData]);
 
   return (
@@ -75,12 +81,7 @@ function ViewModal(props) {
       color={colorEffect}
     >
       <Modal.Header closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{
-            fontSize: 33,
-          }}
-        >
+        <Modal.Title id="contained-modal-title-vcenter">
           <div className="infoTitle">
             {props.tokenid} 번째 {catData.catName} 별
           </div>

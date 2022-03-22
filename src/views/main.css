@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
 
 
 html, body {
@@ -10,11 +9,12 @@ html, body {
 }
 
 .planet {
-  background: -webkit-linear-gradient(top, rgb(4, 79, 96) 20%, rgb(5, 38, 54)60%, rgb(4, 15, 15));
+  background: -webkit-linear-gradient(top, rgb(45, 41, 49) 20%, rgb(30, 30, 34)60%, rgb(9, 9, 10));
   width: 100%;
   height: 100%;
-  overflow: hidden;
   position: absolute;
+  overflow-y : scroll;
+  overflow-x: hidden;
 }
 
 .constelacao {
@@ -28,6 +28,7 @@ html, body {
 }
 
 .estrela {
+  pointer-events: none;
   background-color: white;
   border-radius: 50%;
   position: absolute;
@@ -96,11 +97,11 @@ html, body {
   margin:0px auto;
 }
 
-.imgCon img {
+#planetImg {
   height:auto;
-  width: 290px;
-  height: 290px;
-  filter: drop-shadow(3px 3px 20px white);
+  width: 350px;
+  height: 310px;
+  filter: drop-shadow(0px 0px 5px white);
 }
 
 .rocket {
@@ -111,7 +112,7 @@ html, body {
 .head {
   float: center;
   color: white;
-  font-family: 'Luxurious Roman', cursive;
+  font-family: 'Poor Story', cursive;
   font-size: 35px;
   margin: 30px 200px 30px 200px;
   padding-right: 70px;
@@ -123,47 +124,59 @@ html, body {
 }
 
 .welcome{
-  font-family: 'Gamja Flower', cursive;
+  font-family: 'Poor Story', cursive;
   opacity: 0.9;
   margin-top: 25px;
   font-weight: 700;
 }
 
 .moveCon {
-  font-family: 'Gamja Flower', cursive;
+  position: relative;
+  font-family: 'Poor Story', cursive;
   width:300px;
+  height: 50px;
   margin:auto;
+  cursor: pointer;
+  text-align: center;
+  background-color: #ffae42;
+  border-radius: 50px;
+  z-index: 10;
+  vertical-align: middle;
 }
 
 .move {
+  
   text-decoration: none;
   color: white; 
   cursor: pointer;
-  text-shadow : 3px 4px 20px white;
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
-  opacity: 0.6;
   width:100%;
   margin:auto;
   display:block;
+  font-size: 30px;
 }
 
 .move:hover {
   color: white;
-  text-shadow : 10px 4px 30px white;
+  text-decoration-line: none;
+}
+
+.moveCon:hover {
+  background-color: #ffae42;
+  box-shadow : 0px 0px 7px #ffae42;
   text-decoration-line: none;
   -webkit-transform: scale(1.1,1.1);
   -moz-transform: scale(1.1,1.1);
   transform: scale(1.1,1.1); 
-  opacity: 0.9; 
 }
 
-
 .des{
-  font-family: 'Gaegu', cursive;
+  font-family: 'Poor Story', cursive;
   text-align: center;
   font-size: 27px;
   opacity: 0.8;
+  margin-top: 10px;
 }
 @keyframes fadein {
     from {
@@ -225,7 +238,8 @@ html, body {
 
 .mainWalletConnect{
   float: right;
-  background: #ffae42;
+  color: white;
+  background: #73695D;
   border : 0;
   border-radius: 5px;
   width: 15%;
@@ -237,18 +251,18 @@ html, body {
 }
 
 .mainWalletConnect:hover {
-  background: #ffae42;
-  box-shadow: 0 0 15px #ffae42;
+  background: #73695D;
+  box-shadow: 0 0 15px #73695D;
   border : 0;
 }
 
 .mainWalletConnect:focus{
-  background: #ffae42;
-  border-color: 2px #ffae42;
+  background: #73695D;
+  border-color: 2px #73695D;
 }
 
 .barTitle{
-  font-family: 'Gamja Flower', cursive;
+  font-family: 'Poor Story', cursive;
   color: #FFFFFF;
   font-size: 50px;
   margin-left: 30px;
@@ -256,7 +270,7 @@ html, body {
   float: left;
 }
 .barGuide{
-  font-family: 'Gamja Flower', cursive;
+  font-family: 'Poor Story', cursive;
   float: right;
   width: 8%;
   font-size: 20px;
@@ -270,32 +284,32 @@ html, body {
 }
 
 .barTw{
-  margin-top: 3.5vh;
-  margin-right: 80px;
-  float: right;
-  width: 10%;
-  width: 30px;
-  height: 30px;
-}
-
-.barTw img{
-  width: 100%;
-  height: 100%;
-}
-
-.barTele{
+  font-family: 'Poor Story', cursive;
+  font-size: 20px;
   margin-top: 3.5vh;
   margin-right: 20px;
   float: right;
-  width: 10%;
-  width: 30px;
-  height: 30px;
+  color: white
 }
 
-.barTele img{
+/* .barTw img{
   width: 100%;
   height: 100%;
+} */
+
+.barTele{
+  font-size: 20px;
+  font-family: 'Poor Story', cursive;
+  margin-top: 3.5vh;
+  margin-right: 20px;
+  float: right;
+  color: white
 }
+
+/* .barTele img{
+  width: 100%;
+  height: 100%;
+} */
 
 .mainKlipConnect{
   float: right;

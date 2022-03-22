@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Poppins:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 
 
 .catInfo {
     font-family: 'Gabriela', serif;
-    font-family: 'Gamja Flower', cursive;
+    font-family: 'Poor Story', cursive;
     font-size: 20px;
     margin-bottom: 3%;
     text-align: center;
@@ -19,23 +18,28 @@
 }
 
 .day{
-    font-family: 'Gamja Flower', cursive;
+    font-family: 'Poor Story', cursive;
     font-size: 18px;
 }
 .infoTitle{
-    font-family: 'Gamja Flower', cursive;
-    margin-left: 20px;
+    font-family: 'Poor Story', cursive;
+    margin-left: 10px;
     float: left;
-    width: auto;
+    width: 60%;
+    font-size: 28px;
+    
 }
 
 .infoColor{
-    font-family: 'Gamja Flower', cursive;
+    font-family: 'Poor Story', cursive;
     float: right;
-    font-size: 20px;
+    font-size: 17px;
     width: auto;
     margin-right: 4%;
-    margin-top: 2%;
+  
+    border: 1px solid #e2e2e2;
+    padding: 2%;
+    border-radius: 10px;
 }
 
 .showImg {
@@ -53,15 +57,14 @@
 
 
 .dataComment {
-    font-family: 'Gamja Flower', cursive;
-    padding: 3%;
+    font-family: 'Poor Story', cursive;
     border-style: solid;
     border-color: #e2e2e2;
     border-radius: 10px;
     min-height: 70px;
     height: auto;
     margin: 3%;
-    font-size: 24px;
+    font-size: 21px;
     float: left;
     width: 432px;
 }

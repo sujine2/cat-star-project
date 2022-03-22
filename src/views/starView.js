@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import "./starView.css";
 import ViewModal from "../components/Modal";
-import plus from "../img/plus.png";
+import plus from "../img/plus2.png";
 import FormModal from "../components/FormModal";
-import Search from "../img/search.png";
+import Search from "../img/search2.png";
+import Search_ from "../img/search.png";
 import $ from "jquery";
 import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
@@ -423,7 +424,7 @@ function StarView() {
           />
           <Decoration showDeco={setShow} id={id} />
 
-          <div className="chuvaMeteoro">{/* <Meteoro /> */}</div>
+          <div className="chuvaMeteoro"></div>
 
           <div className="floresta">
             <img
@@ -443,6 +444,7 @@ function StarView() {
 
           <div className="form">
             <img
+              style={{ marginLeft: 10 }}
               src={plus}
               id="plusbtn"
               onClick={async () => {
@@ -561,7 +563,7 @@ function StarView() {
               placeholder="#색상코드, 별 번호 검색"
             />
             <a onClick={search}>
-              <img className="search-icon" src={Search} />
+              <img className="search-icon" src={Search_} />
             </a>
           </form>
         </div>

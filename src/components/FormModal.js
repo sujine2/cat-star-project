@@ -12,6 +12,8 @@ import QRCode from "qrcode";
 import { Cookies } from "react-cookie";
 import QRModal from "../components/QRModal";
 import ViewModal from "../components/Modal";
+import kaikas from "../img/kaikas.png";
+import klip from "../img/Klip.png";
 
 const ModalCustomFrom = styled(Modal)`
   .modal-content {
@@ -25,14 +27,14 @@ const ModalCustomFrom = styled(Modal)`
     margin: 0 auto;
     width: auto;
   }
-  @media (min-width: 652px) {
+  @media (min-width: 580px) {
     .modal-dialog-centered {
       min-height: calc(100% - 0.5rem);
     }
   }
-  @media (min-width: 652px) {
+  @media (min-width: 580px) {
     .modal-dialog {
-      max-width: 652px;
+      max-width: 580px;
       margin: 0 auto;
     }
   }
@@ -160,7 +162,7 @@ function FormModal(props) {
                 className="inputData"
                 name="catName"
                 type="text"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={catName}
                 required="required"
@@ -170,7 +172,7 @@ function FormModal(props) {
                 className="inputData"
                 name="yourName"
                 type="text"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={yourName}
                 required="required"
@@ -181,7 +183,7 @@ function FormModal(props) {
                 name="dayMet"
                 type="number"
                 placeholder="ex)20210510"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={dayMet}
                 required="required"
@@ -191,7 +193,7 @@ function FormModal(props) {
                 className="inputData"
                 name="favorite"
                 type="text"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={favorite}
                 required="required"
@@ -201,7 +203,7 @@ function FormModal(props) {
                 className="inputData"
                 name="comment"
                 type="text"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={comment}
                 required="required"
@@ -212,14 +214,14 @@ function FormModal(props) {
                 name="imgURL"
                 type="text"
                 placeholder="구글 드라이브 **전체 공유 링크를** 넣어주세요!"
-                style={{ width: 400 }}
+                style={{ width: 350 }}
                 onChange={onChange}
                 value={imgURL}
                 required="required"
               />
             </div>
             <br />
-            <div className="currentColor" style={{ width: 600 }}>
+            <div className="currentColor" style={{ width: 528 }}>
               <div
                 style={{
                   float: "left",
@@ -239,13 +241,14 @@ function FormModal(props) {
                   outline: 0,
                   width: 10,
                   cursor: "default",
-                  marginRight: 30,
+                  marginRight: 20,
                   float: "left",
+                  marginTop: 4,
                 }}
               ></button>
               <div
                 className="printColorValue"
-                style={{ float: "left", marginRight: 170 }}
+                style={{ float: "left", marginRight: 110 }}
               >
                 #{colors}
               </div>
@@ -271,9 +274,18 @@ function FormModal(props) {
                     className="changeColor"
                     type="color"
                     defaultValue={"#" + changeColor}
+                    style={{
+                      backgroundColor: "#" + changeColor,
+                      border: 0,
+                      outline: 0,
+                      cursor: "cusor",
+                      marginRight: 20,
+                      float: "left",
+                      marginTop: 4,
+                    }}
                   ></input>
                   <span className="printColorValue">#{changeColor}</span>
-                  <br />
+
                   <span
                     style={{
                       marginLeft: 15,
@@ -392,7 +404,24 @@ function FormModal(props) {
               }
             }}
           >
-            Kaikas로 별 만들기
+            <div style={{ textAligin: "center" }}>
+              <div
+                style={{
+                  float: "left",
+                  backgroundColor: "#73695D",
+                  padding: 7,
+                  paddingTop: 5,
+                  borderRadius: 40,
+                  marginRight: 10,
+                }}
+              >
+                <img style={{ width: 20, height: 20 }} src={kaikas}></img>
+              </div>
+              <div style={{ float: "left", marginTop: "0.5vh" }}>
+                {" "}
+                Kaikas로 별 만들기
+              </div>
+            </div>
           </Button>
         </div>
         <div className="klipBtn">
@@ -531,7 +560,28 @@ function FormModal(props) {
               }
             }}
           >
-            Klip 으로 별 만들기
+            <div>
+              <div
+                style={{
+                  backgroundColor: "#216FEA",
+                  padding: 4,
+                  borderRadius: 40,
+                  marginRight: 10,
+                  float: "left",
+                }}
+              >
+                <img
+                  style={{
+                    width: 30,
+                    height: 30,
+                  }}
+                  src={klip}
+                ></img>
+              </div>
+              <div style={{ float: "left", marginTop: "0.7vh" }}>
+                Klip 으로 별 만들기
+              </div>
+            </div>
           </Button>
         </div>
       </Modal.Footer>

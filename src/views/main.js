@@ -1,6 +1,6 @@
 import React from "react";
 import "./main.css";
-import planet from "../img/catStar.png";
+import planet from "../img/cat_planet.png";
 import twitter from "../img/twitter.png";
 import rocket from "../img/rocket.png";
 import tele from "../img/tele.png";
@@ -12,6 +12,7 @@ import QRCode from "qrcode";
 import klip from "../img/Klip.png";
 import { Cookies } from "react-cookie";
 import logo from "../img/logo.png";
+import kaikas from "../img/kaikas.png";
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -56,11 +57,31 @@ function Main() {
                   }
                 }}
               >
+                <img
+                  src={kaikas}
+                  style={{
+                    height: 18,
+                    width: 18,
+                    marginRight: 8,
+                    marginBottom: 6,
+                  }}
+                ></img>
                 Kaikas로 로그인
               </button>
             )}
             {klaytn !== undefined && klaytn.selectedAddress !== undefined && (
-              <button className="mainWalletConnect">Kaikas 연결됨</button>
+              <button className="mainWalletConnect">
+                <img
+                  src={kaikas}
+                  style={{
+                    height: 18,
+                    width: 18,
+                    marginRight: 8,
+                    marginBottom: 6,
+                  }}
+                ></img>
+                Kaikas 연결됨
+              </button>
             )}
 
             {cookies.get("user") === undefined ? (
@@ -124,12 +145,8 @@ function Main() {
               </a>
             </div>
 
-            <div className="barTw">
-              <img src={twitter}></img>
-            </div>
-            <div className="barTele">
-              <img src={tele}></img>
-            </div>
+            <div className="barTw">트위터</div>
+            <div className="barTele">텔레그램</div>
           </div>
         </div>
         <br />
@@ -164,9 +181,9 @@ function Main() {
       </div>
       <div className="head">
         <div className="imgCon">
-          <img src={planet}></img>
+          <img id="planetImg" src={planet}></img>
           <br />
-          <p className="welcome">220321</p>
+          <img src={logo} style={{ width: 280, height: 90 }}></img>
         </div>
 
         <div className="des">
@@ -179,7 +196,7 @@ function Main() {
         <br />
         <div className="moveCon">
           <Link to="/stars" className="move">
-            행성에 들어가기 <img className="rocket" src={rocket}></img>
+            행성으로 들어가기
           </Link>
         </div>
       </div>
