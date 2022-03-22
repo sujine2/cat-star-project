@@ -12,6 +12,7 @@ import land from "../img/land2.png";
 import searchLoading from "../img/catStar.png";
 import Decoration from "../components/Decoration";
 import { Cookies } from "react-cookie";
+import RequestLogin from "../components/RequestLogin";
 
 global.Buffer = global.Buffer || require("buffer").Buffer;
 let colorSearch = "";
@@ -41,6 +42,7 @@ function StarView() {
   const { setShow, id } = modalShow;
   const [account, setAccount] = React.useState("");
   const [formModalShow, setFormModalShow] = React.useState(false);
+  const [loginModalShow, setLoginModalShow] = React.useState(false);
   const [viewStar, setViewStar] = React.useState(false);
   const [tokenID, setTokenID] = React.useState(-1);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -449,13 +451,24 @@ function StarView() {
               id="plusbtn"
               onClick={async () => {
                 setFormModalShow(true);
+                if (
+                  (klaytn === undefined ||
+                    klaytn.selectedAddress === undefined) &&
+                  cookies.get("user") === undefined
+                ) {
+                  setLoginModalShow(true);
+                }
               }}
             />
             <FormModal
               show={formModalShow}
               onHide={() => setFormModalShow(false)}
               id={tokenID}
-              onClose={() => setFormModalShow(true)}
+            />
+
+            <RequestLogin
+              show={loginModalShow}
+              onHide={() => setLoginModalShow(false)}
             />
 
             <img

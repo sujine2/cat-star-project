@@ -1,11 +1,9 @@
 import React from "react";
 import "./main.css";
 import planet from "../img/cat_planet.png";
-import twitter from "../img/twitter.png";
-import rocket from "../img/rocket.png";
-import tele from "../img/tele.png";
+
 import { Link } from "react-router-dom";
-import { klaytn, caver } from "../wallet/caver";
+import { klaytn } from "../wallet/caver";
 import { prepare } from "klip-sdk";
 import QRModal from "../components/QRModal";
 import QRCode from "qrcode";

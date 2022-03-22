@@ -1,0 +1,39 @@
+.walletConnect{
+
+    color: white;
+    background: #73695D;
+    border : 0;
+    border-radius: 5px;
+    width: 97%;
+    height: 4vh;
+    margin-top: calc(5vh / 2.5);
+    margin-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+  
+.walletConnect:hover {
+    background: #73695D;
+    box-shadow: 0 0 15px #73695D;
+    border : 0;
+}
+  
+
+
+.klipConnect{
+
+    background-color: #216FEA;
+    border : 0;
+    border-radius: 5px;
+    width: 96%;
+    height: 4vh;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-right: 20px;
+    margin-top: calc(5vh / 2.5);
+}
+.klipConnect:hover {
+    background: #216FEA;
+    box-shadow: 0 0 15px #216FEA;
+    border : 0;
+}

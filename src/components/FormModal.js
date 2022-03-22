@@ -10,7 +10,6 @@ import { prepare, getResult } from "klip-sdk";
 import QRbuyModal from "./QRbuyModal";
 import QRCode from "qrcode";
 import { Cookies } from "react-cookie";
-import QRModal from "../components/QRModal";
 import ViewModal from "../components/Modal";
 import kaikas from "../img/kaikas.png";
 import klip from "../img/Klip.png";
@@ -60,12 +59,7 @@ function FormModal(props) {
   const [colorDup, setColorDup] = React.useState(true);
   const [account, setAccount] = React.useState("");
   const [QRurl, setQRurl] = React.useState("");
-  const [key, setKey] = React.useState("");
   const [buyKey, setBuyKey] = React.useState("");
-
-  const [QRurlForm, setQRurlForm] = React.useState("");
-  const [keyForm, setKeyForm] = React.useState("");
-  const [QRModalShowForm, setQRModalShowForm] = React.useState(false);
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -309,12 +303,6 @@ function FormModal(props) {
           url={QRurl}
           qrkey={buyKey}
         />
-        <QRModal
-          show={QRModalShowForm}
-          onHide={() => setQRModalShowForm(false)}
-          url={QRurlForm}
-          qrkey={keyForm}
-        />
         <ViewModal
           show={setShow}
           onHide={() =>
@@ -339,7 +327,6 @@ function FormModal(props) {
                   klaytn.selectedAddress === undefined
                 ) {
                   alert("kaikas 로 로그인 해주세요!");
-                  await klaytn.enable();
                 } else {
                   if (
                     catName === "" ||
@@ -432,30 +419,6 @@ function FormModal(props) {
                 alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
               } else if (klipAddress == undefined) {
                 alert("Klip 으로 로그인 해주세요!");
-
-                const bappName = "cat-planet";
-                const res = await prepare.auth({
-                  bappName,
-                });
-                if (res.err) {
-                  alert(
-                    "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
-                  );
-                  // 에러 처리
-                } else if (res.request_key) {
-                  // request_key 보관
-
-                  await setKeyForm(res.request_key);
-
-                  QRCode.toDataURL(
-                    "https://klipwallet.com/?target=/a2a?request_key=" +
-                      res.request_key,
-                    function (err, url) {
-                      setQRurlForm(url);
-                      setQRModalShowForm(true);
-                    }
-                  );
-                }
               } else {
                 if (
                   catName === "" ||

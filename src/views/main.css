@@ -154,7 +154,8 @@ html, body {
   width:100%;
   margin:auto;
   display:block;
-  font-size: px;
+  padding-top: 0.3vh;
+  font-size: 28px;
 }
 
 .move:hover {
