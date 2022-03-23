@@ -70,6 +70,10 @@ function ViewModal(props) {
     if (String(tmp).length > 11) {
       $(".infoTitle").css("font-size", "20px");
     }
+    tmp = catData.favorite;
+    if (String(tmp).length > 18) {
+      $(".catInfo").css("font-size", "15px");
+    }
   }, [catData]);
 
   return (
