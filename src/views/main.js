@@ -143,8 +143,12 @@ function Main() {
               </a>
             </div>
 
-            <div className="barTw">트위터</div>
-            <div className="barTele">텔레그램</div>
+            <div className="barTw">
+              <a href="https://twitter.com/cat_planet_HQ">트위터</a>
+            </div>
+            <div className="barTele">
+              <a href="https://t.me/cat_planet_official">텔레그램</a>
+            </div>
           </div>
         </div>
         <br />

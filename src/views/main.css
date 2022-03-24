@@ -293,10 +293,10 @@ html, body {
   color: white
 }
 
-/* .barTw img{
-  width: 100%;
-  height: 100%;
-} */
+.barTw a{
+  text-decoration: none;
+  color: #FFFFFF;
+}
 
 .barTele{
   font-size: 20px;
@@ -307,10 +307,10 @@ html, body {
   color: white
 }
 
-/* .barTele img{
-  width: 100%;
-  height: 100%;
-} */
+.barTele a{
+  text-decoration: none;
+  color: #FFFFFF;
+}
 
 .mainKlipConnect{
   float: right;
