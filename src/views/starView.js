@@ -8,11 +8,11 @@ import Search_ from "../img/search.png";
 import $ from "jquery";
 import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
-import land from "../img/land2.png";
 import searchLoading from "../img/catStar.png";
 import Decoration from "../components/Decoration";
 import { Cookies } from "react-cookie";
 import RequestLogin from "../components/RequestLogin";
+import princeBack from "../img/prince-back.png";
 
 global.Buffer = global.Buffer || require("buffer").Buffer;
 let colorSearch = "";
@@ -427,16 +427,16 @@ function StarView() {
 
           <div className="chuvaMeteoro"></div>
 
-          <div className="floresta">
+          {/* <div className="floresta">
             <img
               src="https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png"
               alt=""
             />
-          </div>
-
-          {/* <div className="land">
-            <img src={land} alt="" />
           </div> */}
+
+          <div className="princeBackImg">
+            <img src={princeBack} alt="" />
+          </div>
 
           <div className="loading">
             <img className="loadingImg" src={searchLoading} />
