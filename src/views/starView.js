@@ -573,17 +573,18 @@ function StarView() {
                 </>
               )}
           </div>
-
-          <form className="search-container">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="#색상코드, 별 번호 검색"
-            />
-            <a onClick={search}>
-              <img className="search-icon" src={Search_} />
-            </a>
-          </form>
+          <div className="search-container-con">
+            <form className="search-container">
+              <input
+                type="text"
+                className="search-bar"
+                placeholder="#색상코드, 별 번호 검색"
+              />
+              <a onClick={search}>
+                <img className="search-icon" src={Search_} />
+              </a>
+            </form>
+          </div>
         </div>
       )}
     </>

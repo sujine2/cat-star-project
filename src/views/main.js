@@ -1,7 +1,5 @@
 import React from "react";
 import "./main.css";
-import planet from "../img/cat_planet.png";
-import planet2 from "../img/행성.png";
 import prince from "../img/prince.png";
 import { Link } from "react-router-dom";
 import { klaytn } from "../wallet/caver";
@@ -185,11 +183,10 @@ function Main() {
       <div className="head">
         <div className="imgCon">
           <img id="princeImg" src={prince}></img>
-          <div>
-            <img id="planetImg" src={planet2}></img>
-          </div>
 
-          <img src={logo} style={{ width: 280, height: 90 }}></img>
+          <div>
+            <img src={logo} style={{ width: 280, height: 90 }}></img>
+          </div>
         </div>
 
         <div className="des">
