@@ -3,6 +3,7 @@ import "./starView.css";
 import ViewModal from "../components/Modal";
 import plus from "../img/plus2.png";
 import FormModal from "../components/FormModal";
+import Announcement from "../components/Announcement";
 import Search from "../img/search2.png";
 import Search_ from "../img/search.png";
 import $ from "jquery";
@@ -43,6 +44,7 @@ function StarView() {
   const [account, setAccount] = React.useState("");
   const [formModalShow, setFormModalShow] = React.useState(false);
   const [loginModalShow, setLoginModalShow] = React.useState(false);
+  const [announceModalShow, setAnnounceModalShow] = React.useState(false);
   const [viewStar, setViewStar] = React.useState(false);
   const [tokenID, setTokenID] = React.useState(-1);
   const [isLoading, setIsLoading] = React.useState(false);

@@ -7,6 +7,7 @@ import $ from "jquery";
 import { klaytn, caver } from "../wallet/caver";
 import Caver from "caver-js";
 import { prepare, getResult } from "klip-sdk";
+import Announcement from "../components/Announcement";
 import QRbuyModal from "./QRbuyModal";
 import QRCode from "qrcode";
 import { Cookies } from "react-cookie";
@@ -53,6 +54,7 @@ function FormModal(props) {
   const [modalShow, setModalShow] = React.useState({ setShow: false, id: "" });
   const { setShow, id } = modalShow;
   const [QRbuyModalShow, setQRbuyModalShow] = React.useState(false);
+  const [announceModalShow, setAnnounceModalShow] = React.useState(false);
   const { catName, yourName, dayMet, favorite, comment, imgURL } = inputs;
   const [colors, setColors] = React.useState([]);
   const [changeColor, setChangeColor] = React.useState();
@@ -149,7 +151,21 @@ function FormModal(props) {
               <h4>만난 날 </h4>
               <h4>좋아하는 것 </h4>
               <h4>메모 </h4>
-              <h4>이미지 링크 </h4>
+              <h4>
+                이미지 링크
+                <h1
+                  onClick={() => {
+                    setAnnounceModalShow(true);
+                  }}
+                  style={{ fontSize: 15, cursor: "pointer" }}
+                >
+                  (&#128680;도움말 보기)
+                </h1>
+                <Announcement
+                  show={announceModalShow}
+                  onHide={() => setAnnounceModalShow(false)}
+                />
+              </h4>
             </div>
             <div style={{ float: "left", width: "auto" }}>
               <input
