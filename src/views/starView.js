@@ -8,11 +8,11 @@ import Search_ from "../img/search.png";
 import $ from "jquery";
 import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
-import land from "../img/land2.png";
 import searchLoading from "../img/catStar.png";
 import Decoration from "../components/Decoration";
 import { Cookies } from "react-cookie";
 import RequestLogin from "../components/RequestLogin";
+import princeBack from "../img/prince-back.png";
 
 global.Buffer = global.Buffer || require("buffer").Buffer;
 let colorSearch = "";
@@ -319,7 +319,7 @@ function StarView() {
             inlineStyle: {
               animationDelay: getRandomArbitrary(0, 9) + "s",
               left: getRandomArbitrary(0, widthWindow),
-              top: getRandomArbitrary(250, 300),
+              top: getRandomArbitrary(150, 300),
               opacity: [getRandomArbitrary(0, 6)],
             },
           };
@@ -342,7 +342,7 @@ function StarView() {
             inlineStyle: {
               animationDelay: getRandomArbitrary(0, 9) + "s",
               left: getRandomArbitrary(0, widthWindow),
-              top: getRandomArbitrary(300, 450),
+              top: getRandomArbitrary(300, 500),
               opacity: [getRandomArbitrary(0, 6)],
             },
           };
@@ -412,6 +412,72 @@ function StarView() {
                     );
                   })
             }
+            {/* {
+              //200
+              tokenID > 0 &&
+                Array(280)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test1[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test1[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            } */}
+            {/* {
+              //200
+              tokenID > 0 &&
+                Array(100)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test2[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test2[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            }
+            {
+              //200
+              tokenID > 0 &&
+                Array(100)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test3[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test3[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            } */}
           </div>
           <ViewModal
             show={setShow}
@@ -427,16 +493,16 @@ function StarView() {
 
           <div className="chuvaMeteoro"></div>
 
-          <div className="floresta">
+          {/* <div className="floresta">
             <img
               src="https://raw.githubusercontent.com/interaminense/starry-sky/master/src/img/bgTree.png"
               alt=""
             />
-          </div>
-
-          {/* <div className="land">
-            <img src={land} alt="" />
           </div> */}
+
+          <div className="princeBackImg">
+            <img src={princeBack} alt="" />
+          </div>
 
           <div className="loading">
             <img className="loadingImg" src={searchLoading} />
@@ -573,17 +639,18 @@ function StarView() {
                 </>
               )}
           </div>
-
-          <form className="search-container">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="#색상코드, 별 번호 검색"
-            />
-            <a onClick={search}>
-              <img className="search-icon" src={Search_} />
-            </a>
-          </form>
+          <div className="search-container-con">
+            <form className="search-container">
+              <input
+                type="text"
+                className="search-bar"
+                placeholder="#색상코드, 별 번호 검색"
+              />
+              <a onClick={search}>
+                <img className="search-icon" src={Search_} />
+              </a>
+            </form>
+          </div>
         </div>
       )}
     </>
