@@ -37,6 +37,10 @@ const ModalCustom = styled(Modal)`
   }
 `;
 
+const handleImgError = (e) => {
+  e.target.src = nonImg;
+};
+
 function ViewModal(props) {
   const viewCatData = async () => {
     const id = props.tokenid;
@@ -67,8 +71,8 @@ function ViewModal(props) {
     }
     let tmp = catData.catName;
 
-    if (String(tmp).length > 11) {
-      $(".infoTitle").css("font-size", "20px");
+    if (String(tmp).length > 7) {
+      $(".infoTitle").css("font-size", "22px");
     }
     tmp = catData.favorite;
     if (String(tmp).length > 18) {
@@ -107,7 +111,7 @@ function ViewModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <img className="showImg" src={loadingImg} />
+        <img className="showImg" src={loadingImg} onError={handleImgError} />
 
         {
           ((_id = catData.imgURL),
