@@ -15,7 +15,7 @@ function Announcement(props) {
           id="contained-modal-title-vcenter"
           style={{ fontWeight: "bold" }}
         >
-          안내 사항
+          주의사항
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -29,12 +29,13 @@ function Announcement(props) {
           변경하실 수 있습니다.
         </p>
         <p>
-          또한, 구글 드라이브에서 삭제하면 이미지가 보이지 않으므로 유의해
-          주시기 바랍니다.
+          또한, 구글 드라이브에서 삭제하면 이미지가 보이지 않으므로 절대
+          삭제하시면 안됩니다.
         </p>
         <p style={{ fontWeight: "bold" }}>
           구글 드라이브 공유 링크는 전체 공유로 해주세요.
         </p>
+        <p>감사합니다.</p>
       </Modal.Body>
     </Modal>
   );

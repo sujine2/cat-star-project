@@ -159,7 +159,7 @@ function FormModal(props) {
                   }}
                   style={{ fontSize: 15, cursor: "pointer" }}
                 >
-                  (&#128680;도움말 보기)
+                  (&#128680;주의사항)
                 </h1>
                 <Announcement
                   show={announceModalShow}
