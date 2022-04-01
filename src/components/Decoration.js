@@ -1,7 +1,5 @@
 import line from "../img/line.png";
-import star from "../img/star.png";
 import React, { useEffect } from "react";
-import circle from "../img/circle.png";
 import { address, _abi } from "../components/contract/contractInfo";
 import { klaytn, caver } from "../wallet/caver";
 import "./Decoration.css";
