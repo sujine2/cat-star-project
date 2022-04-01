@@ -39,6 +39,8 @@ const ModalCustom = styled(Modal)`
 
 const handleImgError = (e) => {
   e.target.src = nonImg;
+  $(".showImg").css("margin-bottom", "0");
+  $(".errorText").text("사진이 안 보인다냥 ㅠ__ㅠ");
 };
 
 function ViewModal(props) {
@@ -111,7 +113,13 @@ function ViewModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <img className="showImg" src={loadingImg} onError={handleImgError} />
+        <div style={{ position: "relative" }}>
+          <img className="showImg" src={loadingImg} onError={handleImgError} />
+          <div
+            style={{ position: "absolute", top: 320, left: 150 }}
+            className="errorText"
+          ></div>
+        </div>
 
         {
           ((_id = catData.imgURL),
