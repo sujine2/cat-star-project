@@ -35,6 +35,7 @@ function Announcement(props) {
         <p style={{ fontWeight: "bold" }}>
           구글 드라이브 공유 링크는 전체 공유로 해주세요.
         </p>
+
         <p>감사합니다.</p>
       </Modal.Body>
     </Modal>

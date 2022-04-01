@@ -230,6 +230,22 @@ function FormModal(props) {
                 required="required"
               />
             </div>
+            <div
+              className="formGuide"
+              style={{
+                float: "right",
+                marginRight: 45,
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <a
+                target="_blank"
+                href="https://wiry-ruby-135.notion.site/Cat-Planet-52ec98c6c0aa40eea78cdf3d17d77a34"
+              >
+                이용 가이드
+              </a>
+            </div>
             <br />
             <div className="currentColor" style={{ width: 528 }}>
               <div

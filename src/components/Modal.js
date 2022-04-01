@@ -5,7 +5,7 @@ import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
 import $ from "jquery";
 import styled from "styled-components";
-import FormModal from "../components/FormModal";
+import nonImg from "../img/non-img.png";
 import { klaytn, caver } from "../wallet/caver";
 
 const ModalCustom = styled(Modal)`
