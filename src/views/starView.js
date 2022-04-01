@@ -319,7 +319,7 @@ function StarView() {
             inlineStyle: {
               animationDelay: getRandomArbitrary(0, 9) + "s",
               left: getRandomArbitrary(0, widthWindow),
-              top: getRandomArbitrary(250, 300),
+              top: getRandomArbitrary(150, 300),
               opacity: [getRandomArbitrary(0, 6)],
             },
           };
@@ -342,7 +342,7 @@ function StarView() {
             inlineStyle: {
               animationDelay: getRandomArbitrary(0, 9) + "s",
               left: getRandomArbitrary(0, widthWindow),
-              top: getRandomArbitrary(300, 450),
+              top: getRandomArbitrary(300, 500),
               opacity: [getRandomArbitrary(0, 6)],
             },
           };
@@ -393,7 +393,7 @@ function StarView() {
             {
               //200
               tokenID > 0 &&
-                Array(tokenID)
+                Array(300)
                   .fill(0)
                   .map((_, index) => {
                     return (
@@ -408,6 +408,72 @@ function StarView() {
                           });
                         }}
                         style={test[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            }
+            {
+              //200
+              tokenID > 0 &&
+                Array(280)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test1[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test1[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            }
+            {
+              //200
+              tokenID > 0 &&
+                Array(100)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test2[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test2[index].inlineStyle}
+                      ></span>
+                    );
+                  })
+            }
+            {
+              //200
+              tokenID > 0 &&
+                Array(100)
+                  .fill(0)
+                  .map((_, index) => {
+                    return (
+                      <span
+                        id={index}
+                        className={test3[index].styleClass}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setModalShow({
+                            setShow: true,
+                            id: index,
+                          });
+                        }}
+                        style={test3[index].inlineStyle}
                       ></span>
                     );
                   })
