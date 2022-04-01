@@ -393,7 +393,7 @@ function StarView() {
             {
               //200
               tokenID > 0 &&
-                Array(300)
+                Array(tokenID)
                   .fill(0)
                   .map((_, index) => {
                     return (
@@ -412,7 +412,7 @@ function StarView() {
                     );
                   })
             }
-            {
+            {/* {
               //200
               tokenID > 0 &&
                 Array(280)
@@ -433,8 +433,8 @@ function StarView() {
                       ></span>
                     );
                   })
-            }
-            {
+            } */}
+            {/* {
               //200
               tokenID > 0 &&
                 Array(100)
@@ -477,7 +477,7 @@ function StarView() {
                       ></span>
                     );
                   })
-            }
+            } */}
           </div>
           <ViewModal
             show={setShow}
