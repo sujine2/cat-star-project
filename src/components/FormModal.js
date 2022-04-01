@@ -243,7 +243,7 @@ function FormModal(props) {
                 target="_blank"
                 href="https://wiry-ruby-135.notion.site/Cat-Planet-52ec98c6c0aa40eea78cdf3d17d77a34"
               >
-                이용 가이드
+                이용 가이드 보기
               </a>
             </div>
             <br />
