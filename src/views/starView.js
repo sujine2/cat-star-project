@@ -232,7 +232,7 @@ function StarView() {
     }
   };
 
-  const search = async () => {
+  async function search() {
     if (colorSearch !== "") {
       $("#" + colorSearch).removeClass("style5");
       $("#" + colorSearch).css("width", "2px");
@@ -251,10 +251,6 @@ function StarView() {
       }
     }
     $(".loading").css("display", "none");
-  };
-
-  function callSearch() {
-    return search;
   }
 
   const fff = () => {
@@ -649,14 +645,19 @@ function StarView() {
                 type="text"
                 className="search-bar"
                 placeholder="#색상코드, 별 번호 검색"
-                // onKeyPress={(event) => {
-                //   if (event.key === "Enter") {
-                //     console.log("Click Enter");
-                //     callSearch();
-                //   }
-                // }}
+                onKeyPress={(e) => {
+                  if (window.event.keyCode == 13) {
+                    e.preventDefault();
+                    console.log("click enter");
+                    search();
+                  }
+                }}
               />
-              <a onClick={search}>
+              <a
+                onClick={() => {
+                  search();
+                }}
+              >
                 <img className="search-icon" src={Search_} />
               </a>
             </form>
