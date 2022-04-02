@@ -223,7 +223,7 @@ function FormModal(props) {
                 className="inputData"
                 name="imgURL"
                 type="text"
-                placeholder="구글 드라이브 **전체 공유 링크를** 넣어주세요!"
+                placeholder="반드시 구글 드라이브 **전체 공유 링크를** 넣어주세요!"
                 style={{ width: 350 }}
                 onChange={onChange}
                 value={imgURL}
