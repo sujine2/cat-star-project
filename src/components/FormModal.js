@@ -327,7 +327,7 @@ function FormModal(props) {
                     }}
                   ></input>
                   <span className="printColorValue">#{changeColor}</span>
-
+                  <br />
                   <span
                     style={{
                       marginLeft: 15,
