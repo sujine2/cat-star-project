@@ -272,9 +272,7 @@ html, body {
 }
 
 .barTitle{
-  font-family: 'Poor Story', cursive;
-  color: #FFFFFF;
-  font-size: 50px;
+  margin-top: calc(2vh / 2.5);
   margin-left: 30px;
   opacity: 0.9;
   float: left;
