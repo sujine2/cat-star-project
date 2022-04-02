@@ -241,6 +241,22 @@ function FormModal(props) {
             >
               <a
                 target="_blank"
+                href="https://wiry-ruby-135.notion.site/Cat-Planet-Guide-English-c23f9304fdb14f2a942f970cf941f995"
+              >
+                View Usage Guide
+              </a>
+            </div>
+            <div
+              className="formGuide"
+              style={{
+                float: "right",
+                marginRight: 45,
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <a
+                target="_blank"
                 href="https://wiry-ruby-135.notion.site/Cat-Planet-52ec98c6c0aa40eea78cdf3d17d77a34"
               >
                 이용 가이드 보기
