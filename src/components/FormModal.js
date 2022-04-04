@@ -406,7 +406,7 @@ function FormModal(props) {
                         )
                         .send({
                           from: account,
-                          gas: 1500000,
+                          gas: 1000000,
                           value: caver.utils.toPeb(price, "KLAY"),
                         })
                         .then(function (receipt) {
@@ -427,7 +427,7 @@ function FormModal(props) {
                         )
                         .send({
                           from: account,
-                          gas: 1500000,
+                          gas: 1000000,
                         })
                         .then(function (receipt) {
                           window.sessionStorage.setItem("id_&", props.id);
