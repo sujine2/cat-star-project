@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/eng" element={<MainEng />} />
         <Route path="/stars" element={<StarsVeiw />} />
-        <Route path="/stars/eng" element={<StarsVeiwEng />} />
+        <Route path="/stars_eng" element={<StarsVeiwEng />} />
       </Routes>
     </BrowserRouter>
   );

@@ -208,7 +208,7 @@ function Main() {
         </div>
         <br />
         <div className="moveCon">
-          <Link to="/stars/eng" className="move">
+          <Link to="/stars_eng" className="move">
             Go to the planet
           </Link>
         </div>
