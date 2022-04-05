@@ -175,7 +175,7 @@ function StarView() {
         $("#" + myStarList[i]).removeClass("style5");
         $(".myStar").css("opacity", "60%");
         $(".myStar").css("text-shadow", "");
-        $(".myStar").text("View my satr - off");
+        $(".myStar").text("View my star - off");
       }
     }
   };
@@ -581,7 +581,7 @@ function StarView() {
                       if (cookies.get("user") !== undefined) {
                         viewMyStar(cookies.get("user"));
                       } else {
-                        alert("Kilp login expired");
+                        alert("Kilp 로그인 만료");
                       }
                     }}
                   >
@@ -613,11 +613,11 @@ function StarView() {
                               setViewStarAccount(cookies.get("user"));
                               viewMyStar(cookies.get("user"));
                             } else {
-                              alert("Kilp login expired");
+                              alert("Kilp login expiration!");
                             }
                           }}
                         >
-                          Klip wallet
+                          Klip Wallet
                         </div>
                         <div
                           className="menu"
@@ -631,7 +631,7 @@ function StarView() {
                             }
                           }}
                         >
-                          Kaikas wallet
+                          Kaikas Wallet
                         </div>
                       </div>
                     </div>
@@ -644,7 +644,7 @@ function StarView() {
               <input
                 type="text"
                 className="search-bar"
-                placeholder="search #color code, star number"
+                placeholder="Search #color code, star number"
                 onKeyPress={(e) => {
                   if (window.event.keyCode == 13) {
                     e.preventDefault();
