@@ -143,7 +143,7 @@ function ViewModal(props) {
                 float: "left",
                 marginLeft: 20,
                 marginRight: 20,
-                width: 100,
+                width: 160,
               }}
             >
               Owner : {catData.yourName}
