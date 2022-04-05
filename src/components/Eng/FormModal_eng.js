@@ -1,19 +1,19 @@
 import { Modal, Button } from "react-bootstrap";
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import "./FormModal.css";
-import { address, _abi, _mintabi } from "../components/contract/contractInfo";
+import "../FormModal.css";
+import { address, _abi, _mintabi } from "../contract/contractInfo";
 import $ from "jquery";
-import { klaytn, caver } from "../wallet/caver";
+import { klaytn, caver } from "../../wallet/caver";
 import Caver from "caver-js";
 import { prepare, getResult } from "klip-sdk";
-import Announcement from "../components/Announcement";
-import QRbuyModal from "./QRbuyModal";
+import Announcement from "./Announcement_eng";
+import QRbuyModal from "./QRbuyModal_eng";
 import QRCode from "qrcode";
 import { Cookies } from "react-cookie";
-import ViewModal from "../components/Modal";
-import kaikas from "../img/kaikas.png";
-import klip from "../img/Klip.png";
+import ViewModal from "../Modal";
+import kaikas from "../../img/kaikas.png";
+import klip from "../../img/Klip.png";
 
 const ModalCustomFrom = styled(Modal)`
   .modal-content {
@@ -110,7 +110,7 @@ function FormModal(props) {
 
   useEffect(() => {
     if (colorDup === false) {
-      $(".isColorDup").text("이미 사용된 컬러 입니다.", { colorDup });
+      $(".isColorDup").text("This color has already been used.", { colorDup });
     } else {
       $(".isColorDup").text("");
     }
@@ -139,27 +139,27 @@ function FormModal(props) {
       }}
     >
       <Modal.Header id="closeForm" closeButton>
-        <div className="modalTitle">고양이 별 정보</div>
+        <div className="modalTitle">Cat star Info</div>
       </Modal.Header>
       <Modal.Body>
         <div className="formModalBody">
           <div className="catInfoForm">
             <br />
             <div style={{ float: "left", width: 140, fontSize: 50 }}>
-              <h4>고양이 이름 </h4>
-              <h4>주인 이름 </h4>
-              <h4>만난 날 </h4>
-              <h4>좋아하는 것 </h4>
-              <h4>메모 </h4>
+              <h4>Cat Name </h4>
+              <h4>Owner Name </h4>
+              <h4 style={{ marginLeft: 0 }}>The day we met </h4>
+              <h4 style={{ marginLeft: 0 }}>Favorite Things</h4>
+              <h4>Comment </h4>
               <h4>
-                이미지 링크
+                Image Link
                 <h1
                   onClick={() => {
                     setAnnounceModalShow(true);
                   }}
                   style={{ fontSize: 15, cursor: "pointer" }}
                 >
-                  (&#128680;주의사항)
+                  (&#128680;Caution)
                 </h1>
                 <Announcement
                   show={announceModalShow}
@@ -223,14 +223,13 @@ function FormModal(props) {
                 className="inputData"
                 name="imgURL"
                 type="text"
-                placeholder="반드시 구글 드라이브 **전체 공유 링크를** 넣어주세요!"
+                placeholder="Please add to Google Drive links ** for all Internet users **"
                 style={{ width: 350 }}
                 onChange={onChange}
                 value={imgURL}
                 required="required"
               />
             </div>
-
             <div
               className="formGuide"
               style={{
@@ -242,24 +241,24 @@ function FormModal(props) {
             >
               <a
                 target="_blank"
-                href="https://wiry-ruby-135.notion.site/Cat-Planet-52ec98c6c0aa40eea78cdf3d17d77a34"
+                href="https://wiry-ruby-135.notion.site/Cat-Planet-Guide-English-c23f9304fdb14f2a942f970cf941f995"
               >
-                이용 가이드 보기
+                View Usage Guide
               </a>
             </div>
+
             <br />
             <div className="currentColor" style={{ width: 528 }}>
               <div
                 style={{
                   float: "left",
-                  width: 105,
+                  width: 130,
                   marginLeft: 20,
-                  marginRight: 20,
+                  fontSize: 17,
                 }}
               >
-                현재 별 색상 :
+                Current star color :
               </div>
-
               <button
                 className="printColor"
                 style={{
@@ -279,7 +278,6 @@ function FormModal(props) {
               >
                 #{colors}
               </div>
-
               <div style={{ float: "left", width: 150 }}>
                 <input
                   type="checkbox"
@@ -294,7 +292,7 @@ function FormModal(props) {
                     color: "gray",
                   }}
                 >
-                  컬러 바꾸기 1 Klay
+                  change color 1 Klay
                 </label>
                 <div className="changeColorCon">
                   <input
@@ -347,19 +345,24 @@ function FormModal(props) {
           tokenid={id}
         />
 
-        <div className="kaikasBtn">
+        <div
+          className="kaikasBtn"
+          style={{ padding: 0, width: 250, float: "left" }}
+        >
           <Button
             onClick={async () => {
               if (colorDup === false && $(".changeColorCheck").is(":checked")) {
-                alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
+                alert(
+                  "This color has already been used. Please change the color."
+                );
               } else if (klaytn === undefined) {
-                alert("카이카스 지갑을 설치해 주세요!");
+                alert("Please install a Kaikas wallet!");
               } else {
                 if (
                   (await klaytn._kaikas.isUnlocked()) === false ||
                   klaytn.selectedAddress === undefined
                 ) {
-                  alert("kaikas 로 로그인 해주세요!");
+                  alert("Please log in as kaikas!");
                 } else {
                   if (
                     catName === "" ||
@@ -369,7 +372,7 @@ function FormModal(props) {
                     dayMet === "" ||
                     imgURL === ""
                   ) {
-                    alert("입력란을 모두 채워주세요.");
+                    alert("Please fill in all the fields.");
                   } else {
                     //setAccount(klaytn.selectedAddress);
                     const _caver = new Caver(window.klaytn);
@@ -437,21 +440,26 @@ function FormModal(props) {
               >
                 <img style={{ width: 20, height: 20 }} src={kaikas}></img>
               </div>
-              <div style={{ float: "left", marginTop: "0.5vh" }}>
+              <div style={{ float: "left", marginTop: "0.5vh", fontSize: 19 }}>
                 {" "}
-                Kaikas로 별 만들기
+                Make a Star with Kaikas
               </div>
             </div>
           </Button>
         </div>
-        <div className="klipBtn">
+        <div
+          className="klipBtn"
+          style={{ padding: 0, width: 250, marginLeft: 21 }}
+        >
           <Button
             onClick={async () => {
               const klipAddress = cookies.get("user");
               if (colorDup === false && $(".changeColorCheck").is(":checked")) {
-                alert("이미 사용된 컬러 입니다. 색상을 변경해 주세요.");
+                alert(
+                  "This color has already been used. Please change the color."
+                );
               } else if (klipAddress == undefined) {
-                alert("Klip 으로 로그인 해주세요!");
+                alert("Please log in with Klip!");
               } else {
                 if (
                   catName === "" ||
@@ -461,7 +469,7 @@ function FormModal(props) {
                   dayMet === "" ||
                   imgURL === ""
                 ) {
-                  alert("입력란을 모두 채워주세요.");
+                  alert("Please fill in all the fields.");
                 } else {
                   const contract = new caver.klay.Contract(_abi, address);
                   if ($(".changeColorCheck").is(":checked")) {
@@ -574,8 +582,8 @@ function FormModal(props) {
                   src={klip}
                 ></img>
               </div>
-              <div style={{ float: "left", marginTop: "0.7vh" }}>
-                Klip 으로 별 만들기
+              <div style={{ float: "left", marginTop: "0.7vh", fontSize: 19 }}>
+                Make a star with Klip
               </div>
             </div>
           </Button>

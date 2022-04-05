@@ -336,3 +336,84 @@ html, body {
   box-shadow: 0 0 15px #216FEA;
   border : 0;
 }
+
+.language{
+  z-index: 10;
+  left: 2vw;
+  font-size: 20px;
+  font-family: 'Poor Story', cursive;
+  position: fixed;
+  bottom: 3vh;
+  color: white;
+  width: 7vw;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.language:hover > .eng{
+  display: block;
+}
+.kor{
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+  opacity: 0.5;
+}
+.kor:hover{
+  opacity: 1;
+}
+
+.eng a{
+  font-size: 20px;
+}
+.eng{
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+  opacity: 0.5;
+  display: none;
+}
+
+.eng:hover{
+  opacity: 1;
+}
+
+.language_eng{
+  z-index: 10;
+  left: 2vw;
+  font-size: 20px;
+  font-family: 'Poor Story', cursive;
+  position: fixed;
+  bottom: 3vh;
+  color: white;
+  width: 7vw;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.language_eng:hover > .kor_eng{
+  display: block;
+}
+.eng_eng{
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+  opacity: 0.5;
+}
+.eng_eng:hover{
+  opacity: 1;
+}
+.kor_eng a{
+  font-size: 20px;
+}
+
+.kor_eng{
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+  opacity: 0.5;
+  display: none;
+}
+
+.kor_eng:hover{
+  opacity: 1;
+}
+

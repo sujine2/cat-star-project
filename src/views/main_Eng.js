@@ -4,7 +4,7 @@ import prince from "../img/prince.png";
 import { Link } from "react-router-dom";
 import { klaytn } from "../wallet/caver";
 import { prepare } from "klip-sdk";
-import QRModal from "../components/QRModal";
+import QRModal from "../components/Eng/QRModal_eng";
 import QRCode from "qrcode";
 import klip from "../img/Klip.png";
 import { Cookies } from "react-cookie";
@@ -47,7 +47,7 @@ function Main() {
                 className="mainWalletConnect"
                 onClick={async () => {
                   if (klaytn === undefined) {
-                    alert("카이카스 지갑을 설치해 주세요!");
+                    alert("Please install a Kaikas wallet!");
                   } else {
                     await klaytn.enable();
                     window.location.reload();
@@ -63,7 +63,7 @@ function Main() {
                     marginBottom: 6,
                   }}
                 ></img>
-                Kaikas로 로그인
+                Login as kaikas
               </button>
             )}
             {klaytn !== undefined && klaytn.selectedAddress !== undefined && (
@@ -77,7 +77,7 @@ function Main() {
                     marginBottom: 6,
                   }}
                 ></img>
-                Kaikas 연결됨
+                Kaikas Connected
               </button>
             )}
 
@@ -91,7 +91,7 @@ function Main() {
                   });
                   if (res.err) {
                     alert(
-                      "카카오톡 클립(Klip) 인증 오류가 발행하였습니다. 나중에 다시 시도해 주세요."
+                      "KakaoTalk Klip authentication error has been issued. Please try again later."
                     );
                     // 에러 처리
                   } else if (res.request_key) {
@@ -114,7 +114,7 @@ function Main() {
                   style={{ width: 30, height: 30, marginRight: 5 }}
                   src={klip}
                 ></img>
-                Klip으로 로그인
+                Login as Klip
               </button>
             ) : (
               <button className="mainKlipConnect">
@@ -122,7 +122,7 @@ function Main() {
                   style={{ width: 30, height: 30, marginRight: 5 }}
                   src={klip}
                 ></img>
-                Klip 연결됨
+                Klip Connected
               </button>
             )}
 
@@ -136,17 +136,17 @@ function Main() {
             <div className="barGuide">
               <a
                 target="_blank"
-                href="https://wiry-ruby-135.notion.site/Cat-Planet-52ec98c6c0aa40eea78cdf3d17d77a34"
+                href="https://wiry-ruby-135.notion.site/Cat-Planet-Guide-English-c23f9304fdb14f2a942f970cf941f995"
               >
-                이용 가이드
+                User Guide
               </a>
             </div>
 
             <div className="barTw">
-              <a href="https://twitter.com/cat_planet_HQ">트위터</a>
+              <a href="https://twitter.com/cat_planet_HQ">Twitter</a>
             </div>
             <div className="barTele">
-              <a href="https://t.me/cat_planet_official">텔레그램</a>
+              <a href="https://t.me/cat_planet_official">Telegram</a>
             </div>
           </div>
         </div>
@@ -155,13 +155,13 @@ function Main() {
           <button className="barBtn">^</button>
         </div>
       </div>
-      <div className="language">
-        <div className="eng">
-          <Link to="/eng" className="move">
-            Engnlish
+      <div className="language_eng">
+        <div className="kor_eng">
+          <Link to="/" className="move">
+            한국어
           </Link>
         </div>
-        <div className="kor">한국어</div>
+        <div className="eng_eng">Engnlish</div>
       </div>
       <div className="constelacao">
         {Array(250)
@@ -198,16 +198,18 @@ function Main() {
         </div>
 
         <div className="des">
-          어린왕자는 8번째 별인 고양이 별에 도착했습니다.
-          <br />이 별에는 고양이들이 살았고, 밤이 되면 고양이들은 별이 되어
-          누군가를 위해 반짝였습니다.
-          <br />이 곳에서 고양이들은 아프지도, 사라지지도 않았고 하늘에서 밝게
-          빛날 뿐이었습니다.
+          The Little Prince has arrived at the 8th star, the Cat-planet.
+          <br />
+          Cats lived on this planet, and at night they became stars and twinkled
+          for someone.
+          <br />
+          Here the cats were neither sick nor gone, only shining brightly in the
+          sky.
         </div>
         <br />
         <div className="moveCon">
-          <Link to="/stars" className="move">
-            행성으로 들어가기
+          <Link to="/stars/eng" className="move">
+            Go to the planet
           </Link>
         </div>
       </div>
