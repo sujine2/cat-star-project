@@ -412,15 +412,15 @@ function StarView() {
                     );
                   })
             }
-            {/* {
+            {
               //200
               tokenID > 0 &&
-                Array(280)
+                Array(tokenID - 251)
                   .fill(0)
                   .map((_, index) => {
                     return (
                       <span
-                        id={index}
+                        id={index + 251}
                         className={test1[index].styleClass}
                         onClick={(e) => {
                           e.preventDefault();
@@ -433,7 +433,7 @@ function StarView() {
                       ></span>
                     );
                   })
-            } */}
+            }
             {/* {
               //200
               tokenID > 0 &&
@@ -648,7 +648,6 @@ function StarView() {
                 onKeyPress={(e) => {
                   if (window.event.keyCode == 13) {
                     e.preventDefault();
-                    console.log("click enter");
                     search();
                   }
                 }}
