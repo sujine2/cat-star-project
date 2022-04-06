@@ -393,7 +393,7 @@ function StarView() {
             {
               //200
               tokenID > 0 &&
-                Array(tokenID)
+                Array(250)
                   .fill(0)
                   .map((_, index) => {
                     return (
@@ -415,18 +415,18 @@ function StarView() {
             {
               //200
               tokenID > 0 &&
-                Array(tokenID - 251)
+                Array(tokenID - 250)
                   .fill(0)
                   .map((_, index) => {
                     return (
                       <span
-                        id={index + 251}
+                        id={index + 250}
                         className={test1[index].styleClass}
                         onClick={(e) => {
                           e.preventDefault();
                           setModalShow({
                             setShow: true,
-                            id: index,
+                            id: index + 250,
                           });
                         }}
                         style={test1[index].inlineStyle}
