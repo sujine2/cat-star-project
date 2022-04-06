@@ -5,7 +5,7 @@ import "../Modal.css";
 import loadingImg from "../../img/loading-img.gif";
 import $ from "jquery";
 import styled from "styled-components";
-import nonImg from "../../img/non-img.png";
+import nonImg from "../../img/non-img2.png";
 import { klaytn, caver } from "../../wallet/caver";
 
 const ModalCustom = styled(Modal)`
@@ -40,7 +40,7 @@ const ModalCustom = styled(Modal)`
 const handleImgError = (e) => {
   e.target.src = nonImg;
   $(".showImg").css("margin-bottom", "0");
-  $(".errorText").text("사진이 안 보인다냥 ㅠ__ㅠ");
+  $(".errorText").text("I can't see the picture meow T_T");
 };
 
 function ViewModal(props) {
@@ -116,7 +116,7 @@ function ViewModal(props) {
         <div style={{ position: "relative" }}>
           <img className="showImg" src={loadingImg} onError={handleImgError} />
           <div
-            style={{ position: "absolute", top: 320, left: 150 }}
+            style={{ position: "absolute", top: 320, left: 120 }}
             className="errorText"
           ></div>
         </div>

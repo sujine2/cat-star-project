@@ -5,7 +5,7 @@ import "./Modal.css";
 import loadingImg from "../img/loading-img.gif";
 import $ from "jquery";
 import styled from "styled-components";
-import nonImg from "../img/non-img.png";
+import nonImg from "../img/non-img2.png";
 import { klaytn, caver } from "../wallet/caver";
 
 const ModalCustom = styled(Modal)`
@@ -40,7 +40,7 @@ const ModalCustom = styled(Modal)`
 const handleImgError = (e) => {
   e.target.src = nonImg;
   $(".showImg").css("margin-bottom", "0");
-  $(".errorText").text("사진이 안 보인다냥 ㅠ__ㅠ");
+  $(".errorText").text("사진이 안 보인다냥 ㅠ_ㅠ");
 };
 
 function ViewModal(props) {
