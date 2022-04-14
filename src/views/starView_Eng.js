@@ -393,7 +393,7 @@ function StarView() {
             {
               //200
               tokenID > 0 &&
-                Array(tokenID)
+                Array(250)
                   .fill(0)
                   .map((_, index) => {
                     return (
