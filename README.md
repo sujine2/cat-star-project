@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# 가이드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+한글: https://wiry-ruby-135.notion.site/Cat-Planet-9d9ac80bc861405bbb59ed28ad492f72?pvs=4
 
-## Available Scripts
+영문: https://www.notion.so/Cat-Planet-Guide-English-286c854d4915498c88973bd6d54b8101
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Home
+---
+<img width="1000" alt="catplanet3" src="https://github.com/sujine2/cat-star-project/assets/52918738/647c3c75-1935-499c-9de5-654ba4929e6b">
+<img width="1000" alt="catplanet4" src="https://github.com/sujine2/cat-star-project/assets/52918738/fcd1edab-ba7c-416e-b305-31cab1b5fee6">
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main Page
+---
+<img width="1000" alt="cat planet1" src="https://github.com/sujine2/cat-star-project/assets/52918738/d27e4633-65aa-4b06-9472-ed78aef2656c">
 
-### `npm run build`
+### Search the star
+---
+<img width="1000" alt="cat planet 5" src="https://github.com/sujine2/cat-star-project/assets/52918738/354dc9dd-8c04-455c-8e0d-638e749d17a2">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Only my start
+---
+<img width="1000" alt="catplanet2" src="https://github.com/sujine2/cat-star-project/assets/52918738/3a6a81e2-6ef3-4227-9af7-e16aa379d200">
